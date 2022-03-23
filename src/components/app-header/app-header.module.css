@@ -1,0 +1,49 @@
+.header{
+    background-color: #1C1C21;
+}
+
+.main_nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 64%;
+    margin: 0 auto;
+}
+
+.list{
+    display: flex;
+    
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.list_item{
+    margin-right: 49px;
+}
+
+.list_item:last-of-type{
+    margin-right: 0;
+}
+
+.list_link{
+    display: flex;
+    
+}
+.link{
+    text-decoration: none;
+    transition: opacity 0.4s linear;
+}
+
+.link:hover{
+    opacity: 0.6;
+}
+
+.link_text{
+    color: #8585AD;
+}
+
+.link_text.active{
+    color: #F2F2F3;
+}
