@@ -1,0 +1,41 @@
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.list{
+    padding: 0;
+    padding-right: 20px;
+    list-style-type: none;
+}
+
+.ingredient_with_drag{
+    display: flex;
+    align-items: center;
+    column-gap: 13.5px;
+    margin-bottom: 16px;
+}
+
+.ingredient_with_drag:last-child{
+    margin-bottom: 0;
+}
+
+.scrollbar{
+    overflow-y: scroll;
+    scrollbar-color: #8585AD #2F2F37;
+
+    height: 464px;
+    
+}
+
+/* полоса прокрутки (скроллбар) */
+.scrollbar::-webkit-scrollbar{
+    background-color: #2F2F37;
+    width: 8px;
+}
+
+/* ползунок скроллбара */
+.scrollbar::-webkit-scrollbar-thumb{
+    background-color: #8585AD;
+}

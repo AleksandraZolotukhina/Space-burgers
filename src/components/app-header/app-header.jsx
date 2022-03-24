@@ -4,6 +4,7 @@ export function AppHeader() {
     return (
         <header className={`text_type_main-default ${styles.header}`}>
             <nav className={`${styles.main_nav} pt-4 pb-4`}>
+                
                 <ul className={styles.list}>
                     <li className={styles.list_item}>
                         <a href="#" className={`${styles.link} ${styles.list_link}`}>
@@ -20,10 +21,10 @@ export function AppHeader() {
                     </li>
                 </ul>
                 
-                <a href="#" className={styles.link}>
+                <a href="#" className={`${styles.link} ${styles.logo}`}>
                     <Logo />
                 </a>
-                
+               
                 <ul className={styles.list}>
                     <li className={styles.list_item}>
                         <a href="#" className={`${styles.link} ${styles.list_link}`}>
