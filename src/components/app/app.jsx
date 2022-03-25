@@ -12,7 +12,7 @@ export function App() {
                 <section className="mt-4">
                     <h1 className="text text_type_main-large">Соберите бургер</h1>
                     <div className={`${styles.menu_and_order} mt-5`}>
-                        <BurgerIngredients ingredients={dataIngredients} />
+                        <BurgerIngredients ingredients = {dataIngredients} />
                         <BurgerConstructor composition = {dataComposition} />
                     </div>
                     

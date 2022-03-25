@@ -25,7 +25,7 @@
     overflow-y: scroll;
     scrollbar-color: #8585AD #2F2F37;
 
-    height: 464px;
+    max-height: 464px;
     
 }
 
