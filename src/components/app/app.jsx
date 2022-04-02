@@ -2,7 +2,7 @@ import styles from "./app.module.css";
 import { AppHeader } from "../app-header/app-header";
 import { BurgerIngredients } from "../burger-ingredients/burger-ingredients";
 import { BurgerConstructor } from "../burger-constructor/burger-constructor";
-import {dataIngredients, dataComposition} from "../../utils/data";
+import {dataIngredients, dataComposition} from "../../utils/constants";
 
 export function App() {
     return (

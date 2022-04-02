@@ -2,7 +2,9 @@ import React from "react";
 import styles from "./burger-ingredients.module.css"
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Ingredient } from "../ingredient/ingredient";
+import { menuItemPropTypes } from "../../utils/constants";
 import PropTypes from 'prop-types';
+
 export function BurgerIngredients({ ingredients }) {
     const [current, setCurrent] = React.useState('one');
     return (
@@ -52,9 +54,5 @@ export function BurgerIngredients({ ingredients }) {
 }
 
 BurgerIngredients.propTypes = {
-    _id: PropTypes.string,
-    name: PropTypes.string,
-    image: PropTypes.string,
-    image_mobile: PropTypes.string,
-    image_large: PropTypes.string,
+    ingredients: PropTypes.arrayOf(menuItemPropTypes.isRequired),
 }
