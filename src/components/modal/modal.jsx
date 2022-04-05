@@ -7,15 +7,13 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 
 export function Modal(props) {
-    const [, setClosePopup] = React.useState();
 
-    const closePopup = (event) => {
-        if(event.key === "Escape"){
-            setClosePopup(props.closeModal);
-        }
-    }
-
-    React.useEffect(() =>{
+    React.useEffect(() => {
+        const closePopup = (event) => {
+            if(event.key === "Escape"){
+                props.closeModal();
+            }
+        };
         document.addEventListener("keydown", closePopup);
         return () => {
             document.removeEventListener("keydown", closePopup);

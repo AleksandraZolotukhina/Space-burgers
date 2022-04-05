@@ -63,5 +63,5 @@ export function BurgerConstructor({ composition }) {
 }
 
 BurgerConstructor.propTypes = {
-    composition: PropTypes.arrayOf(menuItemPropTypes.isRequired),
+    composition: PropTypes.arrayOf(menuItemPropTypes.isRequired).isRequired,
 }

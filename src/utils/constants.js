@@ -18,4 +18,4 @@ export const menuItemPropTypes = PropTypes.shape({
 
 export const url = "https://norma.nomoreparties.space/api/ingredients";
 
-export const statusOrder = {id_order: "034536", status: "Ваш заказ начали готовить", status_info: "Дождитесь готовности на орбитальной станции"};
+export const statusOrder = {idOrder: "034536", status: "Ваш заказ начали готовить", statusInfo: "Дождитесь готовности на орбитальной станции"};
