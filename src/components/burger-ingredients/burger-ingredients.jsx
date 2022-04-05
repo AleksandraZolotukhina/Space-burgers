@@ -25,7 +25,7 @@ export function BurgerIngredients({ ingredients }) {
                     <h2 className="text text_type_main-medium">Булки</h2>
                     <ul className={`${styles.list} ${styles.list_ingredients}`}>
                         {ingredients.map(ingredient => {
-                            return ingredient.type === "bun" && <Ingredient key={ingredient._id} name={ingredient.name} image={ingredient.image} count={0} />
+                            return ingredient.type === "bun" && <Ingredient key={ingredient._id} data={ingredient} count={0} />
                         })}
                     </ul>
                 </li>
@@ -34,7 +34,7 @@ export function BurgerIngredients({ ingredients }) {
                     <h2 className="text text_type_main-medium">Соусы</h2>
                     <ul className={`${styles.list} ${styles.list_ingredients} mt-6`}>
                         {ingredients.map(ingredient => {
-                            return ingredient.type === "sauce" && <Ingredient key={ingredient._id} name={ingredient.name} image={ingredient.image} count={0} />
+                            return ingredient.type === "sauce" && <Ingredient key={ingredient._id} data={ingredient} count={0} />
                         })}
                     </ul>
                 </li>
@@ -43,7 +43,7 @@ export function BurgerIngredients({ ingredients }) {
                     <h2 className="text text_type_main-medium">Начинки</h2>
                     <ul className={`${styles.list} ${styles.list_ingredients} mt-6`}>
                         {ingredients.map(ingredient => {
-                            return ingredient.type === "sauce" && <Ingredient key={ingredient._id} name={ingredient.name} image={ingredient.image} count={0} />
+                            return ingredient.type === "main" && <Ingredient key={ingredient._id} data={ingredient} count={0} />
                         })}
                     </ul>
                 </li>

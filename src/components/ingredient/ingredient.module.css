@@ -5,6 +5,10 @@
     text-align: center;
 }
 
+.list_ingredients_item:hover{
+    cursor: pointer;
+}
+
 .list_ingredients_item_active{
     position: relative;
 }

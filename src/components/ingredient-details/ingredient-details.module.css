@@ -1,0 +1,22 @@
+.subtitle{
+    margin-top: 26px;
+}
+
+.list_bju{
+    display: flex;
+
+    margin-bottom: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.list_bju_item{
+    margin-right: 51px;
+    text-align: center;
+
+    color: #8585AD;
+}
+
+.list_bju_item:last-child{
+    margin-right: 0;
+}
