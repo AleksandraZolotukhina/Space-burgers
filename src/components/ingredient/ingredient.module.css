@@ -1,0 +1,19 @@
+.list_ingredients_item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.list_ingredients_item:hover{
+    cursor: pointer;
+}
+
+.list_ingredients_item_active{
+    position: relative;
+}
+
+.cost{
+    display: flex;
+    margin-top: 9px;
+}
