@@ -1,10 +1,11 @@
+import React from "react";
 import styles from "./burger-constructor.module.css";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerCost } from "../burger-cost/burger-cost";
-import { menuItemPropTypes } from "../../utils/constants";
-import PropTypes from 'prop-types';
+import { BurgerConstructorContext } from "../../utils/appContext";
 
-export function BurgerConstructor({ composition }) {
+export function BurgerConstructor() {
+    const composition = React.useContext(BurgerConstructorContext);
     const isBun = composition.find(el =>
         el.type === "bun"
     );
@@ -24,7 +25,6 @@ export function BurgerConstructor({ composition }) {
                 />
                 <ul className={`${styles.list} ${styles.scrollbar} mt-4 mb-4`}>
                     {
-                        
                         composition.map(ingredient => {
                             let element;
                             index++
@@ -57,11 +57,8 @@ export function BurgerConstructor({ composition }) {
                     thumbnail={isBun.image}
                 />
             </div>
+
             <BurgerCost cost = {burgerPrice} />
         </div>
     )
-}
-
-BurgerConstructor.propTypes = {
-    composition: PropTypes.arrayOf(menuItemPropTypes.isRequired).isRequired,
 }
