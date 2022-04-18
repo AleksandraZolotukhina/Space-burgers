@@ -4,7 +4,7 @@ import { AppHeader } from "../app-header/app-header";
 import { BurgerIngredients } from "../burger-ingredients/burger-ingredients";
 import { BurgerConstructor } from "../burger-constructor/burger-constructor";
 import { url } from "../../utils/constants";
-import { BurgerConstructorContext } from "../../utils/appContext";
+import { BurgerContext } from "../../utils/appContext";
 
 export function App() {
     const [state, setState] = React.useState({ isLoading: false, hasError: false, errorMessage: "", data: [] });
@@ -35,13 +35,11 @@ export function App() {
                             !isLoading &&
                             !hasError &&
                             data.length &&
-                            <>
-                                <BurgerIngredients ingredients={data} />
+                            <BurgerContext.Provider value={data}>
+                                <BurgerIngredients />
+                                <BurgerConstructor />
+                            </BurgerContext.Provider>
 
-                                <BurgerConstructorContext.Provider value={data}>
-                                    <BurgerConstructor />
-                                </BurgerConstructorContext.Provider>
-                            </>
                         }
 
                     </div>

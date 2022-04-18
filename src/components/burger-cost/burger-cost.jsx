@@ -4,11 +4,11 @@ import { CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-co
 import styles from "./burger-cost.module.css";
 import { Modal } from "../modal/modal";
 import { OrderDetails } from "../order-details/order-details";
-import { BurgerConstructorContext } from "../../utils/appContext";
+import { BurgerContext } from "../../utils/appContext";
 import { url } from "../../utils/constants";
 export function BurgerCost({ cost }) {
     const [isOpenModal, setModal] = React.useState(false);
-    const ingredients = React.useContext(BurgerConstructorContext);
+    const ingredients = React.useContext(BurgerContext);
     const idIngredients = ingredients.map(ingredient => ingredient._id);
     const [state, setState] = React.useState({ hasError: false, isLoading: false, errorMessage: "", numberOrder: undefined });
     const { hasError, isLoading, errorMessage, numberOrder } = state;

@@ -2,15 +2,15 @@ import React from "react";
 import styles from "./burger-constructor.module.css";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerCost } from "../burger-cost/burger-cost";
-import { BurgerConstructorContext } from "../../utils/appContext";
+import { BurgerContext } from "../../utils/appContext";
 
 export function BurgerConstructor() {
-    const composition = React.useContext(BurgerConstructorContext);
+    const composition = React.useContext(BurgerContext);
     const isBun = composition.find(el =>
         el.type === "bun"
     );
     let index = 0;
-    let burgerPrice = isBun.price * 2;
+    const burgerPrice = isBun.price * 2 + composition.reduce((current, next) => (next.type !== 'bun') ? current + next.price : current, 0);
     return (
         <div>
             <div className={styles.content}>
@@ -38,7 +38,6 @@ export function BurgerConstructor() {
                                     />
 
                                 </li>
-                                burgerPrice += ingredient.price;
                             } else {
                                 index--
                             }
