@@ -2,11 +2,13 @@ import React from "react";
 import styles from "./burger-ingredients.module.css"
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Ingredient } from "../ingredient/ingredient";
-import { menuItemPropTypes } from "../../utils/constants";
-import PropTypes from 'prop-types';
 import { Modal } from "../modal/modal";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
-export function BurgerIngredients({ ingredients }) {
+import { BurgerContext } from "../../utils/appContext";
+
+export function BurgerIngredients() {
+
+    const ingredients = React.useContext(BurgerContext);
     const [current, setCurrent] = React.useState('one');
 
     const [isOpenModal, setModal] = React.useState(false);
@@ -71,8 +73,4 @@ export function BurgerIngredients({ ingredients }) {
             }
         </>
     )
-}
-
-BurgerIngredients.propTypes = {
-    ingredients: PropTypes.arrayOf(menuItemPropTypes.isRequired).isRequired,
 }

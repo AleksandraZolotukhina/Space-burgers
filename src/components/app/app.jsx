@@ -4,13 +4,13 @@ import { AppHeader } from "../app-header/app-header";
 import { BurgerIngredients } from "../burger-ingredients/burger-ingredients";
 import { BurgerConstructor } from "../burger-constructor/burger-constructor";
 import { url } from "../../utils/constants";
+import { BurgerContext } from "../../utils/appContext";
 
 export function App() {
-    const [state, setState] = React.useState({ isLoading: true, hasError: false, errorMessage: "", data: [] });
-
+    const [state, setState] = React.useState({ isLoading: false, hasError: false, errorMessage: "", data: [] });
     React.useEffect(() => {
         setState({ ...state, isLoading: true });
-        fetch(url)
+        fetch(`${url}/ingredients`)
             .then(res => {
                 if (res.ok) {
                     return res.json();
@@ -35,10 +35,11 @@ export function App() {
                             !isLoading &&
                             !hasError &&
                             data.length &&
-                            <>
-                                <BurgerIngredients ingredients={data} />
-                                <BurgerConstructor composition={data} />
-                            </>
+                            <BurgerContext.Provider value={data}>
+                                <BurgerIngredients />
+                                <BurgerConstructor />
+                            </BurgerContext.Provider>
+
                         }
 
                     </div>
