@@ -1,11 +1,10 @@
-import React from "react";
 import styles from "./burger-constructor.module.css";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerCost } from "../burger-cost/burger-cost";
-import { BurgerContext } from "../../utils/appContext";
+import { useSelector } from "react-redux";
 
 export function BurgerConstructor() {
-    const composition = React.useContext(BurgerContext);
+    const composition = useSelector(store=>store.listIngredients.data);
     const isBun = composition.find(el =>
         el.type === "bun"
     );

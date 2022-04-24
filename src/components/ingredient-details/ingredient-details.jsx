@@ -1,7 +1,8 @@
 import styles from "./ingredient-details.module.css";
-import { menuItemPropTypes } from "../../utils/constants";
+import { useSelector } from "react-redux";
 
-export function IngredientDetails({data}) {
+export function IngredientDetails() {
+    const data = useSelector(store=>store.ingredientDetails.details);
     const {calories, carbohydrates, fat, image_large, name, proteins} = data;
     return (
         <>
@@ -28,8 +29,4 @@ export function IngredientDetails({data}) {
             </ul>
         </>
     )
-}
-
-IngredientDetails.propTypes = {
-    data: menuItemPropTypes.isRequired,
 }

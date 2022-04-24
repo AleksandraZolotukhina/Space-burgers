@@ -4,40 +4,19 @@ import { CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-co
 import styles from "./burger-cost.module.css";
 import { Modal } from "../modal/modal";
 import { OrderDetails } from "../order-details/order-details";
-import { BurgerContext } from "../../utils/appContext";
-import { url } from "../../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { sendNewOrder } from "../../services/actions/burger-cost";
 export function BurgerCost({ cost }) {
+
     const [isOpenModal, setModal] = React.useState(false);
-    const ingredients = React.useContext(BurgerContext);
+    const ingredients = useSelector(store=>store.listIngredients.data);
     const idIngredients = ingredients.map(ingredient => ingredient._id);
-    const [state, setState] = React.useState({ hasError: false, isLoading: false, errorMessage: "", numberOrder: undefined });
-    const { hasError, isLoading, errorMessage, numberOrder } = state;
-
-    const sendNewOrder = () => {
-        setState({...state, isLoading: true});
-        fetch(`${url}/orders`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ 
-                       ingredients: idIngredients,
-            })
-        })
-        .then(res => {
-            if(res.ok){
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        })
-        .then(data => setState({...state, isLoading: false, numberOrder: data.order.number}))
-        .catch(error => setState({...state, isLoading: false, hasError: true, errorMessage: error}))
-    }
-
+    const { hasError, isLoading, errorMessage, orderNumber } = useSelector(store=>store.order);
+    const dispatch = useDispatch();
 
     const openModal = () => {
         setModal(true);
-        sendNewOrder();
+        dispatch(sendNewOrder(idIngredients));
     }
 
     const closeModal = () => {
@@ -63,8 +42,8 @@ export function BurgerCost({ cost }) {
                     {
                         !isLoading &&
                         !hasError &&
-                        numberOrder &&
-                        <OrderDetails numberOrder={numberOrder} />
+                        orderNumber &&
+                        <OrderDetails />
                     }
 
                 </Modal>
