@@ -6,12 +6,11 @@ import { Modal } from "../modal/modal";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { useDispatch, useSelector } from "react-redux";
 import { SEE_INGREDIENT_DETAILS, DELETE_INGREDIENT_DETAILS } from "../../services/actions/burger-ingredients";
-
 export function BurgerIngredients() {
 
-    const ingredients = useSelector(store => store.listIngredients.data);
+    const ingredients = useSelector(store => store.listIngredients.ingredients);
     const [current, setCurrent] = React.useState('one');
-
+    const constructorIngredients = useSelector(state => state.listIngredients.constructorIngredients);
     const [isOpenModal, setModal] = React.useState(false);
     const dispatch = useDispatch();
 
@@ -24,7 +23,6 @@ export function BurgerIngredients() {
         setModal(false);
         dispatch({ type: DELETE_INGREDIENT_DETAILS, data: {} });
     }
-
     return (
         <>
             <div>
@@ -46,11 +44,13 @@ export function BurgerIngredients() {
                     </a>
                 </div>
                 <ul className={`${styles.list} ${styles.scrollbar}`}>
-                    <li className={styles.list_item}>
+                    <li className={styles.list_item} >
                         <h2 className="text text_type_main-medium" id="bun">Булки</h2>
                         <ul className={`${styles.list} ${styles.list_ingredients}`}>
                             {ingredients.map(ingredient => {
-                                return ingredient.type === "bun" && <Ingredient key={ingredient._id} data={ingredient} count={0} openModal={openModal} />
+                                const constructorIngredient = constructorIngredients.find(el => el._id === ingredient._id);
+                                return ingredient.type === "bun" && <Ingredient key={ingredient._id} data={ingredient} openModal={openModal} 
+                                count={constructorIngredient ? constructorIngredient.count : 0} />
                             })}
                         </ul>
                     </li>
@@ -59,7 +59,9 @@ export function BurgerIngredients() {
                         <h2 className="text text_type_main-medium" id="sauce">Соусы</h2>
                         <ul className={`${styles.list} ${styles.list_ingredients} mt-6`}>
                             {ingredients.map(ingredient => {
-                                return ingredient.type === "sauce" && <Ingredient key={ingredient._id} data={ingredient} count={0} openModal={openModal} />
+                                const constructorIngredient = constructorIngredients.find(el => el._id === ingredient._id);
+                                return ingredient.type === "sauce" && <Ingredient key={ingredient._id} data={ingredient} openModal={openModal} 
+                                count={constructorIngredient ? constructorIngredient.count : 0} />
                             })}
                         </ul>
                     </li>
@@ -68,7 +70,9 @@ export function BurgerIngredients() {
                         <h2 className="text text_type_main-medium" id="filling">Начинки</h2>
                         <ul className={`${styles.list} ${styles.list_ingredients} mt-6`}>
                             {ingredients.map(ingredient => {
-                                return ingredient.type === "main" && <Ingredient key={ingredient._id} data={ingredient} count={0} openModal={openModal} />
+                                const constructorIngredient = constructorIngredients.find(el => el._id === ingredient._id);
+                                return ingredient.type === "main" && <Ingredient key={ingredient._id} data={ingredient} openModal={openModal} 
+                                count={constructorIngredient ? constructorIngredient.count : 0} />
                             })}
                         </ul>
                     </li>

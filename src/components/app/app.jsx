@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./app.module.css";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import { AppHeader } from "../app-header/app-header";
 import { BurgerIngredients } from "../burger-ingredients/burger-ingredients";
 import { BurgerConstructor } from "../burger-constructor/burger-constructor";
@@ -13,7 +15,7 @@ export function App() {
        dispatch(getDataIngredients());
     }, []);
 
-    const { isLoading, data, hasError, errorMessage } = useSelector(store => store.listIngredients);
+    const { isLoading, ingredients, hasError, errorMessage } = useSelector(store => store.listIngredients);
     return (
         <>
             <AppHeader />
@@ -26,11 +28,11 @@ export function App() {
                         {
                             !isLoading &&
                             !hasError &&
-                            data.length &&
-                            <>
+                            ingredients.length &&
+                            <DndProvider backend={HTML5Backend}>
                                 <BurgerIngredients />
                                 <BurgerConstructor />
-                            </>
+                            </DndProvider>
 
                         }
 

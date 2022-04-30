@@ -9,7 +9,7 @@ import { sendNewOrder } from "../../services/actions/burger-cost";
 export function BurgerCost({ cost }) {
 
     const [isOpenModal, setModal] = React.useState(false);
-    const ingredients = useSelector(store=>store.listIngredients.data);
+    const ingredients = useSelector(store=>store.listIngredients.constructorIngredients);
     const idIngredients = ingredients.map(ingredient => ingredient._id);
     const { hasError, isLoading, errorMessage, orderNumber } = useSelector(store=>store.order);
     const dispatch = useDispatch();
