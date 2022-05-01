@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createRef } from "react";
 import styles from "./burger-ingredients.module.css"
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Ingredient } from "../ingredient/ingredient";
@@ -6,13 +6,17 @@ import { Modal } from "../modal/modal";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { useDispatch, useSelector } from "react-redux";
 import { SEE_INGREDIENT_DETAILS, DELETE_INGREDIENT_DETAILS } from "../../services/actions/burger-ingredients";
+
 export function BurgerIngredients() {
 
     const ingredients = useSelector(store => store.listIngredients.ingredients);
     const [current, setCurrent] = React.useState('one');
-    const constructorIngredients = useSelector(state => state.listIngredients.constructorIngredients);
     const [isOpenModal, setModal] = React.useState(false);
+    const constructorIngredients = useSelector(state => state.listIngredients.constructorIngredients);
     const dispatch = useDispatch();
+    const bunRef = createRef();
+    const sauceRef = createRef();
+    const mainRef = createRef();
 
     const openModal = (data) => {
         setModal(true);
@@ -23,6 +27,19 @@ export function BurgerIngredients() {
         setModal(false);
         dispatch({ type: DELETE_INGREDIENT_DETAILS, data: {} });
     }
+
+    const scroll = () => {
+        if(bunRef.current.getBoundingClientRect().top > 0 ){
+            setCurrent("one");
+            
+        } else if(sauceRef.current.getBoundingClientRect().top > 0 ){ 
+            setCurrent("two");
+        } else if(mainRef.current.getBoundingClientRect().top > 0 ){ 
+            setCurrent("three");
+        }
+
+    }
+
     return (
         <>
             <div>
@@ -43,8 +60,8 @@ export function BurgerIngredients() {
                         </Tab>
                     </a>
                 </div>
-                <ul className={`${styles.list} ${styles.scrollbar}`}>
-                    <li className={styles.list_item} >
+                <ul className={`${styles.list} ${styles.scrollbar}`} onScroll={scroll}>
+                    <li className={styles.list_item} ref={bunRef}>
                         <h2 className="text text_type_main-medium" id="bun">Булки</h2>
                         <ul className={`${styles.list} ${styles.list_ingredients}`}>
                             {ingredients.map(ingredient => {
@@ -55,7 +72,7 @@ export function BurgerIngredients() {
                         </ul>
                     </li>
 
-                    <li className={styles.list_item}>
+                    <li className={styles.list_item} ref={sauceRef}>
                         <h2 className="text text_type_main-medium" id="sauce">Соусы</h2>
                         <ul className={`${styles.list} ${styles.list_ingredients} mt-6`}>
                             {ingredients.map(ingredient => {
@@ -66,7 +83,7 @@ export function BurgerIngredients() {
                         </ul>
                     </li>
 
-                    <li className={styles.list_item}>
+                    <li className={styles.list_item} ref={mainRef}>
                         <h2 className="text text_type_main-medium" id="filling">Начинки</h2>
                         <ul className={`${styles.list} ${styles.list_ingredients} mt-6`}>
                             {ingredients.map(ingredient => {

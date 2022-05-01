@@ -4,6 +4,8 @@ import { DELETE_INGREDIENT, UPDATE_ORDER_INGREDIENTS, DECREASE_INGREDIENT } from
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 import { useRef } from "react";
+import PropTypes from 'prop-types';
+import { menuItemPropTypes } from "../../utils/constants";
 
 export const ConstructorIngredient = ({data, index}) => {
     const {name, price, image, _id} = data;
@@ -41,6 +43,7 @@ export const ConstructorIngredient = ({data, index}) => {
             item.index = hoverIndex;
         }
     })
+
     drag(drop(ref))
     
     return (
@@ -57,4 +60,9 @@ export const ConstructorIngredient = ({data, index}) => {
             />
         </li>
     )
+}
+
+ConstructorIngredient.propTypes = {
+     data: menuItemPropTypes.isRequired,
+    index: PropTypes.number.isRequired
 }

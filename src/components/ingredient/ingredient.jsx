@@ -25,4 +25,5 @@ export function Ingredient({ data, openModal, count }) {
 Ingredient.propTypes = {
     data: menuItemPropTypes.isRequired,
     openModal: PropTypes.func.isRequired,
+    count: PropTypes.number.isRequired,
 }
