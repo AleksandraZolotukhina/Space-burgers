@@ -11,7 +11,7 @@ export const ingredientDetailsReducer = (state = initialState, action) => {
         case DELETE_INGREDIENT_DETAILS:
             return {...state, details: action.data}        
         default:
-            return {...state}    
+            return state    
     }
     
 }

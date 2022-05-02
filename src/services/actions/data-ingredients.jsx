@@ -1,4 +1,5 @@
 import { url } from "../../utils/constants";
+import { checkResponce } from "../../utils/functions";
 
 export const GET_LIST_INGREDIENTS_REQUEST = "GET_LIST_INGREDIENTS_REQUEST";
 export const GET_LIST_INGREDIENTS_ERROR = "GET_LIST_INGREDIENTS_ERROR";
@@ -17,12 +18,7 @@ export const getDataIngredients = () => {
         dispatch({type: GET_LIST_INGREDIENTS_REQUEST});
 
         fetch(`${url}/ingredients`)
-        .then(res=>{
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        })
+        .then(checkResponce)
         .then(data=>{
             dispatch({type: GET_LIST_INGREDIENTS_SUCCESS, data: data.data});
         })
