@@ -39,7 +39,7 @@ export const ConstructorIngredient = ({data, index}) => {
             if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
                 return
             }
-            dispatch({ type:UPDATE_ORDER_INGREDIENTS, dragIndex, hoverIndex })
+            dispatch({ type: UPDATE_ORDER_INGREDIENTS, dragIndex, hoverIndex })
             item.index = hoverIndex;
         }
     })
@@ -63,6 +63,6 @@ export const ConstructorIngredient = ({data, index}) => {
 }
 
 ConstructorIngredient.propTypes = {
-     data: menuItemPropTypes.isRequired,
+    data: menuItemPropTypes.isRequired,
     index: PropTypes.number.isRequired
 }

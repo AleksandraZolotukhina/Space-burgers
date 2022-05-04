@@ -12,7 +12,6 @@ export function BurgerIngredients() {
     const ingredients = useSelector(store => store.listIngredients.ingredients);
     const [current, setCurrent] = React.useState('one');
     const [isOpenModal, setModal] = React.useState(false);
-    const constructorIngredients = useSelector(state => state.listIngredients.constructorIngredients);
     const dispatch = useDispatch();
     const bunRef = createRef();
     const sauceRef = createRef();
@@ -64,33 +63,30 @@ export function BurgerIngredients() {
                     <li className={styles.list_item} ref={bunRef}>
                         <h2 className="text text_type_main-medium" id="bun">Булки</h2>
                         <ul className={`${styles.list} ${styles.list_ingredients}`}>
-                            {ingredients.map(ingredient => {
-                                const constructorIngredient = constructorIngredients.find(el => el._id === ingredient._id);
-                                return ingredient.type === "bun" && <Ingredient key={ingredient._id} data={ingredient} openModal={openModal} 
-                                count={constructorIngredient ? constructorIngredient.count : 0} />
-                            })}
+                            {ingredients.map(ingredient => 
+                                ingredient.type === "bun" && <Ingredient key={ingredient._id} data={ingredient} openModal={openModal} 
+                                count={ingredient.count} />
+                            )}
                         </ul>
                     </li>
 
                     <li className={styles.list_item} ref={sauceRef}>
                         <h2 className="text text_type_main-medium" id="sauce">Соусы</h2>
                         <ul className={`${styles.list} ${styles.list_ingredients} mt-6`}>
-                            {ingredients.map(ingredient => {
-                                const constructorIngredient = constructorIngredients.find(el => el._id === ingredient._id);
-                                return ingredient.type === "sauce" && <Ingredient key={ingredient._id} data={ingredient} openModal={openModal} 
-                                count={constructorIngredient ? constructorIngredient.count : 0} />
-                            })}
+                            {ingredients.map(ingredient => 
+                                ingredient.type === "sauce" && <Ingredient key={ingredient._id} data={ingredient} openModal={openModal} 
+                                count={ingredient.count} />
+                            )}
                         </ul>
                     </li>
 
                     <li className={styles.list_item} ref={mainRef}>
                         <h2 className="text text_type_main-medium" id="filling">Начинки</h2>
                         <ul className={`${styles.list} ${styles.list_ingredients} mt-6`}>
-                            {ingredients.map(ingredient => {
-                                const constructorIngredient = constructorIngredients.find(el => el._id === ingredient._id);
-                                return ingredient.type === "main" && <Ingredient key={ingredient._id} data={ingredient} openModal={openModal} 
-                                count={constructorIngredient ? constructorIngredient.count : 0} />
-                            })}
+                            {ingredients.map(ingredient => 
+                                ingredient.type === "main" && <Ingredient key={ingredient._id} data={ingredient} openModal={openModal} 
+                                count={ingredient.count} />
+                            )}
                         </ul>
                     </li>
                 </ul>

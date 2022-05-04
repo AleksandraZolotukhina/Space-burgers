@@ -6,7 +6,7 @@ import { Modal } from "../modal/modal";
 import { OrderDetails } from "../order-details/order-details";
 import { useDispatch, useSelector } from "react-redux";
 import { sendNewOrder } from "../../services/actions/burger-cost";
-export function BurgerCost({ cost }) {
+export function BurgerCost({ cost, hasBun }) {
 
     const [isOpenModal, setModal] = React.useState(false);
     const ingredients = useSelector(store=>store.listIngredients.constructorIngredients);
@@ -30,10 +30,19 @@ export function BurgerCost({ cost }) {
                     <p>{cost}</p>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button type="primary" size="large" onClick={openModal}>
+                <Button type="primary" size="large" onClick={openModal} disabled={!hasBun}>
                     Оформить заказ
                 </Button>
             </div>
+            {
+                ingredients.length && !hasBun ? 
+                <div className={styles.tip}>
+                    <p className={styles.star}>*</p>
+                    <p className={`text text_type_main-small ${styles.message_tip}`}>Булочка в заказе обязательна</p> 
+                </div>
+                
+                : <></>
+            }
             {
                 isOpenModal &&
                 <Modal closeModal={closeModal}>
@@ -53,5 +62,6 @@ export function BurgerCost({ cost }) {
 }
 
 BurgerCost.propTypes = {
-    cost: PropTypes.number.isRequired
+    cost: PropTypes.number.isRequired,
+    hasBun: PropTypes.bool.isRequired
 }

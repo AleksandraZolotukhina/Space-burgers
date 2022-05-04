@@ -9,3 +9,19 @@
     align-items: center;
     column-gap: 10px;
 }
+.tip{
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -20px;
+}
+.message_tip{
+    margin: 0;
+    margin-left: 15px;
+}
+.star{
+    margin: 0;
+    position: absolute;
+    top: -11px;
+    right: 240px;
+}

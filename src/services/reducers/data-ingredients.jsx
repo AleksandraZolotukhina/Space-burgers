@@ -20,17 +20,17 @@ const initialState = {
 
 export const dataIngredientsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_LIST_INGREDIENTS_REQUEST:
+        case GET_LIST_INGREDIENTS_REQUEST:{
             return { ...state, isLoading: true }
-        case GET_LIST_INGREDIENTS_SUCCESS:
-            return {
-                ...state, isLoading: false, ingredients: action.data.map(el => {
-                    return { ...el, count: 0 }}),
-                constructorIngredients: [action.data.map(el => {
-                    return { ...el, count: 1 }}).find(el => el.type === "bun")]
+        }
+        case GET_LIST_INGREDIENTS_SUCCESS:{
+            return {...state, isLoading: false, ingredients: action.data.map(el => {
+                    return { ...el, count: 0 }})
             }
-        case GET_LIST_INGREDIENTS_ERROR:
+        }
+        case GET_LIST_INGREDIENTS_ERROR: {
             return { ...state, isLoading: false, hasError: true, errorMessage: action.error }
+        }
         case ADD_INGREDIENT: {
             return { ...state, constructorIngredients: [...state.constructorIngredients, state.ingredients.find(el => el._id === action.id)] }
         }
@@ -52,19 +52,19 @@ export const dataIngredientsReducer = (state = initialState, action) => {
         }
         case INCREASE_INGREDIENT: {
             return {
-                ...state, constructorIngredients: [...state.constructorIngredients].map(el => 
-                    el._id === action.id ? 
-                    { ...el, count: el.count+1 } : 
-                    { ...el }
-                )
+                ...state, ingredients: [...state.ingredients].map(el => 
+                    el._id === action.id ?
+                    { ...el, count: el.count+1} :
+                    el
+                )  
             }
         }
         case DECREASE_INGREDIENT: {
             return {
-                ...state, constructorIngredients: [...state.constructorIngredients].map(el => 
+                ...state, ingredients: [...state.ingredients].map(el => 
                     el._id === action.id ? 
                     { ...el, count: el.count-1 } : 
-                    { ...el }
+                    el
                 )
             }
         }
