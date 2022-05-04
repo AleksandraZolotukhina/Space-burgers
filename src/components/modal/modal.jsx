@@ -4,14 +4,14 @@ import styles from "./modal.module.css";
 import { modalRoot } from "../../utils/constants";
 import { ModalOverlay } from "../modal-overlay/modal-overlay";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from 'prop-types';
 
-
-export function Modal(props) {
+export function Modal({ closeModal, title, children }) {
 
     React.useEffect(() => {
         const closePopup = (event) => {
             if(event.key === "Escape"){
-                props.closeModal();
+                closeModal();
             }
         };
         document.addEventListener("keydown", closePopup);
@@ -27,18 +27,24 @@ export function Modal(props) {
             <div className={styles.popup_container} >
 
                 <div className={`${styles.popup} pb-15`}>
-                    {props.title && <h1 className={`text text_type_main-large ${styles.title}`}>{props.title}</h1>}
-                    <button className={styles.button} onClick={props.closeModal}>
+                    {title && <h1 className={`text text_type_main-large ${styles.title}`}>{title}</h1>}
+                    <button className={styles.button} onClick={closeModal}>
                         <CloseIcon type="primary" />
                     </button>
                     <div className={styles.container}>
-                        {props.children}
+                        {children}
                     </div>
                    
                 </div>
-                <ModalOverlay closeModal={props.closeModal} />
+                <ModalOverlay closeModal={closeModal} />
             </div>
 
         ),
         modalRoot)
+}
+
+Modal.propTypes = {
+    closeModal: PropTypes.func.isRequired,
+    title: PropTypes.string,
+    children: PropTypes.node.isRequired,
 }
