@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import { ADD_INGREDIENT, DELETE_BUNS, INCREASE_INGREDIENT, DECREASE_INGREDIENT } from "../../services/actions/data-ingredients";
 import { ConstructorIngredient } from "../constructor-ingredient/constructor-ingredient";
-import { v4 as uuidv4 } from 'uuid';
 
 export function BurgerConstructor() {
     const orderIngredients = useSelector(store => store.listIngredients.constructorIngredients);
@@ -38,7 +37,6 @@ export function BurgerConstructor() {
                 {bun &&
                     <ConstructorElement
                         type="top"
-                        key={uuidv4()}
                         isLocked={true}
                         text={`${bun.name} (верх)`}
                         price={bun.price}
@@ -54,7 +52,7 @@ export function BurgerConstructor() {
                                 <p>Перетащите ингредиент для добавления в бургер</p> 
                                 <p>Примечание: Булочка обязательна</p> 
                             </div>
-                            : orderIngredients.map((ingredient, index) => ingredient.type !== "bun" && <ConstructorIngredient key={uuidv4()} data={ingredient} index={index}/> 
+                            : orderIngredients.map((ingredient, index) => ingredient.type !== "bun" && <ConstructorIngredient key={ingredient.uuid} data={ingredient} index={index}/> 
                             )
                     }
                 </ul>
@@ -62,7 +60,6 @@ export function BurgerConstructor() {
                 {bun &&
                     <ConstructorElement
                         type="bottom"
-                        key={uuidv4()}
                         isLocked={true}
                         text={`${bun.name} (низ)`}
                         price={bun.price}

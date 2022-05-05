@@ -9,6 +9,7 @@ import {
     DECREASE_INGREDIENT
 } from "../actions/data-ingredients";
 import update from 'immutability-helper';
+import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
     isLoading: false,
@@ -32,7 +33,7 @@ export const dataIngredientsReducer = (state = initialState, action) => {
             return { ...state, isLoading: false, hasError: true, errorMessage: action.error }
         }
         case ADD_INGREDIENT: {
-            return { ...state, constructorIngredients: [...state.constructorIngredients, state.ingredients.find(el => el._id === action.id)] }
+            return { ...state, constructorIngredients: [...state.constructorIngredients, {...state.ingredients.find(el => el._id === action.id), uuid:uuidv4()}] }
         }
         case DELETE_INGREDIENT: {
             return { ...state, constructorIngredients: [...state.constructorIngredients.slice(0, action.index), ...state.constructorIngredients.slice(action.index + 1)] }
