@@ -3,7 +3,7 @@ import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-comp
 import { BurgerCost } from "../burger-cost/burger-cost";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
-import { ADD_INGREDIENT, DELETE_BUNS, INCREASE_INGREDIENT, DECREASE_INGREDIENT } from "../../services/actions/data-ingredients";
+import { ADD_INGREDIENT, INCREASE_INGREDIENT, DECREASE_INGREDIENT } from "../../services/actions/data-ingredients";
 import { ConstructorIngredient } from "../constructor-ingredient/constructor-ingredient";
 
 export function BurgerConstructor() {
@@ -15,14 +15,15 @@ export function BurgerConstructor() {
 
     const [{ isHover }, ref] = useDrop({
         accept: "ingredient",
-        drop({ id, type }) {
-            if(type === "bun"){
-                bun && dispatch({ type: DELETE_BUNS, id: bun._id }) && dispatch({ type:DECREASE_INGREDIENT, id: bun._id })
-                dispatch({ type: ADD_INGREDIENT, id: id }) && dispatch({ type: INCREASE_INGREDIENT, id: id})
+        drop(item) {
+            if(item.type === "bun"){
+                const newOrderIngredients = bun ? [...orderIngredients].filter(el => el._id !== bun._id) : [...orderIngredients]
+                bun && dispatch({ type: DECREASE_INGREDIENT, id: bun._id })
+                dispatch({ type: ADD_INGREDIENT, item: [...newOrderIngredients, item]}) && dispatch({ type: INCREASE_INGREDIENT, id: item._id})
             }
             else{
-                dispatch({ type: ADD_INGREDIENT, id: id })
-                dispatch({ type: INCREASE_INGREDIENT, id: id})
+                dispatch({ type: ADD_INGREDIENT, item: [...orderIngredients, item] })
+                dispatch({ type: INCREASE_INGREDIENT, id: item._id })
             }
 
         },
