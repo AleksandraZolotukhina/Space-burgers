@@ -1,0 +1,10 @@
+.ingredient_with_drag{
+    display: flex;
+    align-items: center;
+    column-gap: 13.5px;
+    margin-bottom: 16px;
+}
+
+.ingredient_with_drag:last-child{
+    margin-bottom: 0;
+}

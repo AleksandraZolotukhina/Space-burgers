@@ -1,20 +1,21 @@
-
 import PropTypes from 'prop-types';
 import styles from "./ingredient.module.css";
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import { menuItemPropTypes } from "../../utils/constants";
-
-export function Ingredient({ data, count, openModal }) {
-    const { image, name } = data;
-    const classActive = count ? styles.list_ingredients_item_active : "";
-    const counter = count ? <Counter count={count} size="default" /> : "";
-
+import { useDrag } from "react-dnd";
+import { v4 as uuidv4 } from 'uuid';
+export function Ingredient({ data, openModal, count }) {
+    const { image, name, price} = data;
+    const [,ref] = useDrag({
+        type: "ingredient",
+        item: { ...data, uuid: uuidv4() },
+    }); 
     return (
-        <li className={`text_type_main-default ${styles.list_ingredients_item} ${classActive}`} onClick={() => { openModal(data) }}>
-            {counter}
+        <li ref={ref} className={`text_type_main-default ${styles.list_ingredients_item} ${count ? styles.list_ingredients_item_active : ""}`} onClick={() => { openModal(data) }}>
+            {count ? <Counter count={count} size="default" /> : ""}
             <img src={image} alt={name} />
             <div className={styles.cost}>
-                <p className="text text_type_digits-default mr-2">20</p>
+                <p className="text text_type_digits-default mr-2">{price}</p>
                 <CurrencyIcon type="primary" />
             </div>
             <p className="text mt-2">{name}</p>
@@ -24,6 +25,6 @@ export function Ingredient({ data, count, openModal }) {
 
 Ingredient.propTypes = {
     data: menuItemPropTypes.isRequired,
-    count: PropTypes.number.isRequired,
     openModal: PropTypes.func.isRequired,
+    count: PropTypes.number.isRequired,
 }

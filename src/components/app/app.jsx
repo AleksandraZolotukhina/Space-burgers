@@ -1,27 +1,21 @@
 import React from "react";
 import styles from "./app.module.css";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import { AppHeader } from "../app-header/app-header";
 import { BurgerIngredients } from "../burger-ingredients/burger-ingredients";
 import { BurgerConstructor } from "../burger-constructor/burger-constructor";
-import { url } from "../../utils/constants";
-import { BurgerContext } from "../../utils/appContext";
+import { useDispatch, useSelector } from "react-redux";
+import { getDataIngredients } from "../../services/actions/data-ingredients";
 
 export function App() {
-    const [state, setState] = React.useState({ isLoading: false, hasError: false, errorMessage: "", data: [] });
+    const dispatch = useDispatch();
+    
     React.useEffect(() => {
-        setState({ ...state, isLoading: true });
-        fetch(`${url}/ingredients`)
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка: ${res.status}`);
-            })
-            .then(data => setState({ ...state, isLoading: false, data: data.data }))
-            .catch(error => setState({ ...state, isLoading: false, hasError: true, errorMessage: error }))
+       dispatch(getDataIngredients());
     }, []);
 
-    const { isLoading, data, hasError, errorMessage } = state;
+    const { isLoading, ingredients, hasError, errorMessage } = useSelector(store => store.listIngredients);
     return (
         <>
             <AppHeader />
@@ -34,11 +28,11 @@ export function App() {
                         {
                             !isLoading &&
                             !hasError &&
-                            data.length &&
-                            <BurgerContext.Provider value={data}>
+                            ingredients.length &&
+                            <DndProvider backend={HTML5Backend}>
                                 <BurgerIngredients />
                                 <BurgerConstructor />
-                            </BurgerContext.Provider>
+                            </DndProvider>
 
                         }
 

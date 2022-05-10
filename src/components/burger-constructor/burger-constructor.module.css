@@ -1,32 +1,30 @@
-.content{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .list{
     padding: 0;
     padding-right: 20px;
     list-style-type: none;
-}
 
-.ingredient_with_drag{
     display: flex;
-    align-items: center;
-    column-gap: 13.5px;
-    margin-bottom: 16px;
+    flex-direction: column;
 }
 
-.ingredient_with_drag:last-child{
-    margin-bottom: 0;
+.tip{
+    margin: auto;
+    margin-left: 38px;
+    font-size: 20px;
+    opacity: 1;
+    transition: opacity 0.6s linear;
+}
+
+.tip_invisible{
+    opacity: 0.2;
 }
 
 .scrollbar{
     overflow-y: scroll;
     scrollbar-color: #8585AD #2F2F37;
 
-    max-height: 464px;
-    
+    /* min-height: 159px; */
+    height: 464px; 
 }
 
 /* полоса прокрутки (скроллбар) */

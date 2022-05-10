@@ -4,40 +4,19 @@ import { CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-co
 import styles from "./burger-cost.module.css";
 import { Modal } from "../modal/modal";
 import { OrderDetails } from "../order-details/order-details";
-import { BurgerContext } from "../../utils/appContext";
-import { url } from "../../utils/constants";
-export function BurgerCost({ cost }) {
+import { useDispatch, useSelector } from "react-redux";
+import { sendNewOrder } from "../../services/actions/burger-cost";
+export function BurgerCost({ cost, hasBun }) {
+
     const [isOpenModal, setModal] = React.useState(false);
-    const ingredients = React.useContext(BurgerContext);
+    const ingredients = useSelector(store=>store.listIngredients.constructorIngredients);
     const idIngredients = ingredients.map(ingredient => ingredient._id);
-    const [state, setState] = React.useState({ hasError: false, isLoading: false, errorMessage: "", numberOrder: undefined });
-    const { hasError, isLoading, errorMessage, numberOrder } = state;
-
-    const sendNewOrder = () => {
-        setState({...state, isLoading: true});
-        fetch(`${url}/orders`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ 
-                       ingredients: idIngredients,
-            })
-        })
-        .then(res => {
-            if(res.ok){
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        })
-        .then(data => setState({...state, isLoading: false, numberOrder: data.order.number}))
-        .catch(error => setState({...state, isLoading: false, hasError: true, errorMessage: error}))
-    }
-
+    const { hasError, isLoading, errorMessage, orderNumber } = useSelector(store=>store.order);
+    const dispatch = useDispatch();
 
     const openModal = () => {
         setModal(true);
-        sendNewOrder();
+        dispatch(sendNewOrder(idIngredients));
     }
 
     const closeModal = () => {
@@ -51,10 +30,19 @@ export function BurgerCost({ cost }) {
                     <p>{cost}</p>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button type="primary" size="large" onClick={openModal}>
+                <Button type="primary" size="large" onClick={openModal} disabled={!hasBun}>
                     Оформить заказ
                 </Button>
             </div>
+            {
+                ingredients.length && !hasBun ? 
+                <div className={styles.tip}>
+                    <p className={styles.star}>*</p>
+                    <p className={`text text_type_main-small ${styles.message_tip}`}>Булочка в заказе обязательна</p> 
+                </div>
+                
+                : <></>
+            }
             {
                 isOpenModal &&
                 <Modal closeModal={closeModal}>
@@ -63,8 +51,8 @@ export function BurgerCost({ cost }) {
                     {
                         !isLoading &&
                         !hasError &&
-                        numberOrder &&
-                        <OrderDetails numberOrder={numberOrder} />
+                        orderNumber &&
+                        <OrderDetails />
                     }
 
                 </Modal>
@@ -74,5 +62,6 @@ export function BurgerCost({ cost }) {
 }
 
 BurgerCost.propTypes = {
-    cost: PropTypes.number.isRequired
+    cost: PropTypes.number.isRequired,
+    hasBun: PropTypes.bool.isRequired
 }
