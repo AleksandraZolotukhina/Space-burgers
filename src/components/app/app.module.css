@@ -4,9 +4,3 @@
 
     font-family: "JetBrains Mono", Arial, sans-serif;
 }
-
-.menu_and_order{
-    display: grid;
-    grid-template-columns: minmax(min-content, 600px) 1fr;
-    column-gap: 55px;
-}

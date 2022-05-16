@@ -1,44 +1,25 @@
-import React from "react";
+import "./app.css";
 import styles from "./app.module.css";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
 import { AppHeader } from "../app-header/app-header";
-import { BurgerIngredients } from "../burger-ingredients/burger-ingredients";
-import { BurgerConstructor } from "../burger-constructor/burger-constructor";
-import { useDispatch, useSelector } from "react-redux";
-import { getDataIngredients } from "../../services/actions/data-ingredients";
+import { Routes, Route } from "react-router-dom";
+import { MainPage } from "../../pages/main";
+import { LoginPage } from "../../pages/login";
+import { RegisterPage } from "../../pages/register";
+import { ForgotPasswordPage } from "../../pages/forgot-password";
+import { ResetPasswordPage } from "../../pages/reset-password";
 
 export function App() {
-    const dispatch = useDispatch();
-    
-    React.useEffect(() => {
-       dispatch(getDataIngredients());
-    }, []);
-
-    const { isLoading, ingredients, hasError, errorMessage } = useSelector(store => store.listIngredients);
     return (
         <>
             <AppHeader />
-            <main className={`${styles.main} mt-10`}>
-                <section className="mt-4">
-                    <h1 className="text text_type_main-large">Соберите бургер</h1>
-                    <div className={`${styles.menu_and_order} mt-5`}>
-                        {isLoading && "Загрузка..."}
-                        {hasError && `Произошла ошибка: ${errorMessage}`}
-                        {
-                            !isLoading &&
-                            !hasError &&
-                            ingredients.length &&
-                            <DndProvider backend={HTML5Backend}>
-                                <BurgerIngredients />
-                                <BurgerConstructor />
-                            </DndProvider>
-
-                        }
-
-                    </div>
-
-                </section>
+            <main className={`${styles.main}`}>
+                <Routes>
+                    <Route path="/" element={ <MainPage /> } />
+                    <Route path="login" element={ <LoginPage /> } />
+                    <Route path="register" element={ <RegisterPage /> } />
+                    <Route path="forgot-password" element={ <ForgotPasswordPage /> } />
+                    <Route path="reset-password" element={ <ResetPasswordPage /> } />
+                </Routes>
             </main>
         </>
     );
