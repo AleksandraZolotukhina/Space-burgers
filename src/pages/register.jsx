@@ -6,20 +6,26 @@ export const RegisterPage = () => {
         <section className="registration">
             <div className="registration__form">
                 <h1 className="text text_type_main-medium">Регистрация</h1>
-                <Input
-                    type="text"
-                    placeholder="Имя"
-                />
-                <Input
-                    type="email"
-                    placeholder="E-mail"
-                />
-                <Input
-                    type="password"
-                    placeholder="Пароль"
-                    icon="ShowIcon"
-                />
-                <Button type="primary" size="small">
+                <div className="registration__input">
+                    <Input
+                        type="text"
+                        placeholder="Имя"
+                    />
+                </div>
+                <div className="registration__input">
+                    <Input
+                        type="email"
+                        placeholder="E-mail"
+                    />
+                </div>
+                <div className="registration__input">
+                    <Input
+                        type="password"
+                        placeholder="Пароль"
+                        icon="ShowIcon"
+                    />
+                </div>
+                <Button type="primary" size="large">
                     Зарегистрироваться
                 </Button>
             </div>

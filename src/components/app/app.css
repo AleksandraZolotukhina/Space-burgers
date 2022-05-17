@@ -10,6 +10,9 @@
     align-items: center;
     row-gap: 24px;
 }
+.registration__input .input{
+    width: 480px;
+}
 .registration__questions{
     display: flex;
     flex-direction: column;

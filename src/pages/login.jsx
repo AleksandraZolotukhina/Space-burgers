@@ -6,16 +6,20 @@ export const LoginPage = () => {
         <section className="registration">
             <div className="registration__form">
                 <h1 className="text text_type_main-medium">Вход</h1>
-                <Input
-                    type="email"
-                    placeholder="E-mail"
-                />
-                <Input
-                    type="password"
-                    placeholder="Пароль"
-                    icon="ShowIcon"
-                />
-                <Button type="primary" size="small">
+                <div className="registration__input">
+                    <Input
+                        type="email"
+                        placeholder="E-mail"
+                    />
+                </div>
+                <div className="registration__input">
+                    <Input
+                        type="password"
+                        placeholder="Пароль"
+                        icon="ShowIcon"
+                    />
+                </div>
+                <Button type="primary" size="large">
                     Войти
                 </Button>
             </div>

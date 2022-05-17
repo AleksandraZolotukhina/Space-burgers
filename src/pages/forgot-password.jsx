@@ -10,7 +10,7 @@ export const ForgotPasswordPage = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {isLoading, hasError, errorText} = useSelector(store=>store.userData);
+    const {isLoading, hasError, errorText, dataForgotPassword} = useSelector(store=>store.userData);
     return (
         <section className="registration">
             {
@@ -18,16 +18,18 @@ export const ForgotPasswordPage = () => {
             }
             <div className="registration__form">
                 <h1 className="text text_type_main-medium">Восстановление пароля</h1>
-                <Input
-                    type="email"
-                    placeholder="Укажите e-mail"
-                    value={value}
-                    onChange={e => handlerInputChange(e, setValue, setErrorMessage)}
-                    error={errorMessage ? true : false}
-                    errorText={errorMessage}
-                />
-                <Button type="primary" size="small" disabled={errorMessage || value.length === 0 ? true : false} onClick={()=>dispatch(sendForgotPassword(value))}>
-                    {!isLoading ? "Восстановить" : "Загрузка..."}
+                <div className="registration__input">
+                    <Input
+                        type="email"
+                        placeholder="Укажите e-mail"
+                        value={value}
+                        onChange={e => handlerInputChange(e, setValue, setErrorMessage)}
+                        error={errorMessage ? true : false}
+                        errorText={errorMessage}
+                    />
+                </div>
+                <Button type="primary" size="large" disabled={errorMessage || value.length === 0 ? true : false} onClick={()=>dispatch(sendForgotPassword(value))}>
+                    {dataForgotPassword.success ? "Восстановить" : "Загрузка..."}
                 </Button>
                 {
                     !isLoading &&

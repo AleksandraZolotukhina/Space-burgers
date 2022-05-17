@@ -6,7 +6,8 @@ const initialState = {
     email: "",
     isLoading: false,
     hasError: false,
-    errorText: ""
+    errorText: "",
+    dataForgotPassword: {},
 }
 
 export const userDataReducer = (state = initialState, action) => {
@@ -15,7 +16,7 @@ export const userDataReducer = (state = initialState, action) => {
             return { ...state, isLoading: true, hasError: false, errorText: "" }
         } 
         case SEND_FORGOT_PASSWORD_SUCCESS: {
-            return { ...state, isLoading: false, data: action.data }
+            return { ...state, isLoading: false, dataForgotPassword: action.data }
         }
         case SEND_FORGOT_PASSWORD_ERROR: {
             return { ...state, isLoading: false, hasError: true, errorText: action.error }

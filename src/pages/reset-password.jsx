@@ -6,15 +6,19 @@ export const ResetPasswordPage = () => {
         <section className="registration">
             <div className="registration__form">
                 <h1 className="text text_type_main-medium">Восстановление пароля</h1>
-                <Input
-                    type="password"
-                    placeholder="Введите новый пароль"
-                />
-                <Input
-                    type="text"
-                    placeholder="Введите код из письма"
-                />
-                <Button type="primary" size="small">
+                <div className="registration__input">
+                    <Input
+                        type="password"
+                        placeholder="Введите новый пароль"
+                    />
+                </div>
+                <div className="registration__input">
+                    <Input
+                        type="text"
+                        placeholder="Введите код из письма"
+                    />
+                </div>
+                <Button type="primary" size="primary">
                     Сохранить
                 </Button>
             </div>
