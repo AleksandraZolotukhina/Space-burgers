@@ -1,24 +1,34 @@
-import { Input } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useState } from 'react';
 import { handlerInputChange } from '../utils/functions';
 import styles from "./profile-page.module.css";
 import { NavLink } from "react-router-dom";
+
 export const ProfilePage = () => {
-    const [emailValue, setEmailValue] = useState("");
+    const [emailValue, setEmailValue] = useState(""); 
     const [passwordValue, setPasswordValue] = useState("");
-    const [userNameValue, setUserNameValue] = useState("");
+    const [userNameValue, setUserNameValue] = useState(""); 
+
     const [errorUserName, setErrorUserName] = useState("");
     const [errorEmail, setErrorEmail] = useState("");
     const [errorPassword, setErrorPassword] = useState("");
+
+    const activeStyle = {
+        color: "#F2F2F3",
+    }
+
     return (
-        <section className={styles.profile}>
-        <nav className={styles.navigation}>
-            <NavLink to="">Профиль</NavLink>
-            <NavLink to="orders">История заказов</NavLink>
-            <NavLink to="orders/:id">Выход</NavLink>
-        </nav>
-            <div className="registration">
-            <div className="registration__input">
+        <section className={`${styles.profile} mt-30`}>
+            <div className={styles.main_navigation}>
+                <nav className={`${styles.navigation} text_type_main-medium`}>
+                    <NavLink className={styles.link} to="" style={({ isActive }) => isActive ? activeStyle : undefined}>Профиль</NavLink>
+                    <NavLink className={styles.link} to="orders">История заказов</NavLink>
+                    <NavLink className={styles.link} to="orders/:id">Выход</NavLink>
+                </nav>
+                <p className={`text text_type_main-default text_color_inactive ${styles.message_tip}`}>В этом разделе вы можете изменить свои персональные данные</p>
+            </div>
+            <div className={`registration ${styles.registration}`}>
+                <div className="registration__input mb-6">
                     <Input
                         type="text"
                         placeholder="Имя"
@@ -29,7 +39,7 @@ export const ProfilePage = () => {
                         errorText={errorUserName}
                     />
                 </div>
-                <div className="registration__input">
+                <div className="registration__input mb-6">
                     <Input
                         type="email"
                         placeholder="Логин"
@@ -50,6 +60,14 @@ export const ProfilePage = () => {
                         error={errorPassword ? true : false}
                         errorText={errorPassword}
                     />
+                </div>
+                <div className={styles.buttons}>
+                    <Button type="secondary" size="large">
+                        Отмена
+                    </Button>
+                    <Button type="primary" size="large">
+                        Сохранить
+                    </Button>
                 </div>
             </div>
         </section>

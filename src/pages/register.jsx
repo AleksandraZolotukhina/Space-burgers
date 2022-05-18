@@ -1,7 +1,22 @@
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from "./register.module.css";
 import { Link } from "react-router-dom";
+import { handlerInputChange } from '../utils/functions';
+import { useState } from 'react';
+import { sendRegister } from '../services/actions/register';
+import { useDispatch } from 'react-redux';
+
 export const RegisterPage = () => {
+    const [emailValue, setEmailValue] = useState("");
+    const [passwordValue, setPasswordValue] = useState("");
+    const [userNameValue, setUserNameValue] = useState("");
+
+    const [errorUserName, setErrorUserName] = useState("");
+    const [errorEmail, setErrorEmail] = useState("");
+    const [errorPassword, setErrorPassword] = useState("");
+    
+    const dispatch = useDispatch();
+
     return (
         <section className="registration">
             <div className="registration__form">
@@ -10,12 +25,20 @@ export const RegisterPage = () => {
                     <Input
                         type="text"
                         placeholder="Имя"
+                        value={userNameValue}
+                        error={errorUserName ? true : false}
+                        errorText={errorUserName}
+                        onChange={(e) => handlerInputChange(e, setUserNameValue, setErrorUserName)}
                     />
                 </div>
                 <div className="registration__input">
                     <Input
                         type="email"
                         placeholder="E-mail"
+                        value={emailValue}
+                        error={errorEmail ? true : false}
+                        errorText={errorEmail}
+                        onChange={(e) => handlerInputChange(e, setEmailValue, setErrorEmail)}
                     />
                 </div>
                 <div className="registration__input">
@@ -23,9 +46,14 @@ export const RegisterPage = () => {
                         type="password"
                         placeholder="Пароль"
                         icon="ShowIcon"
+                        value={passwordValue}
+                        error={errorPassword ? true : false}
+                        errorText={errorPassword}
+                        onChange={(e) => handlerInputChange(e, setPasswordValue, setErrorPassword)}
                     />
                 </div>
-                <Button type="primary" size="large">
+                <Button type="primary" size="large" disabled={(errorUserName || errorEmail || errorPassword) || 
+                    (!userNameValue || !emailValue || !passwordValue) ? true : false} onClick={()=>{dispatch(sendRegister(emailValue, userNameValue, passwordValue))}}>
                     Зарегистрироваться
                 </Button>
             </div>
