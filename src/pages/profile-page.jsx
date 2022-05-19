@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { handlerInputChange } from '../utils/functions';
 import styles from "./profile-page.module.css";
 import { NavLink } from "react-router-dom";
-
+import { getAuthorization } from '../services/actions/authorization';
 export const ProfilePage = () => {
     const [emailValue, setEmailValue] = useState(""); 
     const [passwordValue, setPasswordValue] = useState("");
@@ -18,6 +18,7 @@ export const ProfilePage = () => {
     }
 
     return (
+        <>
         <section className={`${styles.profile} mt-30`}>
             <div className={styles.main_navigation}>
                 <nav className={`${styles.navigation} text_type_main-medium`}>
@@ -65,11 +66,12 @@ export const ProfilePage = () => {
                     <Button type="secondary" size="large">
                         Отмена
                     </Button>
-                    <Button type="primary" size="large">
+                    <Button type="primary" size="large" onClick={()=>{getAuthorization()}}>
                         Сохранить
                     </Button>
                 </div>
             </div>
         </section>
+        </>
     )
 }

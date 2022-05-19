@@ -1,10 +1,10 @@
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from "./register.module.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { handlerInputChange } from '../utils/functions';
-import { useState } from 'react';
 import { sendRegister } from '../services/actions/register';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
+import { useState } from 'react';
 
 export const RegisterPage = () => {
     const [emailValue, setEmailValue] = useState("");
@@ -16,8 +16,13 @@ export const RegisterPage = () => {
     const [errorPassword, setErrorPassword] = useState("");
     
     const dispatch = useDispatch();
-
+    const {isLoading, hasError, errorMessage, data} = useSelector(store => store.register);
+    
     return (
+        <>
+        {
+            data && <Navigate to="/" />
+        }
         <section className="registration">
             <div className="registration__form">
                 <h1 className="text text_type_main-medium">Регистрация</h1>
@@ -54,8 +59,9 @@ export const RegisterPage = () => {
                 </div>
                 <Button type="primary" size="large" disabled={(errorUserName || errorEmail || errorPassword) || 
                     (!userNameValue || !emailValue || !passwordValue) ? true : false} onClick={()=>{dispatch(sendRegister(emailValue, userNameValue, passwordValue))}}>
-                    Зарегистрироваться
+                    {!isLoading ? "Зарегистрироваться" : "Загрузка..."}
                 </Button>
+                {hasError && <p className="registration__error-request">{errorMessage}</p>}
             </div>
             <div className="registration__questions  mt-20">
                 <div className="registration__question">
@@ -64,5 +70,6 @@ export const RegisterPage = () => {
                 </div>
             </div>
         </section>
+        </>
     )
 }

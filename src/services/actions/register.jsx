@@ -1,5 +1,5 @@
 import { url } from "../../utils/constants";
-import { checkResponce } from "../../utils/functions";
+import { checkResponce, setCookie } from "../../utils/functions";
 
 export const SEND_REGISTER_REQUEST = "SEND_REGISTER_REQUEST";
 export const SEND_REGISTER_SUCCESS = "SEND_REGISTER_SUCCESS";
@@ -12,14 +12,9 @@ export const sendRegister = (email, name, password) => {
 
         fetch(`${url}/auth/register`, {
             method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
             headers: {
               'Content-Type': 'application/json'
             },
-            redirect: 'follow',
-            referrerPolicy: 'no-referrer',
             body: JSON.stringify({
                 "email": email,
                 "password": password,
@@ -27,7 +22,12 @@ export const sendRegister = (email, name, password) => {
             })
         })
         .then(checkResponce)
-        .then(data => {console.log(data)})
-        .catch(error => {console.log(error)})
+        .then(data => {
+            const {user} = data;
+            const token = data.accessToken.split("Bearer ")[1];
+            setCookie("token", token);
+            dispatch({ type: SEND_REGISTER_SUCCESS, data: user })
+        })
+        .catch(error => dispatch({type: SEND_REGISTER_ERROR, error: error}))
     }
 }

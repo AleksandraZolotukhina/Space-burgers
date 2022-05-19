@@ -17,7 +17,7 @@ export const registerUserReducer = (state = initialState, action) => {
         }
 
         case SEND_REGISTER_SUCCESS: {
-            return {...state, isLoading: false, email: action.email, userName: action.userName, token: action.token}
+            return {...state, isLoading: false, data: action.data}
         }
 
         case SEND_REGISTER_ERROR: {
