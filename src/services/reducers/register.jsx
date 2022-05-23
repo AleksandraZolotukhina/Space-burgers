@@ -4,9 +4,7 @@ const initialState = {
     hasError: false,
     errorMessage: "",
 
-    email: "",
-    userName: "",
-    token: ""
+    data: {}
 }
 
 export const registerUserReducer = (state = initialState, action) => {

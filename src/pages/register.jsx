@@ -19,10 +19,6 @@ export const RegisterPage = () => {
     const {isLoading, hasError, errorMessage, data} = useSelector(store => store.register);
     
     return (
-        <>
-        {
-            data && <Navigate to="/" />
-        }
         <section className="registration">
             <div className="registration__form">
                 <h1 className="text text_type_main-medium">Регистрация</h1>
@@ -70,6 +66,5 @@ export const RegisterPage = () => {
                 </div>
             </div>
         </section>
-        </>
     )
 }

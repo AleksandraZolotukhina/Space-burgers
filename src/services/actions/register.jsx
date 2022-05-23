@@ -1,12 +1,11 @@
 import { url } from "../../utils/constants";
-import { checkResponce, setCookie } from "../../utils/functions";
+import { checkResponce, updateCookies } from "../../utils/functions";
 
 export const SEND_REGISTER_REQUEST = "SEND_REGISTER_REQUEST";
 export const SEND_REGISTER_SUCCESS = "SEND_REGISTER_SUCCESS";
 export const SEND_REGISTER_ERROR = "SEND_REGISTER_ERROR";
 
 export const sendRegister = (email, name, password) => {
-
     return function (dispatch) {
         dispatch({ type: SEND_REGISTER_REQUEST });
 
@@ -24,8 +23,8 @@ export const sendRegister = (email, name, password) => {
         .then(checkResponce)
         .then(data => {
             const {user} = data;
-            const token = data.accessToken.split("Bearer ")[1];
-            setCookie("token", token);
+            document.cookie="";
+            updateCookies(data);
             dispatch({ type: SEND_REGISTER_SUCCESS, data: user })
         })
         .catch(error => dispatch({type: SEND_REGISTER_ERROR, error: error}))

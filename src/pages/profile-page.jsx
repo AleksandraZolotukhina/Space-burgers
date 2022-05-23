@@ -3,11 +3,15 @@ import { useState } from 'react';
 import { handlerInputChange } from '../utils/functions';
 import styles from "./profile-page.module.css";
 import { NavLink } from "react-router-dom";
-import { getAuthorization } from '../services/actions/authorization';
+import { useSelector } from 'react-redux';
+
 export const ProfilePage = () => {
-    const [emailValue, setEmailValue] = useState(""); 
+    const {data} = useSelector(store => store.userInformation);
+    const {email, name} = data.user;
+
+    const [emailValue, setEmailValue] = useState(email);
     const [passwordValue, setPasswordValue] = useState("");
-    const [userNameValue, setUserNameValue] = useState(""); 
+    const [userNameValue, setUserNameValue] = useState(name);
 
     const [errorUserName, setErrorUserName] = useState("");
     const [errorEmail, setErrorEmail] = useState("");
@@ -18,7 +22,6 @@ export const ProfilePage = () => {
     }
 
     return (
-        <>
         <section className={`${styles.profile} mt-30`}>
             <div className={styles.main_navigation}>
                 <nav className={`${styles.navigation} text_type_main-medium`}>
@@ -66,12 +69,11 @@ export const ProfilePage = () => {
                     <Button type="secondary" size="large">
                         Отмена
                     </Button>
-                    <Button type="primary" size="large" onClick={()=>{getAuthorization()}}>
+                    <Button type="primary" size="large">
                         Сохранить
                     </Button>
                 </div>
             </div>
         </section>
-        </>
     )
 }

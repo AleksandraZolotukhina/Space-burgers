@@ -5,7 +5,6 @@ import { BurgerConstructor } from "../components/burger-constructor/burger-const
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getDataIngredients } from "../services/actions/data-ingredients";
-import { Outlet, Link } from "react-router-dom";
 import styles from "./main.module.css";
 
 export const MainPage = () => {

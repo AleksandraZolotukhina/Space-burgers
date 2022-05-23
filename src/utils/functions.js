@@ -1,7 +1,5 @@
-import { url } from "./constants";
-
 export const checkResponce = (res) => {
-    if(res.ok){
+    if (res.ok) {
         return res.json();
     }
     return Promise.reject(`Ошибка: ${res.status}`);
@@ -11,16 +9,6 @@ export const handlerInputChange = (e, setValue, setErrorMessage) => {
     const targetElement = e.target;
     setValue(targetElement.value);
     setErrorMessage(targetElement.validationMessage);
-}
-
-export const getAutorizationRequest =  async() => {
-    return  await fetch(`${url}/auth/login`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${getCookie('token')}`
-        }
-    })
 }
 
 export const setCookie = (name, value) => {
@@ -34,3 +22,9 @@ export const getCookie = (name) => {
     );
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
+
+export const updateCookies = (data) => {
+    const token = data.accessToken.split("Bearer ")[1];
+    setCookie("token", token);
+    setCookie("refreshToken", data.refreshToken);
+} 
