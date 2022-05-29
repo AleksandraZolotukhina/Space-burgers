@@ -2,38 +2,26 @@ import React, { createRef } from "react";
 import styles from "./burger-ingredients.module.css"
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Ingredient } from "../ingredient/ingredient";
-import { Modal } from "../modal/modal";
-import { IngredientDetails } from "../ingredient-details/ingredient-details";
-import { useDispatch, useSelector } from "react-redux";
-import { SEE_INGREDIENT_DETAILS, DELETE_INGREDIENT_DETAILS } from "../../services/actions/burger-ingredients";
+import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function BurgerIngredients() {
 
     const ingredients = useSelector(store => store.listIngredients.ingredients);
     const [current, setCurrent] = React.useState('one');
-    const [isOpenModal, setModal] = React.useState(false);
-    const dispatch = useDispatch();
     const bunRef = createRef();
     const sauceRef = createRef();
     const mainRef = createRef();
-
-    const openModal = (data) => {
-        setModal(true);
-        dispatch({ type: SEE_INGREDIENT_DETAILS, data: data });
-    }
-
-    const closeModal = () => {
-        setModal(false);
-        dispatch({ type: DELETE_INGREDIENT_DETAILS, data: {} });
-    }
+    const location = useLocation();
 
     const scroll = () => {
-        if(bunRef.current.getBoundingClientRect().top > 0 ){
+        if (bunRef.current.getBoundingClientRect().top > 0) {
             setCurrent("one");
-            
-        } else if(sauceRef.current.getBoundingClientRect().top > 0 ){ 
+
+        } else if (sauceRef.current.getBoundingClientRect().top > 0) {
             setCurrent("two");
-        } else if(mainRef.current.getBoundingClientRect().top > 0 ){ 
+        } else if (mainRef.current.getBoundingClientRect().top > 0) {
             setCurrent("three");
         }
 
@@ -63,9 +51,12 @@ export function BurgerIngredients() {
                     <li className={styles.list_item} ref={bunRef}>
                         <h2 className="text text_type_main-medium" id="bun">Булки</h2>
                         <ul className={`${styles.list} ${styles.list_ingredients}`}>
-                            {ingredients.map(ingredient => 
-                                ingredient.type === "bun" && <Ingredient key={ingredient._id} data={ingredient} openModal={openModal} 
-                                count={ingredient.count} />
+                            {ingredients.map(ingredient =>
+                                ingredient.type === "bun" &&
+                                <Link key={ingredient._id} style={{ textDecoration: 'none', color: '#F2F2F3' }} to={`ingredients/${ingredient._id}`} state={{ backgroundLocation: location }}>
+                                    <Ingredient data={ingredient}
+                                        count={ingredient.count} />
+                                </Link>
                             )}
                         </ul>
                     </li>
@@ -73,9 +64,12 @@ export function BurgerIngredients() {
                     <li className={styles.list_item} ref={sauceRef}>
                         <h2 className="text text_type_main-medium" id="sauce">Соусы</h2>
                         <ul className={`${styles.list} ${styles.list_ingredients} mt-6`}>
-                            {ingredients.map(ingredient => 
-                                ingredient.type === "sauce" && <Ingredient key={ingredient._id} data={ingredient} openModal={openModal} 
-                                count={ingredient.count} />
+                            {ingredients.map(ingredient =>
+                                ingredient.type === "sauce" &&
+                                <Link key={ingredient._id} style={{ textDecoration: 'none', color: '#F2F2F3' }} to={`ingredients/${ingredient._id}`} state={{ backgroundLocation: location }}>
+                                    <Ingredient data={ingredient}
+                                        count={ingredient.count} />
+                                </Link>
                             )}
                         </ul>
                     </li>
@@ -83,20 +77,17 @@ export function BurgerIngredients() {
                     <li className={styles.list_item} ref={mainRef}>
                         <h2 className="text text_type_main-medium" id="filling">Начинки</h2>
                         <ul className={`${styles.list} ${styles.list_ingredients} mt-6`}>
-                            {ingredients.map(ingredient => 
-                                ingredient.type === "main" && <Ingredient key={ingredient._id} data={ingredient} openModal={openModal} 
-                                count={ingredient.count} />
+                            {ingredients.map(ingredient =>
+                                ingredient.type === "main" &&
+                                <Link key={ingredient._id} style={{ textDecoration: 'none', color: '#F2F2F3' }} to={`ingredients/${ingredient._id}`} state={{ backgroundLocation: location }}>
+                                    <Ingredient data={ingredient}
+                                        count={ingredient.count} />
+                                </Link>
                             )}
                         </ul>
                     </li>
                 </ul>
             </div>
-            {
-                isOpenModal &&
-                <Modal closeModal={closeModal} title="Детали ингредиента">
-                    <IngredientDetails />
-                </Modal>
-            }
         </>
     )
 }

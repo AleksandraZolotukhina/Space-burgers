@@ -2,22 +2,24 @@ import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-component
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate  } from "react-router-dom";
-import { sendForgotPassword } from '../services/actions/forgot-password';
+import { sendForgotPassword } from '../services/actions/user-information';
 import { handlerInputChange } from '../utils/functions';
+import style_page from "./page.module.css";
+import "./page.css";
 
 export const ForgotPasswordPage = () => {
     const [emailValue, setEmailValue] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const dispatch = useDispatch();
-    const {isLoading, hasError, errorText, dataForgotPassword} = useSelector(store=>store.userData);
+    const {isLoadingForgotPassword, hasErrorForgotPassword, errorMessageForgotPassword, successForgotPassword, data} = useSelector(store=>store.userInformation);
+    
+    if (successForgotPassword) return <Navigate to="/reset-password" />
+    if (data.success) return <Navigate to="/" />
     return (
-        <section className="registration">
-            {
-                dataForgotPassword.success &&  <Navigate to="/reset-password" replace={true} />
-            }
-            <div className="registration__form">
+        <section className={style_page.registration}>
+            <div className={style_page.registration__form}>
                 <h1 className="text text_type_main-medium">Восстановление пароля</h1>
-                <div className="registration__input">
+                <div className={style_page.registration__input}>
                     <Input
                         type="email"
                         placeholder="Укажите e-mail"
@@ -28,18 +30,18 @@ export const ForgotPasswordPage = () => {
                     />
                 </div>
                 <Button type="primary" size="large" disabled={errorMessage || !emailValue ? true : false} onClick={()=>dispatch(sendForgotPassword(emailValue))}>
-                    {!isLoading ? "Восстановить" : "Загрузка..."}
+                    {!isLoadingForgotPassword ? "Восстановить" : "Загрузка..."}
                 </Button>
                 {
-                    !isLoading &&
-                    hasError &&
-                    <p class = "registration__error-request">{errorText}</p>
+                    !isLoadingForgotPassword &&
+                    hasErrorForgotPassword &&
+                    <p className = {style_page.registration__error_request}>{errorMessageForgotPassword}</p>
                 }
             </div>
-            <div className="registration__questions  mt-20">
-                <div className="registration__question">
+            <div className={`${style_page.registration__questions} mt-20`}>
+                <div className={style_page.registration__question}>
                     <p className="text text_type_main-default text_color_inactive">Вспомнили пароль?</p>
-                    <Link className="link" to="/login">Войти</Link>
+                    <Link className={style_page.link} to="/login">Войти</Link>
                 </div>
             </div>
         </section>

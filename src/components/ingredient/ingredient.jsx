@@ -4,14 +4,15 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import { menuItemPropTypes } from "../../utils/constants";
 import { useDrag } from "react-dnd";
 import { v4 as uuidv4 } from 'uuid';
-export function Ingredient({ data, openModal, count }) {
-    const { image, name, price} = data;
-    const [,ref] = useDrag({
+export function Ingredient({ data, count }) {
+    const { image, name, price } = data;
+    const [, ref] = useDrag({
         type: "ingredient",
         item: { ...data, uuid: uuidv4() },
-    }); 
+    });
+
     return (
-        <li ref={ref} className={`text_type_main-default ${styles.list_ingredients_item} ${count ? styles.list_ingredients_item_active : ""}`} onClick={() => { openModal(data) }}>
+        <li ref={ref} className={`text_type_main-default ${styles.list_ingredients_item} ${count ? styles.list_ingredients_item_active : ""}`}>
             {count ? <Counter count={count} size="default" /> : ""}
             <img src={image} alt={name} />
             <div className={styles.cost}>
@@ -25,6 +26,5 @@ export function Ingredient({ data, openModal, count }) {
 
 Ingredient.propTypes = {
     data: menuItemPropTypes.isRequired,
-    openModal: PropTypes.func.isRequired,
     count: PropTypes.number.isRequired,
 }

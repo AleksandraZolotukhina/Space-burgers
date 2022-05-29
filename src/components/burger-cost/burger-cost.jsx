@@ -6,8 +6,10 @@ import { Modal } from "../modal/modal";
 import { OrderDetails } from "../order-details/order-details";
 import { useDispatch, useSelector } from "react-redux";
 import { sendNewOrder } from "../../services/actions/burger-cost";
+import { useNavigate } from "react-router-dom";
 export function BurgerCost({ cost, hasBun }) {
-
+    const navigate = useNavigate();
+    const user = useSelector(store => store.userInformation.data.success);
     const [isOpenModal, setModal] = React.useState(false);
     const ingredients = useSelector(store=>store.listIngredients.constructorIngredients);
     const idIngredients = ingredients.map(ingredient => ingredient._id);
@@ -15,8 +17,14 @@ export function BurgerCost({ cost, hasBun }) {
     const dispatch = useDispatch();
 
     const openModal = () => {
-        setModal(true);
-        dispatch(sendNewOrder(idIngredients));
+        if(!user){
+            navigate("/login")
+        }
+        else{
+            setModal(true);
+            dispatch(sendNewOrder(idIngredients));
+        }
+
     }
 
     const closeModal = () => {
@@ -27,7 +35,7 @@ export function BurgerCost({ cost, hasBun }) {
         <>
             <div className={`${styles.content} text_type_digits-medium`}>
                 <div className={styles.price}>
-                    <p>{cost}</p>
+                    <p className="text">{cost}</p>
                     <CurrencyIcon type="primary" />
                 </div>
                 <Button type="primary" size="large" onClick={openModal} disabled={!hasBun}>
@@ -36,12 +44,8 @@ export function BurgerCost({ cost, hasBun }) {
             </div>
             {
                 ingredients.length && !hasBun ? 
-                <div className={styles.tip}>
-                    <p className={styles.star}>*</p>
-                    <p className={`text text_type_main-small ${styles.message_tip}`}>Булочка в заказе обязательна</p> 
-                </div>
-                
-                : <></>
+                <p className={`text text_type_main-small ${styles.message_tip}`}>Булочка в заказе обязательна</p> 
+                : <></>   
             }
             {
                 isOpenModal &&

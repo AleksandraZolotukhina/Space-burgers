@@ -3,25 +3,23 @@
     justify-content: flex-end;
     align-items: center;
     column-gap: 40px;
+    margin-top: 40px;
 }
 .price{
     display: flex;
     align-items: center;
     column-gap: 10px;
 }
-.tip{
-    position: relative;
-    display: flex;
-    justify-content: flex-end;
-    margin-top: -20px;
-}
 .message_tip{
-    margin: 0;
-    margin-left: 15px;
+    display: flex;
+    justify-content: end;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: red;
 }
-.star{
-    margin: 0;
-    position: absolute;
-    top: -11px;
-    right: 240px;
+.message_tip:first-of-type{
+    margin-top: 10px;
+}
+.message_tip:last-of-type{
+    margin-bottom: 0;
 }

@@ -9,10 +9,9 @@ export const NotFoundPage = () => {
                 <BurgerIcon type="success" />
             </div>
             <h1 className="text text_type_main-large">Извините страница не найдена</h1>
-            <div className={styles.navigation}>
-                <Link to="" className={styles.link}>Вернуться обратно</Link>
+            {/* <div className={styles.navigation}>
                 <Link to="/" className={styles.link}>Сделать заказ</Link>
-            </div>
+            </div> */}
         </section>
     )
 }
