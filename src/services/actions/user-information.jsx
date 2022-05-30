@@ -68,14 +68,14 @@ export const updateToken = () => {
             .then(data => {
                 document.cookie = "";
                 updateCookies(data);
-                dispatch({ type: UPDATE_TOKEN_ERROR })
+                dispatch(getUserInformationRequest())
             })
             .catch(error => dispatch({ type: UPDATE_TOKEN_ERROR, error: error }))
     }
 }
 
 export const getUserInformationRequest = () => {
-    return dispatch => {
+    return  dispatch => {
         dispatch({ type: GET_USER_INFORMATION_REQUEST })
 
         fetch(`${url}/auth/user`, {
