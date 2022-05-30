@@ -2,6 +2,9 @@ export const checkResponce = (res) => {
     if (res.ok) {
         return res.json();
     }
+    if(res.status===401){
+      return Promise.reject(`Ошибка: проверьте корректность введенных данных`);
+    }
     return Promise.reject(`Ошибка: ${res.status}`);
 }
 

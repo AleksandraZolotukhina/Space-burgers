@@ -1,8 +1,8 @@
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { loginRequest } from '../services/actions/user-information';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { handlerInputChange } from '../utils/functions';
 import style_page from "./page.module.css";
 import "./page.css";
@@ -11,16 +11,26 @@ export const LoginPage = () => {
     const dispatch = useDispatch();
     const [emailValue, setEmailValue] = useState("");
     const [passwordValue, setPasswordValue] = useState("");
+    const { state } = useLocation();
     const navigate = useNavigate();
     const [errorEmail, setErrorEmail] = useState("");
     const [errorPassword, setErrorPassword] = useState("");
     const {isLoadingLogIn, hasErrorLogIn, errorMessageLogIn, data} = useSelector(store => store.userInformation);
+
+    const handlerSubmit = (e) => {
+        e.preventDefault();
+        dispatch(loginRequest(emailValue, passwordValue));
+    };
+    
+    useEffect(()=>{
+        if (data.success) navigate(state?.path || "/")
+    }, [data.success])
+
     return (
         <section className={style_page.registration}>
-            {data.success && navigate(-1)}
-            <div className={style_page.registration__form}>
+            <form className={style_page.registration__form} onSubmit={(e)=>handlerSubmit(e)}>
                 <h1 className="text text_type_main-medium">Вход</h1>
-                <div className={style_page.registration__input}>
+                <label className={style_page.registration__input}>
                     <Input
                         type="email"
                         placeholder="E-mail"
@@ -29,8 +39,8 @@ export const LoginPage = () => {
                         errorText={errorEmail}
                         onChange={(e) => handlerInputChange(e, setEmailValue, setErrorEmail)}
                     />
-                </div>
-                <div className={style_page.registration__input}>
+                </label>
+                <label className={style_page.registration__input}>
                     <Input
                         type="password"
                         placeholder="Пароль"
@@ -40,14 +50,13 @@ export const LoginPage = () => {
                         errorText={errorPassword}
                         onChange={(e) => handlerInputChange(e, setPasswordValue, setErrorPassword)}
                     />
-                </div>
+                </label>
                 <Button type="primary" size="large" disabled={(errorEmail || errorPassword) || 
-                    (!emailValue || !passwordValue) ? true : false} 
-                    onClick={()=>dispatch(loginRequest(emailValue, passwordValue))}>
+                    (!emailValue || !passwordValue) ? true : false} >
                     {isLoadingLogIn ? "Загрузка..." : "Войти"}
                 </Button>
                 {hasErrorLogIn&& <p className={style_page.registration__error_request}>{errorMessageLogIn}</p>}
-            </div>
+            </form>
             <div className={`${style_page.registration__questions} mt-20`}>
                 <div className={style_page.registration__question}>
                     <p className="text text_type_main-default text_color_inactive">Вы — новый пользователь?</p>

@@ -20,11 +20,16 @@ export const ResetPasswordPage = () => {
     if (!successForgotPassword && !successResetPassword && !hasErrorResetPassword) return <NotFoundPage />
     if (successResetPassword) return <Navigate to="/login" />
     
+    const handlerSubmit = (e) => {
+        e.preventDefault();
+        dispatch(resetPassword(passwordValue, codeValue));
+    };
+
     return (
         <section className={style_page.registration}>
-            <div className={style_page.registration__form}>
+            <form className={style_page.registration__form} onSubmit={(e)=>handlerSubmit(e)}>
                 <h1 className="text text_type_main-medium">Восстановление пароля</h1>
-                <div className={style_page.registration__input}>
+                <label className={style_page.registration__input}>
                     <Input
                         type="password"
                         placeholder="Введите новый пароль"
@@ -33,8 +38,8 @@ export const ResetPasswordPage = () => {
                         errorText={errorPassword}
                         onChange={(e) => handlerInputChange(e, setPasswordValue, setErrorPassword)}
                     />
-                </div>
-                <div className={style_page.registration__input}>
+                </label>
+                <label className={style_page.registration__input}>
                     <Input
                         type="text"
                         placeholder="Введите код из письма"
@@ -43,9 +48,9 @@ export const ResetPasswordPage = () => {
                         errorText={errorCode}
                         onChange={(e) => handlerInputChange(e, setCodeValue, setErrorCode)}
                     />
-                </div>
+                </label>
                 <Button type="primary" size="primary" disabled={(errorCode || errorPassword) || 
-                    (!codeValue || !passwordValue) ? true : false} onClick={() => dispatch(resetPassword(passwordValue, codeValue))}>
+                    (!codeValue || !passwordValue) ? true : false}>
                     {!isLoadingResetPassword ? "Сохранить" : "Сохранение..."}
                 </Button>
                 {
@@ -53,7 +58,7 @@ export const ResetPasswordPage = () => {
                     hasErrorResetPassword &&
                     <p className = {style_page.registration__error_request}>{errorMessageResetPassword}</p>
                 }
-            </div>
+            </form>
             <div className={`${style_page.registration__questions} mt-20`}>
                 <div className={style_page.registration__question}>
                     <p className="text text_type_main-default text_color_inactive">Вспомнили пароль?</p>

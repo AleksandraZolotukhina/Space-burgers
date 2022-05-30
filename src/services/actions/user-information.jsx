@@ -75,7 +75,7 @@ export const updateToken = () => {
 }
 
 export const getUserInformationRequest = () => {
-    return async dispatch => {
+    return dispatch => {
         dispatch({ type: GET_USER_INFORMATION_REQUEST })
 
         fetch(`${url}/auth/user`, {
@@ -85,14 +85,14 @@ export const getUserInformationRequest = () => {
                 "Authorization": `Bearer ${getCookie("token")}`
             }
         })
-            .then(res => res.json())
-            .then(async (data) => {
-                if (data.message === "jwt expired") {
-                    await dispatch(updateToken());
-                }
+            .then(checkResponce)
+            .then(data => {
                 dispatch({ type: GET_USER_INFORMATION_SUCCESS, data: data })
             })
-            .catch(error => dispatch({ type: GET_USER_INFORMATION_ERROR, error: error }))
+            .catch(error => {
+                dispatch({ type: GET_USER_INFORMATION_ERROR, error: error });
+                dispatch(updateToken());
+            })
     }
 }
 
@@ -176,11 +176,8 @@ export const loginRequest = (email, password) => {
                 "password": password
             })
         })
-            .then(res => res.json())
-            .then((data) => {
-                if(!data.success){
-                    return Promise.reject(`Ошибка: ${data.message}`);
-                }
+            .then(checkResponce)
+            .then(data => {
                 updateCookies(data);
                 dispatch({ type: LOGIN_SUCCESS, data: data});
             })
@@ -202,11 +199,8 @@ export const resetPassword = (password, code) => {
                 "token": code,
             })
         })
-            .then(res => res.json())
-            .then((data) => {
-                if(!data.success){
-                    return Promise.reject(`Ошибка: ${data.message}`);
-                }
+            .then(checkResponce)
+            .then(data => {
                 dispatch({ type: RESET_PASSWORD_SUCCESS, success: data.success});
             })
             .catch(error => dispatch({ type: RESET_PASSWORD_ERROR, error: error }))

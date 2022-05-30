@@ -23,7 +23,7 @@ export function AppHeader() {
                     </NavLink>
                 </ul>
 
-                <Link to="#" className={`${styles.link} ${styles.logo}`}>
+                <Link to="/" className={`${styles.link} ${styles.logo}`}>
                     <Logo />
                 </Link>
 

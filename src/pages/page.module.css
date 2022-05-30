@@ -12,8 +12,8 @@
 }
 .registration__input{
     width: 480px;
+    display: block;
 }
-
 .registration__questions{
     display: flex;
     flex-direction: column;

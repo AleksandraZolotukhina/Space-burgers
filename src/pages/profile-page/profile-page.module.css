@@ -28,6 +28,16 @@
 .buttons{
     display: flex;
     justify-content: flex-end;
-    
+    column-gap: 28px;
     margin-top: 40px;
+}
+.button{
+    color: #4C4CFF;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+    transition: color 0.2s linear;
+}
+.button:hover{
+    color: #F2F2F3;
 }

@@ -17,13 +17,18 @@ export const RegisterPage = () => {
     const [errorPassword, setErrorPassword] = useState("");
     const dispatch = useDispatch();
     const {isLoadingRegisterUser, hasErrorRegisterUser, errorMessageRegisterUser, data} = useSelector(store => store.userInformation);
+
+    const handlerSubmit = (e) => {
+        e.preventDefault();
+        dispatch(sendRegister(emailValue, userNameValue, passwordValue));
+    };
     
     return (
         <section className={style_page.registration}>
              {data.success && <Navigate to="/" />}
-            <div className={style_page.registration__form}>
+            <form className={style_page.registration__form} onSubmit={(e)=>handlerSubmit(e)}>
                 <h1 className="text text_type_main-medium">Регистрация</h1>
-                <div className={style_page.registration__input}>
+                <label className={style_page.registration__input}>
                     <Input
                         type="text"
                         placeholder="Имя"
@@ -32,8 +37,8 @@ export const RegisterPage = () => {
                         errorText={errorUserName}
                         onChange={(e) => handlerInputChange(e, setUserNameValue, setErrorUserName)}
                     />
-                </div>
-                <div className={style_page.registration__input}>
+                </label>
+                <label className={style_page.registration__input}>
                     <Input
                         type="email"
                         placeholder="E-mail"
@@ -42,8 +47,8 @@ export const RegisterPage = () => {
                         errorText={errorEmail}
                         onChange={(e) => handlerInputChange(e, setEmailValue, setErrorEmail)}
                     />
-                </div>
-                <div className={style_page.registration__input}>
+                </label>
+                <label className={style_page.registration__input}>
                     <Input
                         type="password"
                         placeholder="Пароль"
@@ -53,13 +58,13 @@ export const RegisterPage = () => {
                         errorText={errorPassword}
                         onChange={(e) => handlerInputChange(e, setPasswordValue, setErrorPassword)}
                     />
-                </div>
+                </label>
                 <Button type="primary" size="large" disabled={(errorUserName || errorEmail || errorPassword) || 
-                    (!userNameValue || !emailValue || !passwordValue) ? true : false} onClick={()=>{dispatch(sendRegister(emailValue, userNameValue, passwordValue))}}>
+                    (!userNameValue || !emailValue || !passwordValue) ? true : false}>
                     {!isLoadingRegisterUser ? "Зарегистрироваться" : "Загрузка..."}
                 </Button>
                 {hasErrorRegisterUser && <p className={style_page.registration__error_request}>{errorMessageRegisterUser}</p>}
-            </div>
+            </form>
             <div className={`${style_page.registration__questions} mt-20`}>
                 <div className={style_page.registration__question}>
                     <p className="text text_type_main-default text_color_inactive">Уже зарегистрированы?</p>

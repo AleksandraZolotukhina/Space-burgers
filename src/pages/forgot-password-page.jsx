@@ -15,11 +15,17 @@ export const ForgotPasswordPage = () => {
     
     if (successForgotPassword) return <Navigate to="/reset-password" />
     if (data.success) return <Navigate to="/" />
+
+    const handlerSubmit = (e) => {
+        e.preventDefault();
+        dispatch(sendForgotPassword(emailValue));
+    };
+
     return (
         <section className={style_page.registration}>
-            <div className={style_page.registration__form}>
+            <form className={style_page.registration__form} onSubmit={(e)=>handlerSubmit(e)}>
                 <h1 className="text text_type_main-medium">Восстановление пароля</h1>
-                <div className={style_page.registration__input}>
+                <label className={style_page.registration__input}>
                     <Input
                         type="email"
                         placeholder="Укажите e-mail"
@@ -28,8 +34,8 @@ export const ForgotPasswordPage = () => {
                         error={errorMessage ? true : false}
                         errorText={errorMessage}
                     />
-                </div>
-                <Button type="primary" size="large" disabled={errorMessage || !emailValue ? true : false} onClick={()=>dispatch(sendForgotPassword(emailValue))}>
+                </label>
+                <Button type="primary" size="large" disabled={errorMessage || !emailValue ? true : false}>
                     {!isLoadingForgotPassword ? "Восстановить" : "Загрузка..."}
                 </Button>
                 {
@@ -37,7 +43,7 @@ export const ForgotPasswordPage = () => {
                     hasErrorForgotPassword &&
                     <p className = {style_page.registration__error_request}>{errorMessageForgotPassword}</p>
                 }
-            </div>
+            </form>
             <div className={`${style_page.registration__questions} mt-20`}>
                 <div className={style_page.registration__question}>
                     <p className="text text_type_main-default text_color_inactive">Вспомнили пароль?</p>

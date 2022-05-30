@@ -32,6 +32,11 @@ export const ProfilePage = () => {
         setPasswordValue("");
     }
 
+    const handlerSubmit = (e) => {
+        e.preventDefault();
+        dispatch(updateUserInformation(emailValue, userNameValue, passwordValue))
+    };
+
     return (
         <section className={`${styles.profile} mt-30`}>
             <div className={styles.main_navigation}>
@@ -44,8 +49,8 @@ export const ProfilePage = () => {
                 <p className={`text text_type_main-default text_color_inactive ${styles.message_tip}`}>В этом разделе вы можете изменить свои персональные данные</p>
             </div>
             
-            <div className={`registration ${styles.registration}`}>
-                <div className={`${style_page.registration__input} mb-6`}>
+            <form className={`registration ${styles.registration}`} onSubmit={(e)=>handlerSubmit(e)}>
+                <label className={`${style_page.registration__input} mb-6`}>
                     <Input
                         type="text"
                         placeholder="Имя"
@@ -55,8 +60,8 @@ export const ProfilePage = () => {
                         error={errorUserName ? true : false}
                         errorText={errorUserName}
                     />
-                </div>
-                <div className={`${style_page.registration__input} mb-6`}>
+                </label>
+                <label className={`${style_page.registration__input} mb-6`}>
                     <Input
                         type="email"
                         placeholder="Логин"
@@ -66,8 +71,8 @@ export const ProfilePage = () => {
                         error={errorEmail ? true : false}
                         errorText={errorEmail}
                     />
-                </div>
-                <div className={style_page.registration__input}>
+                </label>
+                <label className={style_page.registration__input}>
                     <Input
                         type="password"
                         placeholder="Пароль"
@@ -77,23 +82,21 @@ export const ProfilePage = () => {
                         error={errorPassword ? true : false}
                         errorText={errorPassword}
                     />
-                </div>
+                </label>
                 <div className={styles.buttons}>
-                    <Button type="secondary" size="large"
-                    onClick={handleClickCancel}>
-                        Отмена
-                    </Button>
+                    <input className={`text text_type_main-default ${styles.button}`} type="button"
+                    onClick={handleClickCancel} value="Отмена" />
+                    
 
                     <Button type="primary" size="large" 
                     disabled={(errorUserName || errorEmail || errorPassword) || 
-                    (!userNameValue || !emailValue || !passwordValue) ? true : false} 
-                    onClick={()=>dispatch(updateUserInformation(emailValue, userNameValue, passwordValue))}>
+                    (!userNameValue || !emailValue || !passwordValue) ? true : false}>
                         {!isLoadingUpdateUser ? "Сохранить" : "Загрузка..."}
                     </Button>
                 </div>
                 {hasErrorUpdateUser && <p className={style_page.registration__error_request}>{errorMessageUpdateUser}</p>}
                 {hasErrorLogOut && <p className={style_page.registration__error_request}>{errorMessageLogOut}</p>}
-            </div>
+            </form>
         </section>
     )
 }
