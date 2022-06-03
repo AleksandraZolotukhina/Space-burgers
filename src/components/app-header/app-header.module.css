@@ -20,12 +20,10 @@
 }
 
 .list_item{
-    margin-right: 49px;
-}
-
-.list_item:last-of-type{
-    margin-right: 0;
-}
+    display: flex;
+    text-decoration: none;
+    color: #8585AD;
+};
 
 .list_link{
     display: flex;
@@ -42,12 +40,4 @@
 
 .logo{
     margin-right: 164px;
-}
-
-.link_text{
-    color: #8585AD;
-}
-
-.link_text.active{
-    color: #F2F2F3;
 }
