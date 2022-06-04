@@ -17,7 +17,8 @@ import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { IngredientPage } from "../../pages/ingredient-page";
 import { getDataIngredients } from "../../services/actions/data-ingredients";
 import { OrderFeedPage } from "../../pages/order-feed-page/order-feed-page";
-
+import { ProfileOrdersPage } from "../../pages/profile-orders-page";
+import { ProfileForm } from "../profile-form/profile-form";
 export function App() {
     const dispatch = useDispatch();
     const location = useLocation();
@@ -43,8 +44,12 @@ export function App() {
                     <Route path="reset-password" element={<ResetPasswordPage />} />
                     <Route path="feed" element={<OrderFeedPage />} />
                     <Route path="/" element={<ProtectedRoute />}>
-                        <Route path='profile' element={<ProfilePage />} />
+                        <Route path='profile' element={<ProfilePage />} >
+                            <Route path="orders" element={<ProfileOrdersPage />} />
+                            <Route path="" element={<ProfileForm />} />
+                        </Route>
                     </Route>
+
                     {ingredients.length && <Route path="ingredients/:id" element={<IngredientPage />} />}
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>
