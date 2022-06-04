@@ -1,0 +1,28 @@
+.orders_feed{
+    margin-top: 20px;
+    display: flex;
+    column-gap: 55px;
+}
+.list_orders{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.scrollbar{
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    scrollbar-color: #8585AD #2F2F37;
+
+    max-height: 744px;
+}
+
+/* полоса прокрутки (скроллбар) */
+.scrollbar::-webkit-scrollbar{
+    background-color: #2F2F37;
+    width: 8px;
+}
+
+/* ползунок скроллбара */
+.scrollbar::-webkit-scrollbar-thumb{
+    background-color: #8585AD;
+}

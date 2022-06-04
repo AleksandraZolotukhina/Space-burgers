@@ -11,11 +11,12 @@ import { NotFoundPage } from "../../pages/no-found-page/not-found-page";
 import { ProtectedRoute } from "../protected-route";
 import { getUserInformationRequest } from "../../services/actions/user-information";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Modal } from "../modal/modal";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { IngredientPage } from "../../pages/ingredient-page";
 import { getDataIngredients } from "../../services/actions/data-ingredients";
+import { OrderFeedPage } from "../../pages/order-feed-page/order-feed-page";
 
 export function App() {
     const dispatch = useDispatch();
@@ -40,6 +41,7 @@ export function App() {
                     <Route path="register" element={<RegisterPage />} />
                     <Route path="forgot-password" element={<ForgotPasswordPage />} />
                     <Route path="reset-password" element={<ResetPasswordPage />} />
+                    <Route path="feed" element={<OrderFeedPage />} />
                     <Route path="/" element={<ProtectedRoute />}>
                         <Route path='profile' element={<ProfilePage />} />
                     </Route>
