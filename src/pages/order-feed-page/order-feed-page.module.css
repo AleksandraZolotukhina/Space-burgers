@@ -1,9 +1,10 @@
 .orders_feed{
     margin-top: 20px;
     display: flex;
-    column-gap: 55px;
+    column-gap: 68px;
 }
 .list_orders{
+    width: 100%;
     list-style-type: none;
     padding: 0;
     margin: 0;

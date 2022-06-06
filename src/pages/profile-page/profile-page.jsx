@@ -15,8 +15,8 @@ export const ProfilePage = () => {
         <section className={`${styles.profile} mt-30`}>
             <div className={styles.main_navigation}>
                 <nav className={`${styles.navigation} text_type_main-medium`}>
-                    <NavLink className={styles.link} to="" style={({ isActive }) => isActive ? activeStyle : undefined}>Профиль</NavLink>
-                    <NavLink className={styles.link} to="orders">История заказов</NavLink>
+                    <NavLink className={styles.link} to="" style={({ isActive }) => isActive ? activeStyle : undefined} end>Профиль</NavLink>
+                    <NavLink className={styles.link} to="orders" style={({ isActive }) => isActive ? activeStyle : undefined}>История заказов</NavLink>
                     <a className={styles.link} onClick={()=>dispatch(logoutRequest())}>{isLoadingLogOut ? "Выходим...": "Выход"}</a>
                     {logOutSuccess && <Navigate to="/" />}
                 </nav>
