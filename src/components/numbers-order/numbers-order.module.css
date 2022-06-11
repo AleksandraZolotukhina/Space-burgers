@@ -1,9 +1,10 @@
-.numbers_order{
+.numbers_order {
     display: flex;
     flex-direction: column;
     row-gap: 60px;
     width: 100%;
 }
+
 .numbers {
     display: flex;
     justify-content: space-between;
@@ -14,9 +15,11 @@
 }
 
 .list {
-    display: flex;
-    flex-direction: column;
-    row-gap: 8px;
+    display: grid;
+    grid-template-rows: repeat(10, 20px);
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+    grid-auto-flow: column;
 
     list-style-type: none;
     margin: 0;
