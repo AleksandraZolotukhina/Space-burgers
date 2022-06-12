@@ -23,13 +23,11 @@ export const ProfileOrdersPage = () => {
             {
                 ordersArray.length ? (
                     <ul className={`${styles.list_orders} ${styles.scrollbar}`} style={{ marginTop: '-56px', }}>
-
                         {
                             ordersArray?.map(order => {
                                 return <OrderFeedItem key={order._id} {...order} listIngredients={ingredients} isStatus={true} />
                             })
                         }
-
                     </ul>
                 ) : (
                     <div className={styles.list_description}>

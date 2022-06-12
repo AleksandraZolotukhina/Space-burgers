@@ -19,7 +19,9 @@ import { getDataIngredients } from "../../services/actions/data-ingredients";
 import { OrderFeedPage } from "../../pages/order-feed-page/order-feed-page";
 import { ProfileOrdersPage } from "../../pages/profile-orders-page";
 import { ProfileForm } from "../profile-form/profile-form";
-import { OrderDetails } from "../order-details/order-details";
+import { OrdersDetailsPage } from "../../pages/order-details-page/order-details-page";
+import { OrdersDetails } from "../orders-details/orders-details";
+
 export function App() {
     const dispatch = useDispatch();
     const location = useLocation();
@@ -52,6 +54,8 @@ export function App() {
                     </Route>
 
                     {ingredients.length && <Route path="ingredients/:id" element={<IngredientPage />} />}
+                    <Route path="feed/:id" element={<OrdersDetailsPage />} />
+                    <Route path="profile/orders/:id" element={<OrdersDetailsPage />} />
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>
 
@@ -62,6 +66,13 @@ export function App() {
                                 navigate(-1);
                             }}>
                                 <IngredientDetails />
+                            </Modal>
+                        } />
+                        <Route path="feed/:id" element={
+                            <Modal closeModal={() => {
+                                navigate(-1);
+                            }}>
+                                <OrdersDetails />
                             </Modal>
                         } />
                     </Routes>

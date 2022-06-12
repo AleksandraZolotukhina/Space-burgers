@@ -37,6 +37,15 @@
 .description_text{
     font-size: 22px;
 }
+.orders_feed_link{
+    text-decoration: none;
+    color: #F2F2F3;
+    display: block;
+    margin-bottom: 16px;
+}
+.orders_feed_link:last-child{
+    margin-bottom: 0;
+}
 .link{
     text-decoration: none;
     color: #00CCCC;
