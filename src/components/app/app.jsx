@@ -19,6 +19,7 @@ import { getDataIngredients } from "../../services/actions/data-ingredients";
 import { OrderFeedPage } from "../../pages/order-feed-page/order-feed-page";
 import { ProfileOrdersPage } from "../../pages/profile-orders-page";
 import { ProfileForm } from "../profile-form/profile-form";
+import { OrderDetails } from "../order-details/order-details";
 export function App() {
     const dispatch = useDispatch();
     const location = useLocation();

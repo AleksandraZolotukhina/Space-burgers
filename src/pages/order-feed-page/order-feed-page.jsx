@@ -25,7 +25,7 @@ export const OrderFeedPage = () => {
             <div className={styles.orders_feed}>
                 <ul className={`${styles.list_orders} ${styles.scrollbar}`}>
                     {ordersArray.map(order => {
-                        return <OrderFeedItem key={order._id} {...order} listIngredients={ingredients}/>
+                        return <OrderFeedItem key={order._id} {...order} listIngredients={ingredients} isStatus={false}/>
                     })}
                 </ul>
                 <NumbersOrder  totalToday={totalToday} total={total} ordersArray={ordersArray} />

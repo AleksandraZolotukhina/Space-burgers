@@ -1,4 +1,4 @@
-import { soketUrl } from "../../utils/constants";
+
 import { getCookie } from "../../utils/functions";
 import {
     WS_CONNECTION_CLOSED,
@@ -8,7 +8,7 @@ import {
     WS_GET_ORDERS
 } from "../actions/ws-action-types";
 
-export const socketMiddleware = () => {
+export const socketMiddleware = (soketUrl) => {
     return store => {
         let socket = null;
         return next => action => {

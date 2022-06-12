@@ -19,7 +19,8 @@ export function BurgerConstructor() {
             if(item.type === "bun"){
                 const newOrderIngredients = bun ? [...orderIngredients].filter(el => el._id !== bun._id) : [...orderIngredients]
                 bun && dispatch({ type: DECREASE_INGREDIENT, id: bun._id })
-                dispatch({ type: ADD_INGREDIENT, item: [...newOrderIngredients, item]}) && dispatch({ type: INCREASE_INGREDIENT, id: item._id})
+                dispatch({ type: ADD_INGREDIENT, item: [...newOrderIngredients, item]}) 
+                dispatch({ type: INCREASE_INGREDIENT, id: item._id})
             }
             else{
                 dispatch({ type: ADD_INGREDIENT, item: [...orderIngredients, item] })
