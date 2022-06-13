@@ -28,7 +28,7 @@ export function App() {
     const background = location.state?.backgroundLocation;
     const navigate = useNavigate();
     const { ingredients } = useSelector(store => store.listIngredients);
-    
+
     useEffect(() => {
         dispatch(getUserInformationRequest());
         dispatch(getDataIngredients());
@@ -45,17 +45,21 @@ export function App() {
                     <Route path="register" element={<RegisterPage />} />
                     <Route path="forgot-password" element={<ForgotPasswordPage />} />
                     <Route path="reset-password" element={<ResetPasswordPage />} />
-                    <Route path="feed" element={<OrderFeedPage />} />
+                    <Route path="feed" element={<OrderFeedPage />}>
+                        <Route path=":id" element={<OrdersDetailsPage />} />
+                    </Route>
                     <Route path="/" element={<ProtectedRoute />}>
                         <Route path='profile' element={<ProfilePage />} >
-                            <Route path="orders" element={<ProfileOrdersPage />} />
+                            <Route path="orders" element={<ProfileOrdersPage />}>
+                                <Route path=":id" element={<OrdersDetailsPage />} />
+                            </Route>
                             <Route path="" element={<ProfileForm />} />
                         </Route>
                     </Route>
 
                     {ingredients.length && <Route path="ingredients/:id" element={<IngredientPage />} />}
-                    <Route path="feed/:id" element={<OrdersDetailsPage />} />
-                    <Route path="profile/orders/:id" element={<OrdersDetailsPage />} />
+
+
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>
 
