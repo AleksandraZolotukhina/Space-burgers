@@ -1,7 +1,6 @@
 import styles from "./orders-details-item.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 export const OrdersDetailsItem = ({ ingredient }) => {
-    console.log(ingredient)
     const { image, name, price } = ingredient;
     return (
         <li className={styles.item}>

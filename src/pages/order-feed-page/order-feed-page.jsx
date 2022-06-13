@@ -3,7 +3,7 @@ import { OrderFeedItem } from "../../components/order-feed-item/order-feed-item"
 import { NumbersOrder } from "../../components/numbers-order/numbers-order";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { WS_CONNECTION_CLOSED, WS_CONNECTION_START } from "../../services/actions/ws-action-types";
+import { WS_CONNECTION_CLOSE, WS_CONNECTION_START } from "../../services/actions/ws-action-types";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
@@ -13,10 +13,11 @@ export const OrderFeedPage = () => {
     const { wsConnected, orders } = useSelector(store => store.ws);
     const {ingredients} = useSelector(store => store.listIngredients);
     const {success, total, totalToday, orders: ordersArray} = orders;
+    
     useEffect(() => {
         dispatch({ type: WS_CONNECTION_START, token: false })
         return () => {
-            dispatch({ type: WS_CONNECTION_CLOSED })
+            dispatch({ type: WS_CONNECTION_CLOSE })
         }
     }, [])
 
@@ -30,7 +31,7 @@ export const OrderFeedPage = () => {
                     {ordersArray.map(order => {
                         return (
                             <Link to={order._id} key={order._id} className={styles.orders_feed_link} state={{ backgroundLocation: location }}>
-                                <OrderFeedItem {...order} listIngredients={ingredients} isStatus={false}/>
+                                <OrderFeedItem {...order} listIngredients={ingredients} isStatus={false} />
                             </Link>
                         ) 
                     })}

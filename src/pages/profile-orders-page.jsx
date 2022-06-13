@@ -1,22 +1,26 @@
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { OrderFeedItem } from "../components/order-feed-item/order-feed-item"
-import { WS_CONNECTION_CLOSED, WS_CONNECTION_START } from "../services/actions/ws-action-types"
+import { WS_CONNECTION_CLOSE, WS_CONNECTION_START } from "../services/actions/ws-action-types"
 import styles from "./order-feed-page/order-feed-page.module.css"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 
 export const ProfileOrdersPage = () => {
     const dispatch = useDispatch();
     const { wsConnected, orders } = useSelector(store => store.ws);
     const { ingredients } = useSelector(store => store.listIngredients);
     const { success, orders: ordersArray } = orders;
+    const location = useLocation();
+
     useEffect(() => {
         dispatch({ type: WS_CONNECTION_START, token: true })
         return () => {
-            dispatch({ type: WS_CONNECTION_CLOSED })
+            dispatch({ type: WS_CONNECTION_CLOSE })
         }
     }, [])
+    
     if (!wsConnected) return "Загрузка..."
     if (success) return (
         <>
@@ -24,8 +28,13 @@ export const ProfileOrdersPage = () => {
                 ordersArray.length ? (
                     <ul className={`${styles.list_orders} ${styles.scrollbar}`} style={{ marginTop: '-56px', }}>
                         {
-                            ordersArray?.map(order => {
-                                return <OrderFeedItem key={order._id} {...order} listIngredients={ingredients} isStatus={true} />
+                            ordersArray?.reverse().map(order => {
+                                return (
+                                    <Link to={order._id} key={order._id} className={styles.order_link} state={{ backgroundLocation: location }}>
+                                        <OrderFeedItem {...order} listIngredients={ingredients} isStatus={true} />
+                                    </Link>
+                                )
+
                             })
                         }
                     </ul>

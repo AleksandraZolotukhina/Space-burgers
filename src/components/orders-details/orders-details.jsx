@@ -3,13 +3,15 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { OrdersDetailsItem } from "../orders-details-item/orders-details-item";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-export const OrdersDetails = () => {
+import { orderStatus } from "../../utils/constants";
+
+export const OrdersDetails = ({ center = false }) => {
     const orders = useSelector(store => store.ws.orders.orders);
     const id = useParams().id;
     const listIngredients = useSelector(store => store.listIngredients.ingredients);
-    if(orders===undefined) return <></>
+    if (orders === undefined) return <></>
     
-    const { name, number, status, ingredients, updatedAt } = orders?.find(order => order._id === id)
+    const { name, number, status, ingredients, updatedAt } = orders.find(order => order._id === id)
     const arrayIngredients = [];
     ingredients?.forEach(ingredient => {
         arrayIngredients.push(listIngredients.find(el => el._id === ingredient))
@@ -31,14 +33,14 @@ export const OrdersDetails = () => {
     }
     return (
         <div className={styles.popup_content}>
-            <p className="text text_type_digits-default">{`#${number}`}</p>
+            <p className={`text text_type_digits-default ${center && styles.center}`}>{`#${number}`}</p>
             <h1 className={`text text_type_main-medium ${styles.title}`}>{name}</h1>
-            <p className={`text text_type_main-default ${styles.status}`}>{status}</p>
+            <p className={`text text_type_main-default ${styles.status}`}>{orderStatus[status]}</p>
             <h2 className="text text_type_main-medium">Состав:</h2>
             <ul className={`${styles.list} ${styles.scrollbar}`}>
                 {
                     arrayIngredients.map(ingredient => {
-                        return <OrdersDetailsItem ingredient={ingredient} />
+                        return <OrdersDetailsItem ingredient={ingredient} key={ingredient._id} />
                     })
                 }
             </ul>

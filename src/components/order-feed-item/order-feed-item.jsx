@@ -1,5 +1,6 @@
 import styles from "./order-feed-item.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { orderStatus } from "../../utils/constants";
 
 export const OrderFeedItem = ({ ingredients, status, name, number, updatedAt, listIngredients, isStatus }) => {
     const arrayIngredients = [];
@@ -25,39 +26,39 @@ export const OrderFeedItem = ({ ingredients, status, name, number, updatedAt, li
 
     return (
         <li className={styles.item}>
-                <div className={styles.item_number}>
-                    <p className="text text_type_digits-default">#{number}</p>
-                    <p className={`text text_type_main-default ${styles.order_date}`}>{`${Math.floor(days) > 0 ? Math.floor(days) + " день назад" : "Сегодня"}, ${hour < 10 ? "0" + hour : hour}:${minutes < 10 ? "0" + minutes : minutes} i-GMT+3`}</p>
-                </div>
-                <h2 className="text text_type_main-medium">{name}</h2>
-                {isStatus && <p className="text text_type_main-default">{status === "done" && "Выполнен" || status === "pending" && "Готовится"}</p>}
-                <div className={styles.item_image_cost}>
-                    <ul className={styles.item_ingredients}>
-                        {
-                            arrayIngredients.slice(0, 6).map((ingredient, index) => {
-                                if (index < 5) {
-                                    return (
-                                        <li className={styles.item_ingredient} key={index}>
-                                            <img src={ingredient.image} alt={ingredient.name} className={styles.image} />
-                                        </li>
-                                    )
-                                }
+            <div className={styles.item_number}>
+                <p className="text text_type_digits-default">#{number}</p>
+                <p className={`text text_type_main-default ${styles.order_date}`}>{`${Math.floor(days) > 0 ? Math.floor(days) + " день назад" : "Сегодня"}, ${hour < 10 ? "0" + hour : hour}:${minutes < 10 ? "0" + minutes : minutes} i-GMT+3`}</p>
+            </div>
+            <h2 className="text text_type_main-medium">{name}</h2>
+            {isStatus && <p className={`text text_type_main-default ${status === "done" && styles.done}`}>{orderStatus[status]}</p>}
+            <div className={styles.item_image_cost}>
+                <ul className={styles.item_ingredients}>
+                    {
+                        arrayIngredients.slice(0, 6).map((ingredient, index) => {
+                            if (index < 5) {
                                 return (
-                                    <li className={`${styles.item_ingredient} ${styles.item_ingredient_more}`} key={index}>
+                                    <li className={styles.item_ingredient} key={index}>
                                         <img src={ingredient.image} alt={ingredient.name} className={styles.image} />
-                                        <p className={`text text_type_main-default ${styles.count_ingredient}`}>+{arrayIngredients.length - 5}</p>
                                     </li>
                                 )
+                            }
+                            return (
+                                <li className={`${styles.item_ingredient} ${styles.item_ingredient_more}`} key={index}>
+                                    <img src={ingredient.image} alt={ingredient.name} className={styles.image} />
+                                    <p className={`text text_type_main-default ${styles.count_ingredient}`}>+{arrayIngredients.length - 5}</p>
+                                </li>
+                            )
 
-                            })
-                        }
+                        })
+                    }
 
-                    </ul>
-                    <div className={styles.item_cost}>
-                        <p className="text text_type_digits-default">{cost}</p>
-                        <CurrencyIcon type="primary" />
-                    </div>
+                </ul>
+                <div className={styles.item_cost}>
+                    <p className="text text_type_digits-default">{cost}</p>
+                    <CurrencyIcon type="primary" />
                 </div>
+            </div>
         </li>
     )
 }

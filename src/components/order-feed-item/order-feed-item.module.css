@@ -101,3 +101,6 @@
     column-gap: 9px;
     align-items: center;
 }
+.done{
+    color: #00CCCC;
+}

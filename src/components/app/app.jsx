@@ -45,26 +45,26 @@ export function App() {
                     <Route path="register" element={<RegisterPage />} />
                     <Route path="forgot-password" element={<ForgotPasswordPage />} />
                     <Route path="reset-password" element={<ResetPasswordPage />} />
-                    <Route path="feed" element={<OrderFeedPage />}>
-                        <Route path=":id" element={<OrdersDetailsPage />} />
-                    </Route>
+                    <Route path="feed" element={<OrderFeedPage />} />
+                    
                     <Route path="/" element={<ProtectedRoute />}>
                         <Route path='profile' element={<ProfilePage />} >
-                            <Route path="orders" element={<ProfileOrdersPage />}>
-                                <Route path=":id" element={<OrdersDetailsPage />} />
-                            </Route>
+                            <Route path="orders/:id" element={<OrdersDetailsPage token={true} />} />
+                            <Route path="orders" element={<ProfileOrdersPage />} />
                             <Route path="" element={<ProfileForm />} />
                         </Route>
                     </Route>
 
                     {ingredients.length && <Route path="ingredients/:id" element={<IngredientPage />} />}
 
+                    <Route path="feed/:id" element={<OrdersDetailsPage />} />
 
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>
 
                 {background && ingredients.length && (
                     <Routes>
+
                         <Route path="ingredients/:id" element={
                             <Modal closeModal={() => {
                                 navigate(-1);
@@ -72,6 +72,7 @@ export function App() {
                                 <IngredientDetails />
                             </Modal>
                         } />
+
                         <Route path="feed/:id" element={
                             <Modal closeModal={() => {
                                 navigate(-1);
@@ -79,6 +80,15 @@ export function App() {
                                 <OrdersDetails />
                             </Modal>
                         } />
+
+                        <Route path="profile/orders/:id" element={
+                            <Modal closeModal={() => {
+                                navigate(-1);
+                            }}>
+                                <OrdersDetails />
+                            </Modal>
+                        } />
+
                     </Routes>
                 )}
             </main>
