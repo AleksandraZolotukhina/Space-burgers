@@ -66,7 +66,8 @@ export const updateToken = () => {
         })
             .then(checkResponce)
             .then(data => {
-                document.cookie = "";
+                setCookie("token", null, { expires: -1 });
+                setCookie("refreshToken", null, { expires: -1 });
                 updateCookies(data);
                 dispatch(getUserInformationRequest())
             })

@@ -1,34 +1,24 @@
 import styles from "./order-feed-item.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { orderStatus } from "../../utils/constants";
+import PropTypes from 'prop-types';
+import { getCost, getTextTime } from "../../utils/functions";
 
-export const OrderFeedItem = ({ ingredients, status, name, number, updatedAt, listIngredients, isStatus }) => {
+export const OrderFeedItem = ({ ingredients, status, name, number, updatedAt, listIngredients, isStatus=false }) => {
     const arrayIngredients = [];
     ingredients.forEach(ingredient => {
-        arrayIngredients.push(listIngredients.find(el => el._id === ingredient))
-    })
-
-    const cost = arrayIngredients.reduce((current, next) => {
-        if (next.type === "bun") {
-            return current + next.price * 2
+        if(ingredient!==null){
+            arrayIngredients.push(listIngredients.find(el => el._id === ingredient))
         }
-        return current + next.price
-    }, 0)
-
-    const time = new Date(updatedAt)
-    const hour = time.getHours();
-    const minutes = time.getMinutes();
-
-    let days = (new Date() - time) / (1000 * 60 * 24 * 60);
-    if (Math.abs(Math.floor(days) - days) > 0.56) {
-        days += 1;
-    }
+    })
 
     return (
         <li className={styles.item}>
             <div className={styles.item_number}>
                 <p className="text text_type_digits-default">#{number}</p>
-                <p className={`text text_type_main-default ${styles.order_date}`}>{`${Math.floor(days) > 0 ? Math.floor(days) + " день назад" : "Сегодня"}, ${hour < 10 ? "0" + hour : hour}:${minutes < 10 ? "0" + minutes : minutes} i-GMT+3`}</p>
+                <p className={`text text_type_main-default ${styles.order_date}`}>
+                    {getTextTime(updatedAt)}
+                </p>
             </div>
             <h2 className="text text_type_main-medium">{name}</h2>
             {isStatus && <p className={`text text_type_main-default ${status === "done" && styles.done}`}>{orderStatus[status]}</p>}
@@ -55,10 +45,20 @@ export const OrderFeedItem = ({ ingredients, status, name, number, updatedAt, li
 
                 </ul>
                 <div className={styles.item_cost}>
-                    <p className="text text_type_digits-default">{cost}</p>
+                    <p className="text text_type_digits-default">{getCost(arrayIngredients)}</p>
                     <CurrencyIcon type="primary" />
                 </div>
             </div>
         </li>
     )
+}
+
+OrderFeedItem.propTypes = {
+    ingredients: PropTypes.array.isRequired,
+    status: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    number: PropTypes.number.isRequired,
+    updatedAt: PropTypes.string.isRequired,
+    listIngredients: PropTypes.array.isRequired,
+    isStatus: PropTypes.bool,
 }

@@ -3,6 +3,7 @@ import { OrdersDetails } from "../../components/orders-details/orders-details";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { WS_CONNECTION_CLOSE, WS_CONNECTION_START } from "../../services/actions/ws-action-types";
+import PropTypes from 'prop-types';
 
 export const OrdersDetailsPage = ({ token = false }) => {
     const dispatch = useDispatch();
@@ -22,4 +23,8 @@ export const OrdersDetailsPage = ({ token = false }) => {
     )
 
     return <></>
+}
+
+OrdersDetailsPage.propTypes = {
+    token: PropTypes.bool,
 }

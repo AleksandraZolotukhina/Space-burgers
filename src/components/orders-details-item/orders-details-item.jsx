@@ -1,5 +1,7 @@
 import styles from "./orders-details-item.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from 'prop-types';
+
 export const OrdersDetailsItem = ({ ingredient }) => {
     const { image, name, price } = ingredient;
     return (
@@ -18,4 +20,8 @@ export const OrdersDetailsItem = ({ ingredient }) => {
 
         </li>
     )
+}
+
+OrdersDetailsItem.propTypes = {
+    ingredient: PropTypes.object.isRequired,
 }

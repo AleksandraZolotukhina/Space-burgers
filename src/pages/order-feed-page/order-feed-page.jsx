@@ -11,9 +11,9 @@ export const OrderFeedPage = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const { wsConnected, orders } = useSelector(store => store.ws);
-    const {ingredients} = useSelector(store => store.listIngredients);
-    const {success, total, totalToday, orders: ordersArray} = orders;
-    
+    const { ingredients } = useSelector(store => store.listIngredients);
+    const { success, total, totalToday, orders: ordersArray } = orders;
+
     useEffect(() => {
         dispatch({ type: WS_CONNECTION_START, token: false })
         return () => {
@@ -31,12 +31,12 @@ export const OrderFeedPage = () => {
                     {ordersArray.map(order => {
                         return (
                             <Link to={order._id} key={order._id} className={styles.orders_feed_link} state={{ backgroundLocation: location }}>
-                                <OrderFeedItem {...order} listIngredients={ingredients} isStatus={false} />
+                                <OrderFeedItem {...order} listIngredients={ingredients} />
                             </Link>
-                        ) 
+                        )
                     })}
                 </ul>
-                <NumbersOrder  totalToday={totalToday} total={total} ordersArray={ordersArray} />
+                <NumbersOrder totalToday={totalToday} total={total} ordersArray={ordersArray} />
             </div>
         </section>
     )

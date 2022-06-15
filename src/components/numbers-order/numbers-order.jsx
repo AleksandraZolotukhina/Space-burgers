@@ -1,7 +1,7 @@
 import styles from "./numbers-order.module.css";
+import PropTypes from 'prop-types';
 
 export const NumbersOrder = ({ total, totalToday, ordersArray }) => {
-
     const done = ordersArray.filter(el => el.status === "done");
     const created = ordersArray.filter(el => el.status === "created");
     return (
@@ -36,4 +36,10 @@ export const NumbersOrder = ({ total, totalToday, ordersArray }) => {
             </div>
         </div>
     )
+}
+
+NumbersOrder.propTypes = {
+    total: PropTypes.number.isRequired,
+    totalToday: PropTypes.number.isRequired,
+    ordersArray: PropTypes.array.isRequired,
 }

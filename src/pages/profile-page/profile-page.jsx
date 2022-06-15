@@ -6,7 +6,7 @@ import { logoutRequest } from '../../services/actions/user-information';
 
 export const ProfilePage = () => {
     const dispatch = useDispatch();
-    const {isLoadingLogOut, hasErrorLogOut, errorMessageLogOut, logOutSuccess, data} = useSelector(store => store.userInformation);
+    const {isLoadingLogOut, hasErrorLogOut, errorMessageLogOut, logOutSuccess} = useSelector(store => store.userInformation);
     const activeStyle = {
         color: "#F2F2F3",
     }

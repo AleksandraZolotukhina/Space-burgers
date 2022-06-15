@@ -4,33 +4,26 @@ import { useSelector } from "react-redux";
 import { OrdersDetailsItem } from "../orders-details-item/orders-details-item";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { orderStatus } from "../../utils/constants";
+import { NotFoundPage } from "../../pages/no-found-page/not-found-page";
+import PropTypes from 'prop-types';
+import { getCost, getTextTime } from "../../utils/functions";
 
 export const OrdersDetails = ({ center = false }) => {
     const orders = useSelector(store => store.ws.orders.orders);
     const id = useParams().id;
     const listIngredients = useSelector(store => store.listIngredients.ingredients);
     if (orders === undefined) return <></>
-    
-    const { name, number, status, ingredients, updatedAt } = orders.find(order => order._id === id)
+    const order = orders.find(order => order._id === id)
+    if (!order) return <NotFoundPage />
+    const { name, number, status, ingredients, updatedAt } = order
+
     const arrayIngredients = [];
-    ingredients?.forEach(ingredient => {
-        arrayIngredients.push(listIngredients.find(el => el._id === ingredient))
-    });
-    const cost = arrayIngredients.reduce((current, next) => {
-        if (next.type === "bun") {
-            return current + next.price * 2
+    ingredients.forEach(ingredient => {
+        if (ingredient !== null) {
+            arrayIngredients.push(listIngredients.find(el => el._id === ingredient))
         }
-        return current + next.price
-    }, 0)
+    });
 
-    const time = new Date(updatedAt)
-    const hour = time.getHours();
-    const minutes = time.getMinutes();
-
-    let days = (new Date() - time) / (1000 * 60 * 24 * 60);
-    if (Math.abs(Math.floor(days) - days) > 0.56) {
-        days += 1;
-    }
     return (
         <div className={styles.popup_content}>
             <p className={`text text_type_digits-default ${center && styles.center}`}>{`#${number}`}</p>
@@ -39,17 +32,17 @@ export const OrdersDetails = ({ center = false }) => {
             <h2 className="text text_type_main-medium">Состав:</h2>
             <ul className={`${styles.list} ${styles.scrollbar}`}>
                 {
-                    arrayIngredients.map(ingredient => {
-                        return <OrdersDetailsItem ingredient={ingredient} key={ingredient._id} />
+                    arrayIngredients.map((ingredient, index) => {
+                        return <OrdersDetailsItem ingredient={ingredient} key={index} />
                     })
                 }
             </ul>
             <div className={styles.date_cost}>
                 <p className={`text text_type_main-default ${styles.date}`}>
-                    {`${Math.floor(days) > 0 ? Math.floor(days) + " день назад" : "Сегодня"}, ${hour < 10 ? "0" + hour : hour}:${minutes < 10 ? "0" + minutes : minutes} i-GMT+3`}
+                    {getTextTime(updatedAt)}
                 </p>
                 <div className={styles.cost}>
-                    <p className="text text_type_digits-default">{cost}</p>
+                    <p className="text text_type_digits-default">{getCost(arrayIngredients)}</p>
                     <CurrencyIcon type="primary" />
                 </div>
 
@@ -57,4 +50,8 @@ export const OrdersDetails = ({ center = false }) => {
 
         </div>
     )
+}
+
+OrdersDetails.propTypes = {
+    center: PropTypes.bool,
 }

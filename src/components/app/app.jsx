@@ -48,13 +48,13 @@ export function App() {
                     <Route path="feed" element={<OrderFeedPage />} />
                     
                     <Route path="/" element={<ProtectedRoute />}>
+                    <Route path="profile/orders/:id" element={<OrdersDetailsPage token={true} />} />
                         <Route path='profile' element={<ProfilePage />} >
-                            <Route path="orders/:id" element={<OrdersDetailsPage token={true} />} />
                             <Route path="orders" element={<ProfileOrdersPage />} />
                             <Route path="" element={<ProfileForm />} />
                         </Route>
                     </Route>
-
+                    
                     {ingredients.length && <Route path="ingredients/:id" element={<IngredientPage />} />}
 
                     <Route path="feed/:id" element={<OrdersDetailsPage />} />

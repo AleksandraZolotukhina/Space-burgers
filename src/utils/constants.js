@@ -17,7 +17,6 @@ export const menuItemPropTypes = PropTypes.shape({
 });
 
 export const url = "https://norma.nomoreparties.space/api";
-export const soketUrl = "wss://norma.nomoreparties.space/orders";
 export const orderStatus = {
     done: "Выполнен",
     created: "Создано",
