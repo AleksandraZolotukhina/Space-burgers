@@ -17,7 +17,7 @@ export function AppHeader() {
                         <p className={`text ${styles.link_text} ${styles.active} pl-2`}>Конструктор</p>
                     </NavLink>
 
-                    <NavLink to="feed/:id" className={`${styles.list_item} ${styles.link}`} style={({isActive})=> isActive ? activeStyle : undefined}>
+                    <NavLink to="feed" className={`${styles.list_item} ${styles.link}`} style={({isActive})=> isActive ? activeStyle : undefined}>
                         <ListIcon type="secondary" />
                         <p className={`text ${styles.link_text} pl-2`}>Лента заказов</p>
                     </NavLink>

@@ -12,6 +12,6 @@ export const ProtectedRoute = () => {
         return <Outlet />
     }
     if(isLoaded && !data.success){
-        return <Navigate to="/login"  replace state={{ path: location.pathname }}  />
+        return <Navigate to="/login" replace state={{ path: location.pathname }}  />
     }
 }

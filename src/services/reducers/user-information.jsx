@@ -20,6 +20,7 @@ import {
     RESET_PASSWORD_REQUEST,
     RESET_PASSWORD_SUCCESS,
     RESET_PASSWORD_ERROR,
+    UPDATE_TOKEN_ERROR
 } from "../actions/user-information";
 
 const initialState = {
@@ -30,6 +31,8 @@ const initialState = {
     isLoadingUpdateUser: false,
     hasErrorUpdateUser: false,
     errorMessageUpdateUser: "",
+
+    hasErrorUpdateToken: false,
 
     isLoadingRegisterUser: false,
     hasErrorRegisterUser: false,
@@ -83,7 +86,7 @@ export const userInformationReducer = (state = initialState, action) => {
 
 
         case SEND_REGISTER_REQUEST: {
-            return { ...state, isLoadingRegisterUser: true, hasErrorRegisterUser: false, errorMessageRegisterUser: "", logOutSuccess: false}
+            return { ...state, isLoadingRegisterUser: true, hasErrorRegisterUser: false, errorMessageRegisterUser: "", logOutSuccess: false }
         }
         case SEND_REGISTER_SUCCESS: {
             return { ...state, isLoadingRegisterUser: false, data: action.data }
@@ -127,7 +130,7 @@ export const userInformationReducer = (state = initialState, action) => {
 
 
         case RESET_PASSWORD_REQUEST: {
-            return { ...state, isLoadingResetPassword: true, hasErrorResetPassword: false, successResetPassword: false,errorMessageResetPassword: ""}
+            return { ...state, isLoadingResetPassword: true, hasErrorResetPassword: false, successResetPassword: false, errorMessageResetPassword: "" }
         }
         case RESET_PASSWORD_SUCCESS: {
             return { ...state, isLoadingResetPassword: false, successResetPassword: action.success }
@@ -136,7 +139,9 @@ export const userInformationReducer = (state = initialState, action) => {
             return { ...state, isLoadingResetPassword: false, hasErrorResetPassword: true, errorMessageResetPassword: action.error }
         }
 
-
+        case UPDATE_TOKEN_ERROR: {
+            return { ...state, hasErrorUpdateToken: true }
+        }
         default: {
             return state;
         }

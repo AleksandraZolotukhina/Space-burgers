@@ -1,0 +1,51 @@
+.popup_content{
+    padding: 0 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.list{
+    margin: 0;
+    margin-top: 28px;
+    padding: 0;
+    list-style-type: none;
+}
+.title{
+    margin-top: 20px;
+}
+.status{
+    color: #00CCCC;
+    margin-top: 8px;
+    margin-bottom: 60px;
+}
+.scrollbar{
+    overflow-y: scroll;
+    scrollbar-color: #8585AD #2F2F37;
+
+    height: 312px; 
+}
+
+/* полоса прокрутки (скроллбар) */
+.scrollbar::-webkit-scrollbar{
+    background-color: #2F2F37;
+    width: 8px;
+}
+
+/* ползунок скроллбара */
+.scrollbar::-webkit-scrollbar-thumb{
+    background-color: #8585AD;
+}
+.date {
+    color: #8585AD;
+}
+.cost{
+    display: flex;
+    column-gap: 9px;
+}
+.date_cost{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+.center{
+    text-align: center;
+}

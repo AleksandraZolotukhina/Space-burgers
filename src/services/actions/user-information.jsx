@@ -6,7 +6,7 @@ export const GET_USER_INFORMATION_SUCCESS = "GET_USER_INFORMATION_SUCCESS";
 export const GET_USER_INFORMATION_ERROR = "GET_USER_INFORMATION_ERROR";
 
 export const UPDATE_TOKEN_ERROR = "UPDATE_TOKEN_ERROR";
-export const UPDATE_TOKEN_REQUEST = "UPDATE_TOKEN_REQUEST ";
+export const UPDATE_TOKEN_REQUEST = "UPDATE_TOKEN_REQUEST";
 
 export const UPDATE_USER_REQUEST = "UPDATE_USER_REQUEST";
 export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
@@ -66,7 +66,8 @@ export const updateToken = () => {
         })
             .then(checkResponce)
             .then(data => {
-                document.cookie = "";
+                setCookie("token", null, { expires: -1 });
+                setCookie("refreshToken", null, { expires: -1 });
                 updateCookies(data);
                 dispatch(getUserInformationRequest())
             })

@@ -17,3 +17,8 @@ export const menuItemPropTypes = PropTypes.shape({
 });
 
 export const url = "https://norma.nomoreparties.space/api";
+export const orderStatus = {
+    done: "Выполнен",
+    created: "Создано",
+    pending: "В ожидании"
+}

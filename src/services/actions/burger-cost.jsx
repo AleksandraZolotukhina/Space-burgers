@@ -1,5 +1,6 @@
 import { url } from "../../utils/constants";
 import { checkResponce } from "../../utils/functions";
+import { getCookie } from "../../utils/functions";
 
 export const SEND_ORDER_REQUEST = "SEND_ORDER_REQUEST";
 export const SEND_ORDER_SUCCESS = "SEND_ORDER_SUCCESS";
@@ -13,6 +14,7 @@ export const sendNewOrder = (idIngredients) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": 'Bearer ' + getCookie("token")
             },
             body: JSON.stringify({ ingredients: idIngredients })
         })

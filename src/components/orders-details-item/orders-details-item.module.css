@@ -1,0 +1,32 @@
+.item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 24px;
+    margin-right: 25px;
+}
+.item:last-child{
+    margin-bottom: 0;
+}
+.item__image_title{
+    display: flex;
+    column-gap: 20px;
+}
+.item_picture{
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+.item_picture_wrapper{
+    width: 64px;
+    height: 64px;
+    background: #131316;
+    border-radius: 50%;
+    border: 2px solid #801AB2;
+    box-sizing: border-box;
+}
+.cost{
+    display: flex;
+    column-gap: 9px;
+}
