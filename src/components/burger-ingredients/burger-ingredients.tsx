@@ -1,30 +1,27 @@
-import React, { createRef } from "react";
+import { useRef, useState } from "react";
 import styles from "./burger-ingredients.module.css"
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Ingredient } from "../ingredient/ingredient";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 export function BurgerIngredients() {
 
     const ingredients = useSelector(store => store.listIngredients.ingredients);
-    const [current, setCurrent] = React.useState('one');
-    const bunRef = createRef();
-    const sauceRef = createRef();
-    const mainRef = createRef();
+    const [current, setCurrent] = useState<string>('one');
+    const bunRef = useRef<HTMLLIElement>(null);
+    const sauceRef = useRef<HTMLLIElement>(null);
+    const mainRef = useRef<HTMLLIElement>(null);
     const location = useLocation();
 
     const scroll = () => {
-        if (bunRef.current.getBoundingClientRect().top > 0) {
+        if (bunRef.current !== null && bunRef.current.getBoundingClientRect().top > 0) {
             setCurrent("one");
-
-        } else if (sauceRef.current.getBoundingClientRect().top > 0) {
+        } else if (sauceRef.current !== null && sauceRef.current.getBoundingClientRect().top > 0) {
             setCurrent("two");
-        } else if (mainRef.current.getBoundingClientRect().top > 0) {
+        } else if (mainRef.current !== null && mainRef.current.getBoundingClientRect().top > 0) {
             setCurrent("three");
         }
-
     }
 
     return (

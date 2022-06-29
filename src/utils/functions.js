@@ -34,7 +34,7 @@ export const setCookie = (name, value, props) => {
             updatedCookie += '=' + propValue;
         }
     }
-    document.cookie = updatedCookie;
+    document.cookie = updatedCookie + ";path=/";
 }
 
 export const getCookie = (name) => {

@@ -1,10 +1,11 @@
-import PropTypes from 'prop-types';
 import styles from "./ingredient.module.css";
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import { menuItemPropTypes } from "../../utils/constants";
+import { TMenuItemProps } from '../../utils/types';
 import { useDrag } from "react-dnd";
 import { v4 as uuidv4 } from 'uuid';
-export function Ingredient({ data, count }) {
+import { FC } from "react";
+
+export const Ingredient: FC<{ data: TMenuItemProps, count: number }> = ({ data, count }) => {
     const { image, name, price } = data;
     const [, ref] = useDrag({
         type: "ingredient",
@@ -22,9 +23,4 @@ export function Ingredient({ data, count }) {
             <p className="text mt-2">{name}</p>
         </li>
     )
-}
-
-Ingredient.propTypes = {
-    data: menuItemPropTypes.isRequired,
-    count: PropTypes.number.isRequired,
 }

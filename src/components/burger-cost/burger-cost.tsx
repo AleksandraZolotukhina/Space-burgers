@@ -1,5 +1,4 @@
-import React from "react";
-import PropTypes from 'prop-types';
+import React, { FC } from "react";
 import { CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-cost.module.css";
 import { Modal } from "../modal/modal";
@@ -7,20 +6,21 @@ import { OrderDetails } from "../order-details/order-details";
 import { useDispatch, useSelector } from "react-redux";
 import { sendNewOrder } from "../../services/actions/burger-cost";
 import { useNavigate } from "react-router-dom";
-export function BurgerCost({ cost, hasBun }) {
+
+export const BurgerCost: FC<{ cost: number, hasBun: boolean }> = ({ cost, hasBun }) => {
     const navigate = useNavigate();
     const user = useSelector(store => store.userInformation.data.success);
     const [isOpenModal, setModal] = React.useState(false);
-    const ingredients = useSelector(store=>store.listIngredients.constructorIngredients);
+    const ingredients = useSelector(store => store.listIngredients.constructorIngredients);
     const idIngredients = ingredients.map(ingredient => ingredient._id);
-    const { hasError, isLoading, errorMessage, orderNumber } = useSelector(store=>store.order);
+    const { hasError, isLoading, errorMessage, orderNumber } = useSelector(store => store.order);
     const dispatch = useDispatch();
 
     const openModal = () => {
-        if(!user){
+        if (!user) {
             navigate("/login")
         }
-        else{
+        else {
             setModal(true);
             dispatch(sendNewOrder(idIngredients));
         }
@@ -43,9 +43,9 @@ export function BurgerCost({ cost, hasBun }) {
                 </Button>
             </div>
             {
-                ingredients.length && !hasBun ? 
-                <p className={`text text_type_main-small ${styles.message_tip}`}>Булочка в заказе обязательна</p> 
-                : <></>   
+                ingredients.length && !hasBun ?
+                    <p className={`text text_type_main-small ${styles.message_tip}`}>Булочка в заказе обязательна</p>
+                    : <></>
             }
             {
                 isOpenModal &&
@@ -63,9 +63,4 @@ export function BurgerCost({ cost, hasBun }) {
             }
         </>
     )
-}
-
-BurgerCost.propTypes = {
-    cost: PropTypes.number.isRequired,
-    hasBun: PropTypes.bool.isRequired
 }

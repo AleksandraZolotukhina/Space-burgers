@@ -3,18 +3,17 @@ import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burg
 import { DELETE_INGREDIENT, UPDATE_ORDER_INGREDIENTS, DECREASE_INGREDIENT } from "../../services/actions/data-ingredients";
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
-import { useRef } from "react";
-import PropTypes from 'prop-types';
-import { menuItemPropTypes } from "../../utils/constants";
+import { useRef, FC } from "react";
+import { TMenuItemProps } from "../../utils/types";
 
-export const ConstructorIngredient = ({data, index}) => {
-    const {name, price, image, _id} = data;
+export const ConstructorIngredient: FC<{ data: TMenuItemProps, readonly index: number }> = ({ data, index }) => {
+    const { name, price, image, _id } = data;
     const dispatch = useDispatch();
     const ref = useRef(null);
 
-    const [,drag] = useDrag({
+    const [, drag] = useDrag({
         type: "constructor-ingredient",
-        item: {index}
+        item: { index }
     });
 
     const [, drop] = useDrop({
@@ -45,7 +44,7 @@ export const ConstructorIngredient = ({data, index}) => {
     })
 
     drag(drop(ref))
-    
+
     return (
         <li className={styles.ingredient_with_drag} ref={ref}>
             <DragIcon type="primary" />
@@ -54,15 +53,10 @@ export const ConstructorIngredient = ({data, index}) => {
                 price={price}
                 thumbnail={image}
                 handleClose={() => {
-                    dispatch({ type: DELETE_INGREDIENT, index }); 
+                    dispatch({ type: DELETE_INGREDIENT, index });
                     dispatch({ type: DECREASE_INGREDIENT, id: _id });
                 }}
             />
         </li>
     )
-}
-
-ConstructorIngredient.propTypes = {
-    data: menuItemPropTypes.isRequired,
-    index: PropTypes.number.isRequired
 }
