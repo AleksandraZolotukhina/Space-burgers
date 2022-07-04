@@ -3,9 +3,11 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { orderStatus } from "../../utils/constants";
 import PropTypes from 'prop-types';
 import { getCost, getTextTime } from "../../utils/functions";
+import { FC } from "react";
+import { TOrderFeed, TIngredientsReadOnlyArray, TIngredientsArray } from "../../types/types";
 
-export const OrderFeedItem = ({ ingredients, status, name, number, updatedAt, listIngredients, isStatus=false }) => {
-    const arrayIngredients = [];
+export const OrderFeedItem:FC<Omit<TOrderFeed, "_id"&"createdAt">&{listIngredients:TIngredientsReadOnlyArray, readonly isStatus: boolean}> = ({ ingredients, status, name, number, updatedAt, listIngredients, isStatus=false }) => {
+    const arrayIngredients:TIngredientsArray = [];
     ingredients.forEach(ingredient => {
         if(ingredient!==null){
             arrayIngredients.push(listIngredients.find(el => el._id === ingredient))
@@ -51,14 +53,4 @@ export const OrderFeedItem = ({ ingredients, status, name, number, updatedAt, li
             </div>
         </li>
     )
-}
-
-OrderFeedItem.propTypes = {
-    ingredients: PropTypes.array.isRequired,
-    status: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    number: PropTypes.number.isRequired,
-    updatedAt: PropTypes.string.isRequired,
-    listIngredients: PropTypes.array.isRequired,
-    isStatus: PropTypes.bool,
 }

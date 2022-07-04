@@ -1,11 +1,11 @@
 import styles from "./ingredient.module.css";
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import { TMenuItemProps } from '../../utils/types';
+import { Readonly<TMenuItemProps> } from '../../types/types';
 import { useDrag } from "react-dnd";
 import { v4 as uuidv4 } from 'uuid';
 import { FC } from "react";
 
-export const Ingredient: FC<{ data: TMenuItemProps, count: number }> = ({ data, count }) => {
+export const Ingredient: FC<{ data: Readonly<TMenuItemProps>, count: number }> = ({ data, count }) => {
     const { image, name, price } = data;
     const [, ref] = useDrag({
         type: "ingredient",

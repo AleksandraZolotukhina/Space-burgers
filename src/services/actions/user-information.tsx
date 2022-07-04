@@ -1,24 +1,25 @@
+import { AppDispatch, AppThunk } from "../../types";
 import { url } from "../../utils/constants"
 import { checkResponce, getCookie, updateCookies, setCookie } from "../../utils/functions"
 
-export const GET_USER_INFORMATION_REQUEST = "GET_USER_INFORMATION_REQUEST";
-export const GET_USER_INFORMATION_SUCCESS = "GET_USER_INFORMATION_SUCCESS";
-export const GET_USER_INFORMATION_ERROR = "GET_USER_INFORMATION_ERROR";
+export const GET_USER_INFORMATION_REQUEST:"GET_USER_INFORMATION_REQUEST" = "GET_USER_INFORMATION_REQUEST";
+export const GET_USER_INFORMATION_SUCCESS:"GET_USER_INFORMATION_SUCCESS" = "GET_USER_INFORMATION_SUCCESS";
+export const GET_USER_INFORMATION_ERROR:"GET_USER_INFORMATION_ERROR" = "GET_USER_INFORMATION_ERROR";
 
-export const UPDATE_TOKEN_ERROR = "UPDATE_TOKEN_ERROR";
-export const UPDATE_TOKEN_REQUEST = "UPDATE_TOKEN_REQUEST";
+export const UPDATE_TOKEN_ERROR:"UPDATE_TOKEN_ERROR" = "UPDATE_TOKEN_ERROR";
+export const UPDATE_TOKEN_REQUEST:"UPDATE_TOKEN_REQUEST" = "UPDATE_TOKEN_REQUEST";
 
-export const UPDATE_USER_REQUEST = "UPDATE_USER_REQUEST";
-export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
-export const UPDATE_USER_ERROR = "UPDATE_USER_ERROR";
+export const UPDATE_USER_REQUEST:"UPDATE_USER_REQUEST" = "UPDATE_USER_REQUEST";
+export const UPDATE_USER_SUCCESS:"UPDATE_USER_SUCCESS" = "UPDATE_USER_SUCCESS";
+export const UPDATE_USER_ERROR:"UPDATE_USER_ERROR" = "UPDATE_USER_ERROR";
 
-export const SEND_REGISTER_REQUEST = "SEND_REGISTER_REQUEST";
-export const SEND_REGISTER_SUCCESS = "SEND_REGISTER_SUCCESS";
-export const SEND_REGISTER_ERROR = "SEND_REGISTER_ERROR";
+export const SEND_REGISTER_REQUEST:"SEND_REGISTER_REQUEST" = "SEND_REGISTER_REQUEST";
+export const SEND_REGISTER_SUCCESS:"SEND_REGISTER_SUCCESS" = "SEND_REGISTER_SUCCESS";
+export const SEND_REGISTER_ERROR:"SEND_REGISTER_ERROR" = "SEND_REGISTER_ERROR";
 
-export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
-export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
-export const LOGOUT_ERROR = "LOGOUT_ERROR";
+export const LOGOUT_REQUEST:"LOGOUT_REQUEST" = "LOGOUT_REQUEST";
+export const LOGOUT_SUCCESS:"LOGOUT_SUCCESS" = "LOGOUT_SUCCESS";
+export const LOGOUT_ERROR:"LOGOUT_ERROR" = "LOGOUT_ERROR";
 
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -32,8 +33,21 @@ export const RESET_PASSWORD_REQUEST = "RESET_PASSWORD_REQUEST";
 export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
 export const RESET_PASSWORD_ERROR = "RESET_PASSWORD_ERROR";
 
-export const sendForgotPassword = (email) => {
-    return function (dispatch) {
+type TSendForgotPasswordRequestAction = {
+    readonly type: typeof SEND_FORGOT_PASSWORD_REQUEST
+}
+type TSendForgotPasswordSuccessAction = {
+    readonly type: typeof SEND_FORGOT_PASSWORD_SUCCESS,
+    readonly success: boolean
+}
+type TSendForgotPasswordErrorAction = {
+    readonly type: typeof SEND_FORGOT_PASSWORD_ERROR,
+    readonly error: string
+}
+export type TSendForgotPasswordActions = TSendForgotPasswordRequestAction | TSendForgotPasswordSuccessAction | TSendForgotPasswordErrorAction
+
+export const sendForgotPassword:AppThunk = (email: string) => {
+    return function (dispatch:AppDispatch) {
         dispatch({ type: SEND_FORGOT_PASSWORD_REQUEST });
 
         fetch(`${url}/password-reset`, {
@@ -52,8 +66,8 @@ export const sendForgotPassword = (email) => {
 
 }
  
-export const updateToken = () => {
-    return (dispatch) => {
+export const updateToken:AppThunk = () => {
+    return function(dispatch:AppDispatch) {
         dispatch({ type: UPDATE_TOKEN_REQUEST })
         fetch(`${url}/auth/token`, {
             method: "POST",
@@ -76,7 +90,7 @@ export const updateToken = () => {
 }
 
 export const getUserInformationRequest = () => {
-    return  dispatch => {
+    return function(dispatch) {
         dispatch({ type: GET_USER_INFORMATION_REQUEST })
 
         fetch(`${url}/auth/user`, {

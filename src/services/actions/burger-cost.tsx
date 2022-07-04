@@ -1,3 +1,4 @@
+import { AppDispatch, AppThunk } from "../../types";
 import { url } from "../../utils/constants";
 import { checkResponce } from "../../utils/functions";
 import { getCookie } from "../../utils/functions";
@@ -20,8 +21,8 @@ type TSendOrderErrorAction = {
 }
 export type TSendOrderActions = TSendOrderRequestAction | TSendOrderSuccessAction | TSendOrderErrorAction
 
-export const sendNewOrder = (idIngredients: string) => {
-    return function (dispatch) {
+export const sendNewOrder: AppThunk = (idIngredients: string) => {
+    return function (dispatch: AppDispatch) {
         dispatch({ type: SEND_ORDER_REQUEST });
 
         fetch(`${url}/orders`, {

@@ -1,23 +1,23 @@
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { loginRequest } from '../services/actions/user-information';
 import { useEffect, useState } from 'react';
 import { handlerInputChange } from '../utils/functions';
 import style_page from "./page.module.css";
 import "./page.css";
+import { useDispatch, useSelector } from '../types/hooks';
 
 export const LoginPage = () => {
     const dispatch = useDispatch();
-    const [emailValue, setEmailValue] = useState("");
-    const [passwordValue, setPasswordValue] = useState("");
+    const [emailValue, setEmailValue] = useState<string>("");
+    const [passwordValue, setPasswordValue] = useState<string>("");
     const { state } = useLocation();
     const navigate = useNavigate();
-    const [errorEmail, setErrorEmail] = useState("");
-    const [errorPassword, setErrorPassword] = useState("");
+    const [errorEmail, setErrorEmail] = useState<string>("");
+    const [errorPassword, setErrorPassword] = useState<string>("");
     const {isLoadingLogIn, hasErrorLogIn, errorMessageLogIn, data} = useSelector(store => store.userInformation);
 
-    const handlerSubmit = (e) => {
+    const handlerSubmit = (e:Event) => {
         e.preventDefault();
         dispatch(loginRequest(emailValue, passwordValue));
     };

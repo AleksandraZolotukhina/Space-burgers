@@ -8,7 +8,7 @@ import {
     DECREASE_INGREDIENT
 } from "../actions/data-ingredients";
 import update from 'immutability-helper';
-import { TDataIngredientsInitailState } from "../../utils/types";
+import { TDataIngredientsInitailState } from "../../types/types";
 
 const initialState: TDataIngredientsInitailState = {
     isLoading: false,

@@ -2,23 +2,23 @@ import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-component
 import { Link, Navigate} from "react-router-dom";
 import { handlerInputChange } from '../utils/functions';
 import { sendRegister } from '../services/actions/user-information';
-import { useDispatch, useSelector} from 'react-redux';
-import { useState } from 'react';
+import { useState} from 'react';
 import style_page from "./page.module.css";
 import "./page.css";
+import { useDispatch, useSelector } from '../types/hooks';
 
 export const RegisterPage = () => {
-    const [emailValue, setEmailValue] = useState("");
-    const [passwordValue, setPasswordValue] = useState("");
-    const [userNameValue, setUserNameValue] = useState("");
+    const [emailValue, setEmailValue] = useState<string>("");
+    const [passwordValue, setPasswordValue] = useState<string>("");
+    const [userNameValue, setUserNameValue] = useState<string>("");
 
-    const [errorUserName, setErrorUserName] = useState("");
-    const [errorEmail, setErrorEmail] = useState("");
-    const [errorPassword, setErrorPassword] = useState("");
+    const [errorUserName, setErrorUserName] = useState<string>("");
+    const [errorEmail, setErrorEmail] = useState<string>("");
+    const [errorPassword, setErrorPassword] = useState<string>("");
     const dispatch = useDispatch();
     const {isLoadingRegisterUser, hasErrorRegisterUser, errorMessageRegisterUser, data} = useSelector(store => store.userInformation);
 
-    const handlerSubmit = (e) => {
+    const handlerSubmit = (e:Event) => {
         e.preventDefault();
         dispatch(sendRegister(emailValue, userNameValue, passwordValue));
     };

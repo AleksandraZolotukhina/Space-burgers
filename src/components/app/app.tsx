@@ -10,7 +10,6 @@ import { ProfilePage } from "../../pages/profile-page/profile-page";
 import { NotFoundPage } from "../../pages/no-found-page/not-found-page";
 import { ProtectedRoute } from "../protected-route";
 import { getUserInformationRequest } from "../../services/actions/user-information";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { Modal } from "../modal/modal";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
@@ -21,6 +20,7 @@ import { ProfileOrdersPage } from "../../pages/profile-orders-page";
 import { ProfileForm } from "../profile-form/profile-form";
 import { OrdersDetailsPage } from "../../pages/order-details-page/order-details-page";
 import { OrdersDetails } from "../orders-details/orders-details";
+import { useDispatch, useSelector } from "../../types/hooks";
 
 export function App() {
     const dispatch = useDispatch();

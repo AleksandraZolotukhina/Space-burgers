@@ -1,5 +1,5 @@
 import { SEND_ORDER_REQUEST, SEND_ORDER_SUCCESS, SEND_ORDER_ERROR } from "../actions/burger-cost";
-import { TSendNewOrderInitialState } from "../../utils/types";
+import { TSendNewOrderInitialState } from "../../types/types";
 import { TSendOrderActions } from "../actions/burger-cost";
 
 const initialState: TSendNewOrderInitialState = {

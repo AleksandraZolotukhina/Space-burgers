@@ -4,9 +4,9 @@ import { DELETE_INGREDIENT, UPDATE_ORDER_INGREDIENTS, DECREASE_INGREDIENT } from
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 import { useRef, FC } from "react";
-import { TMenuItemProps } from "../../utils/types";
+import { Readonly<TMenuItemProps> } from "../../types/types";
 
-export const ConstructorIngredient: FC<{ data: TMenuItemProps, readonly index: number }> = ({ data, index }) => {
+export const ConstructorIngredient: FC<{ data: Readonly<TMenuItemProps>, readonly index: number }> = ({ data, index }) => {
     const { name, price, image, _id } = data;
     const dispatch = useDispatch();
     const ref = useRef(null);

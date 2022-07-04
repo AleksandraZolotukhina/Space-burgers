@@ -1,26 +1,26 @@
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link, Navigate } from "react-router-dom";
 import { handlerInputChange } from '../utils/functions';
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 import { resetPassword } from '../services/actions/user-information';
-import { useDispatch, useSelector } from 'react-redux';
 import {NotFoundPage} from "./no-found-page/not-found-page";
 import style_page from "./page.module.css";
 import "./page.css";
+import { useDispatch, useSelector } from '../types/hooks';
 
 export const ResetPasswordPage = () => {
-    const [codeValue, setCodeValue] = useState("");
-    const [passwordValue, setPasswordValue] = useState("");
+    const [codeValue, setCodeValue] = useState<string>("");
+    const [passwordValue, setPasswordValue] = useState<string>("");
 
-    const [errorCode, setErrorCode] = useState("");
-    const [errorPassword, setErrorPassword] = useState("");
+    const [errorCode, setErrorCode] = useState<string>("");
+    const [errorPassword, setErrorPassword] = useState<string>("");
 
     const dispatch = useDispatch();
     const {isLoadingResetPassword, hasErrorResetPassword, errorMessageResetPassword, successResetPassword, successForgotPassword} = useSelector(store=>store.userInformation);
     if (!successForgotPassword && !successResetPassword && !hasErrorResetPassword) return <NotFoundPage />
     if (successResetPassword) return <Navigate to="/login" />
     
-    const handlerSubmit = (e) => {
+    const handlerSubmit = (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(resetPassword(passwordValue, codeValue));
     };

@@ -3,15 +3,16 @@ import { CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-co
 import styles from "./burger-cost.module.css";
 import { Modal } from "../modal/modal";
 import { OrderDetails } from "../order-details/order-details";
-import { useDispatch, useSelector } from "react-redux";
 import { sendNewOrder } from "../../services/actions/burger-cost";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "../../types/hooks";
+import { TIngredientsReadOnlyArray } from "../../types/types";
 
 export const BurgerCost: FC<{ cost: number, hasBun: boolean }> = ({ cost, hasBun }) => {
     const navigate = useNavigate();
     const user = useSelector(store => store.userInformation.data.success);
     const [isOpenModal, setModal] = React.useState(false);
-    const ingredients = useSelector(store => store.listIngredients.constructorIngredients);
+    const ingredients:TIngredientsReadOnlyArray = useSelector(store => store.listIngredients.constructorIngredients);
     const idIngredients = ingredients.map(ingredient => ingredient._id);
     const { hasError, isLoading, errorMessage, orderNumber } = useSelector(store => store.order);
     const dispatch = useDispatch();

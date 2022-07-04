@@ -2,12 +2,12 @@ import { useRef, useState } from "react";
 import styles from "./burger-ingredients.module.css"
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Ingredient } from "../ingredient/ingredient";
-import { useSelector } from "react-redux";
 import { useLocation, Link } from "react-router-dom";
+import { useSelector } from "../../types/hooks";
+import { TIngredientsReadOnlyArray } from "../../types/types";
 
-export function BurgerIngredients() {
-
-    const ingredients = useSelector(store => store.listIngredients.ingredients);
+export const BurgerIngredients = () => {
+    const ingredients:TIngredientsReadOnlyArray = useSelector(store => store.listIngredients.ingredients);
     const [current, setCurrent] = useState<string>('one');
     const bunRef = useRef<HTMLLIElement>(null);
     const sauceRef = useRef<HTMLLIElement>(null);
