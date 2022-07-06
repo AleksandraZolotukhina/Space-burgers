@@ -3,12 +3,13 @@ import styles from "./modal.module.css";
 import { modalRoot } from "../../utils/constants";
 import { ModalOverlay } from "../modal-overlay/modal-overlay";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from 'prop-types';
-import { useEffect } from "react";
-export function Modal({ closeModal, title, children }) {
+import { ReactNode, useEffect } from "react";
+import { NavigateFunction } from "react-router-dom";
+
+export const Modal = ({ closeModal, title, children }:Readonly<{closeModal: ()=>boolean | NavigateFunction, title: string, children: ReactNode}>) => {
 
     useEffect(() => {
-        const closePopup = (event) => {
+        const closePopup = (event:{ readonly key: string}) => {
             if(event.key === "Escape"){
                 closeModal();
             }
@@ -40,10 +41,4 @@ export function Modal({ closeModal, title, children }) {
 
         ),
         modalRoot)
-}
-
-Modal.propTypes = {
-    closeModal: PropTypes.func.isRequired,
-    title: PropTypes.string,
-    children: PropTypes.node.isRequired,
 }

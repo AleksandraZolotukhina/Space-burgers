@@ -1,4 +1,5 @@
 import { AppDispatch, AppThunk } from "../../types";
+import { Ttype, TError } from "../../types/generics";
 import { url } from "../../utils/constants";
 import { checkResponce } from "../../utils/functions";
 import { getCookie } from "../../utils/functions";
@@ -7,18 +8,15 @@ export const SEND_ORDER_REQUEST: "SEND_ORDER_REQUEST" = "SEND_ORDER_REQUEST";
 export const SEND_ORDER_SUCCESS: "SEND_ORDER_SUCCESS" = "SEND_ORDER_SUCCESS";
 export const SEND_ORDER_ERROR: "SEND_ORDER_ERROR" = "SEND_ORDER_ERROR";
 
-type TSendOrderRequestAction = {
-    readonly type: typeof SEND_ORDER_REQUEST
-}
+type TSendOrderRequestAction = Ttype<typeof SEND_ORDER_REQUEST>
+
 type TSendOrderSuccessAction = {
     readonly type: typeof SEND_ORDER_SUCCESS,
     readonly orderNumber: number
 }
 
-type TSendOrderErrorAction = {
-    readonly type: typeof SEND_ORDER_ERROR,
-    readonly error: string
-}
+type TSendOrderErrorAction =  TError<typeof SEND_ORDER_ERROR>
+
 export type TSendOrderActions = TSendOrderRequestAction | TSendOrderSuccessAction | TSendOrderErrorAction
 
 export const sendNewOrder: AppThunk = (idIngredients: string) => {

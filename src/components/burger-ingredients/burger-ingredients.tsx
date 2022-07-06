@@ -4,10 +4,11 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Ingredient } from "../ingredient/ingredient";
 import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "../../types/hooks";
-import { TIngredientsReadOnlyArray } from "../../types/types";
+import { TArrayObjects } from "../../types/generics";
+import { TIngredient } from "../../types/types";
 
 export const BurgerIngredients = () => {
-    const ingredients:TIngredientsReadOnlyArray = useSelector(store => store.listIngredients.ingredients);
+    const ingredients: TArrayObjects<TIngredient> = useSelector(store => store.listIngredients.ingredients);
     const [current, setCurrent] = useState<string>('one');
     const bunRef = useRef<HTMLLIElement>(null);
     const sauceRef = useRef<HTMLLIElement>(null);
@@ -49,7 +50,7 @@ export const BurgerIngredients = () => {
                         <h2 className="text text_type_main-medium" id="bun">Булки</h2>
                         <ul className={`${styles.list} ${styles.list_ingredients}`}>
                             {ingredients.map(ingredient =>
-                                ingredient.type === "bun" &&
+                                ingredient.type === "bun" && ingredient.count !== undefined &&
                                 <Link key={ingredient._id} style={{ textDecoration: 'none', color: '#F2F2F3' }} to={`ingredients/${ingredient._id}`} state={{ backgroundLocation: location }}>
                                     <Ingredient data={ingredient}
                                         count={ingredient.count} />
@@ -62,7 +63,7 @@ export const BurgerIngredients = () => {
                         <h2 className="text text_type_main-medium" id="sauce">Соусы</h2>
                         <ul className={`${styles.list} ${styles.list_ingredients} mt-6`}>
                             {ingredients.map(ingredient =>
-                                ingredient.type === "sauce" &&
+                                ingredient.type === "sauce" && ingredient.count !== undefined &&
                                 <Link key={ingredient._id} style={{ textDecoration: 'none', color: '#F2F2F3' }} to={`ingredients/${ingredient._id}`} state={{ backgroundLocation: location }}>
                                     <Ingredient data={ingredient}
                                         count={ingredient.count} />
@@ -75,7 +76,7 @@ export const BurgerIngredients = () => {
                         <h2 className="text text_type_main-medium" id="filling">Начинки</h2>
                         <ul className={`${styles.list} ${styles.list_ingredients} mt-6`}>
                             {ingredients.map(ingredient =>
-                                ingredient.type === "main" &&
+                                ingredient.type === "main" && ingredient.count !== undefined &&
                                 <Link key={ingredient._id} style={{ textDecoration: 'none', color: '#F2F2F3' }} to={`ingredients/${ingredient._id}`} state={{ backgroundLocation: location }}>
                                     <Ingredient data={ingredient}
                                         count={ingredient.count} />

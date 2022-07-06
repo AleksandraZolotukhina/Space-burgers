@@ -6,13 +6,14 @@ import { OrderDetails } from "../order-details/order-details";
 import { sendNewOrder } from "../../services/actions/burger-cost";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "../../types/hooks";
-import { TIngredientsReadOnlyArray } from "../../types/types";
+import { TArrayObjects } from "../../types/generics";
+import { TIngredient } from "../../types/types";
 
 export const BurgerCost: FC<{ cost: number, hasBun: boolean }> = ({ cost, hasBun }) => {
     const navigate = useNavigate();
     const user = useSelector(store => store.userInformation.data.success);
     const [isOpenModal, setModal] = React.useState(false);
-    const ingredients:TIngredientsReadOnlyArray = useSelector(store => store.listIngredients.constructorIngredients);
+    const ingredients = useSelector(store => store.listIngredients.constructorIngredients);
     const idIngredients = ingredients.map(ingredient => ingredient._id);
     const { hasError, isLoading, errorMessage, orderNumber } = useSelector(store => store.order);
     const dispatch = useDispatch();

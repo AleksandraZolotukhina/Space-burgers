@@ -5,25 +5,26 @@ import { useDrop } from "react-dnd";
 import { ADD_INGREDIENT, INCREASE_INGREDIENT, DECREASE_INGREDIENT } from "../../services/actions/data-ingredients";
 import { ConstructorIngredient } from "../constructor-ingredient/constructor-ingredient";
 import { useDispatch, useSelector } from "../../types/hooks";
-import { TIngredientsReadOnlyArray, Readonly<TMenuItemProps> } from "../../types/types";
+import { TIngredient } from "../../types/types";
+import { TArrayObjects } from "../../types/generics";
 
 export const BurgerConstructor = () => {
-    const orderIngredients: TIngredientsReadOnlyArray = useSelector(store => store.listIngredients.constructorIngredients);
+    const orderIngredients: TArrayObjects<TIngredient & { readonly uuid?: string }> = useSelector(store => store.listIngredients.constructorIngredients);
     const bun = orderIngredients.find(el => el.type === "bun");
-    const bunPrice = bun ? bun.price * 2  : 0;
+    const bunPrice = bun ? bun.price * 2 : 0;
     const burgerPrice = orderIngredients.reduce((current, next) => (next.type !== 'bun') ? current + next.price : current, 0) + bunPrice;
     const dispatch = useDispatch();
 
     const [{ isHover }, ref] = useDrop({
         accept: "ingredient",
-        drop(item:Readonly<TMenuItemProps>) {
-            if(item.type === "bun"){
+        drop(item: Readonly<TIngredient>) {
+            if (item.type === "bun") {
                 const newOrderIngredients = bun ? [...orderIngredients].filter(el => el._id !== bun._id) : [...orderIngredients]
                 bun && dispatch({ type: DECREASE_INGREDIENT, id: bun._id })
-                dispatch({ type: ADD_INGREDIENT, item: [...newOrderIngredients, item]}) 
-                dispatch({ type: INCREASE_INGREDIENT, id: item._id})
+                dispatch({ type: ADD_INGREDIENT, item: [...newOrderIngredients, item] })
+                dispatch({ type: INCREASE_INGREDIENT, id: item._id })
             }
-            else{
+            else {
                 dispatch({ type: ADD_INGREDIENT, item: [...orderIngredients, item] })
                 dispatch({ type: INCREASE_INGREDIENT, id: item._id })
             }
@@ -52,10 +53,10 @@ export const BurgerConstructor = () => {
                     {
                         orderIngredients.length === 0 ?
                             <div className={`${styles.tip} ${isHover && styles.tip_invisible}`}>
-                                <p>Перетащите ингредиент для добавления в бургер</p> 
-                                <p>Примечание: Булочка обязательна</p> 
+                                <p>Перетащите ингредиент для добавления в бургер</p>
+                                <p>Примечание: Булочка обязательна</p>
                             </div>
-                            : orderIngredients.map((ingredient, index) => ingredient.type !== "bun" && <ConstructorIngredient key={ingredient.uuid} data={ingredient} index={index}/> 
+                            : orderIngredients.map((ingredient, index) => ingredient.type !== "bun" && <ConstructorIngredient key={ingredient.uuid} data={ingredient} index={index} />
                             )
                     }
                 </ul>
@@ -70,7 +71,7 @@ export const BurgerConstructor = () => {
                     />
                 }
             </div>
-            <BurgerCost cost={burgerPrice} hasBun={bun ? true : false}/>
+            <BurgerCost cost={burgerPrice} hasBun={bun ? true : false} />
         </div>
     )
 }

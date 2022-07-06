@@ -1,9 +1,8 @@
 import { useEffect } from "react"
-import { useDispatch } from "react-redux"
 import { OrderFeedItem } from "../components/order-feed-item/order-feed-item"
 import { WS_CONNECTION_CLOSE, WS_CONNECTION_START } from "../services/actions/ws-action-types"
 import styles from "./order-feed-page/order-feed-page.module.css"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "../types/hooks"
 import { Link } from "react-router-dom"
 import { useLocation } from "react-router-dom"
 
@@ -21,7 +20,7 @@ export const ProfileOrdersPage = () => {
         }
     }, [])
     
-    if (!wsConnected) return "Загрузка..."
+    if (!wsConnected) return <p>"Загрузка..."</p>
     if (success) return (
         <>
             {

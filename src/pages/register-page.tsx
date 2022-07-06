@@ -2,7 +2,7 @@ import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-component
 import { Link, Navigate} from "react-router-dom";
 import { handlerInputChange } from '../utils/functions';
 import { sendRegister } from '../services/actions/user-information';
-import { useState} from 'react';
+import { FormEvent, useState} from 'react';
 import style_page from "./page.module.css";
 import "./page.css";
 import { useDispatch, useSelector } from '../types/hooks';
@@ -18,7 +18,7 @@ export const RegisterPage = () => {
     const dispatch = useDispatch();
     const {isLoadingRegisterUser, hasErrorRegisterUser, errorMessageRegisterUser, data} = useSelector(store => store.userInformation);
 
-    const handlerSubmit = (e:Event) => {
+    const handlerSubmit = (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(sendRegister(emailValue, userNameValue, passwordValue));
     };
@@ -26,7 +26,7 @@ export const RegisterPage = () => {
     return (
         <section className={style_page.registration}>
              {data.success && <Navigate to="/" />}
-            <form className={style_page.registration__form} onSubmit={(e)=>handlerSubmit(e)}>
+            <form className={style_page.registration__form} onSubmit={handlerSubmit}>
                 <h1 className="text text_type_main-medium">Регистрация</h1>
                 <label className={style_page.registration__input}>
                     <Input

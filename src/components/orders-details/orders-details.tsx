@@ -1,12 +1,12 @@
 import styles from "./orders-details.module.css";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { OrdersDetailsItem } from "../orders-details-item/orders-details-item";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { orderStatus } from "../../utils/constants";
 import { NotFoundPage } from "../../pages/no-found-page/not-found-page";
 import PropTypes from 'prop-types';
 import { getCost, getTextTime } from "../../utils/functions";
+import { useSelector } from "../../types/hooks";
 
 export const OrdersDetails = ({ center = false }) => {
     const orders = useSelector(store => store.ws.orders.orders);

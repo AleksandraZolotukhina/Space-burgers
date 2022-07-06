@@ -1,4 +1,4 @@
-import { TUserInitialState } from "../../types/types";
+import { TUserInitialState } from "../../types/initial-state";
 import {
     GET_USER_INFORMATION_REQUEST,
     GET_USER_INFORMATION_SUCCESS,
@@ -21,7 +21,8 @@ import {
     RESET_PASSWORD_REQUEST,
     RESET_PASSWORD_SUCCESS,
     RESET_PASSWORD_ERROR,
-    UPDATE_TOKEN_ERROR
+    UPDATE_TOKEN_ERROR,
+    TUserInformationActionsThunk
 } from "../actions/user-information";
 
 const initialState: Readonly<TUserInitialState> = {
@@ -61,20 +62,7 @@ const initialState: Readonly<TUserInitialState> = {
     data: {}
 }
 
-type TUserRequest<Ttype> = {
-    readonly type: Ttype;
-}
-type TUserSuccess<Ttype, TData> = {
-    readonly type: Ttype;
-    readonly data: TData;
-}
-type TUserError<Ttype> = {
-    readonly type: Ttype;
-    readonly error: string;
-}
-export type TUserActions = TUserRequest<typeof UPDATE_USER_REQUEST>
-
-export const userInformationReducer = (state = initialState, action: Readonly<TUserActions>):Readonly<TUserInitialState> => {
+export const userInformationReducer = (state = initialState, action: TUserInformationActionsThunk): Readonly<TUserInitialState> => {
     switch (action.type) {
 
         case GET_USER_INFORMATION_REQUEST: {

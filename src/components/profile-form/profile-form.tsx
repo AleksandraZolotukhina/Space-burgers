@@ -1,22 +1,23 @@
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { handlerInputChange } from '../../utils/functions';
 import style_page from "../../pages/page.module.css";
 import styles from "./profile-form.module.css";
-import { useDispatch, useSelector } from 'react-redux';
 import { updateUserInformation } from '../../services/actions/user-information';
 import "../../pages/page.css";
+import { useSelector, useDispatch } from '../../types/hooks';
+
 export const ProfileForm = () => {
     const dispatch = useDispatch();
     const {isLoadingUpdateUser, hasErrorUpdateUser, errorMessageUpdateUser, data} = useSelector(store => store.userInformation);
     const {email, name} = data.user;
-    const [emailValue, setEmailValue] = useState(email);
-    const [passwordValue, setPasswordValue] = useState("");
-    const [userNameValue, setUserNameValue] = useState(name);
+    const [emailValue, setEmailValue] = useState<string>(email);
+    const [passwordValue, setPasswordValue] = useState<string>("");
+    const [userNameValue, setUserNameValue] = useState<string>(name);
 
-    const [errorUserName, setErrorUserName] = useState("");
-    const [errorEmail, setErrorEmail] = useState("");
-    const [errorPassword, setErrorPassword] = useState("");
+    const [errorUserName, setErrorUserName] = useState<string>("");
+    const [errorEmail, setErrorEmail] = useState<string>("");
+    const [errorPassword, setErrorPassword] = useState<string>("");
 
     const handleClickCancel = () => {
         setEmailValue(email);
@@ -24,13 +25,13 @@ export const ProfileForm = () => {
         setPasswordValue("");
     }
 
-    const handlerSubmit = (e) => {
+    const handlerSubmit = (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(updateUserInformation(emailValue, userNameValue, passwordValue))
     }
 
     return (
-        <form className={`registration ${styles.registration}`} onSubmit={(e) => handlerSubmit(e)}>
+        <form className={`registration ${styles.registration}`} onSubmit={handlerSubmit}>
             <label className={`${style_page.registration__input} mb-6`}>
                 <Input
                     type="text"

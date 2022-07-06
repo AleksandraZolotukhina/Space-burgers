@@ -4,9 +4,9 @@ import { orderStatus } from "../../utils/constants";
 import PropTypes from 'prop-types';
 import { getCost, getTextTime } from "../../utils/functions";
 import { FC } from "react";
-import { TOrderFeed, TIngredientsReadOnlyArray, TIngredientsArray } from "../../types/types";
+import { TOrderFeedItemProps, TIngredientsArray } from "../../types/types";
 
-export const OrderFeedItem:FC<Omit<TOrderFeed, "_id"&"createdAt">&{listIngredients:TIngredientsReadOnlyArray, readonly isStatus: boolean}> = ({ ingredients, status, name, number, updatedAt, listIngredients, isStatus=false }) => {
+export const OrderFeedItem:FC<TOrderFeedItemProps> = ({ ingredients, status, name, number, updatedAt, listIngredients, isStatus=false }) => {
     const arrayIngredients:TIngredientsArray = [];
     ingredients.forEach(ingredient => {
         if(ingredient!==null){

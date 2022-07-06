@@ -5,12 +5,13 @@ import {
     ADD_INGREDIENT, DELETE_INGREDIENT,
     UPDATE_ORDER_INGREDIENTS,
     INCREASE_INGREDIENT,
-    DECREASE_INGREDIENT
+    DECREASE_INGREDIENT,
+    TDataIngredientsActions
 } from "../actions/data-ingredients";
 import update from 'immutability-helper';
-import { TDataIngredientsInitailState } from "../../types/types";
+import { TDataIngredientsInitailState } from "../../types/initial-state";
 
-const initialState: TDataIngredientsInitailState = {
+const initialState: Readonly<TDataIngredientsInitailState> = {
     isLoading: false,
     hasError: false,
     errorMessage: "",
@@ -18,7 +19,7 @@ const initialState: TDataIngredientsInitailState = {
     constructorIngredients: [],
 }
 
-export const dataIngredientsReducer = (state = initialState, action) => {
+export const dataIngredientsReducer = (state = initialState, action: TDataIngredientsActions): Readonly<TDataIngredientsInitailState> => {
     switch (action.type) {
         case GET_LIST_INGREDIENTS_REQUEST: {
             return { ...state, isLoading: true }
@@ -52,7 +53,7 @@ export const dataIngredientsReducer = (state = initialState, action) => {
         case INCREASE_INGREDIENT: {
             return {
                 ...state, ingredients: [...state.ingredients].map(el =>
-                    el._id === action.id ?
+                    el._id === action.id && el.count !==undefined ?
                         { ...el, count: el.count + 1 } :
                         el
                 )
@@ -61,7 +62,7 @@ export const dataIngredientsReducer = (state = initialState, action) => {
         case DECREASE_INGREDIENT: {
             return {
                 ...state, ingredients: [...state.ingredients].map(el =>
-                    el._id === action.id ?
+                    el._id === action.id && el.count !==undefined ?
                         { ...el, count: el.count - 1 } :
                         el
                 )

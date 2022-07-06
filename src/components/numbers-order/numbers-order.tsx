@@ -1,7 +1,6 @@
 import styles from "./numbers-order.module.css";
-import PropTypes from 'prop-types';
 
-export const NumbersOrder = ({ total, totalToday, ordersArray }) => {
+export const NumbersOrder = ({ total, totalToday, ordersArray } :{total:number, totalToday:number, ordersArray:any}) => { //test
     const done = ordersArray.filter(el => el.status === "done");
     const created = ordersArray.filter(el => el.status === "created");
     return (
@@ -10,7 +9,7 @@ export const NumbersOrder = ({ total, totalToday, ordersArray }) => {
                 <div>
                     <h2 className="text text_type_main-medium">Готовы:</h2>
                     <ul className={styles.list}>
-                        {done.map(({ number, _id }) => {
+                        {done.map(({ number, _id }:{number:number, _id: string}) => {
                             return <li className={`text text_type_digits-default ${styles.all_order}`} key={_id}>{number}</li>
                         })}
                     </ul>
@@ -19,7 +18,7 @@ export const NumbersOrder = ({ total, totalToday, ordersArray }) => {
                     <h2 className="text text_type_main-medium">В работе:</h2>
                     <ul className={styles.list}>
                         {
-                            created.map(({ number, _id }) => {
+                            created.map(({ number, _id }:{number:number, _id: string}) => {
                                 return <li className="text text_type_digits-default" key={_id}>{number}</li>
                             })
                         }
@@ -36,10 +35,4 @@ export const NumbersOrder = ({ total, totalToday, ordersArray }) => {
             </div>
         </div>
     )
-}
-
-NumbersOrder.propTypes = {
-    total: PropTypes.number.isRequired,
-    totalToday: PropTypes.number.isRequired,
-    ordersArray: PropTypes.array.isRequired,
 }

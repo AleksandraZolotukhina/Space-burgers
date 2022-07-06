@@ -1,4 +1,6 @@
 
+import { Middleware } from "redux";
+import { RootState } from "../../types";
 import { getCookie } from "../../utils/functions";
 import {
     WS_CONNECTION_CLOSED,
@@ -9,9 +11,9 @@ import {
     WS_CONNECTION_CLOSE
 } from "../actions/ws-action-types";
 
-export const socketMiddleware = (soketUrl) => {
+export const socketMiddleware = (soketUrl: string): Middleware<{}, RootState> => {
     return store => {
-        let socket = null;
+        let socket: WebSocket | null = null;
         return next => action => {
             const { type, token } = action;
             const { dispatch } = store;
@@ -31,7 +33,7 @@ export const socketMiddleware = (soketUrl) => {
                 socket.onmessage = event => {
                     dispatch({ type: WS_GET_ORDERS, payload: JSON.parse(event.data) })
                 }
-                if (type===WS_CONNECTION_CLOSE) {
+                if (type === WS_CONNECTION_CLOSE) {
                     socket.close();
                 }
                 socket.onclose = event => {

@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux"
+import { useSelector } from "../types/hooks";
 import { Navigate, Outlet, useLocation } from "react-router-dom"
 
 export const ProtectedRoute = () => {
@@ -6,7 +6,7 @@ export const ProtectedRoute = () => {
     const location = useLocation();
     
     if(!isLoaded && !data.success){
-        return "Загрузка..."
+        return <p>"Загрузка..."</p>
     }
     if(isLoaded && data.success){
         return <Outlet />

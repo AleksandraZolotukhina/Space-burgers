@@ -21,11 +21,12 @@ import { ProfileForm } from "../profile-form/profile-form";
 import { OrdersDetailsPage } from "../../pages/order-details-page/order-details-page";
 import { OrdersDetails } from "../orders-details/orders-details";
 import { useDispatch, useSelector } from "../../types/hooks";
+import { TLocationState } from "../../types/types";
 
 export function App() {
     const dispatch = useDispatch();
-    const location = useLocation();
-    const background = location.state?.backgroundLocation;
+    const location = useLocation() as TLocationState;
+    const background = location.state?.background;
     const navigate = useNavigate();
     const { ingredients } = useSelector(store => store.listIngredients);
 

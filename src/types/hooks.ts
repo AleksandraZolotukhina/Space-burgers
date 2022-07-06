@@ -1,6 +1,8 @@
-import { useDispatch as dispatchHook, 
-    useSelector as selectorHook, 
-    TypedUseSelectorHook } from "react-redux";
+import {
+    useDispatch as dispatchHook,
+    useSelector as selectorHook,
+    TypedUseSelectorHook
+} from "react-redux";
 import { AppDispatch, AppThunk, RootState } from ".";
 
 export const useDispatch = () => dispatchHook<AppDispatch | AppThunk>();

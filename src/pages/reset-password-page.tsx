@@ -27,7 +27,7 @@ export const ResetPasswordPage = () => {
 
     return (
         <section className={style_page.registration}>
-            <form className={style_page.registration__form} onSubmit={(e)=>handlerSubmit(e)}>
+            <form className={style_page.registration__form} onSubmit={handlerSubmit}>
                 <h1 className="text text_type_main-medium">Восстановление пароля</h1>
                 <label className={style_page.registration__input}>
                     <Input

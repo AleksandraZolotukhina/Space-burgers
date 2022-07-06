@@ -1,7 +1,7 @@
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { loginRequest } from '../services/actions/user-information';
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { handlerInputChange } from '../utils/functions';
 import style_page from "./page.module.css";
 import "./page.css";
@@ -17,7 +17,7 @@ export const LoginPage = () => {
     const [errorPassword, setErrorPassword] = useState<string>("");
     const {isLoadingLogIn, hasErrorLogIn, errorMessageLogIn, data} = useSelector(store => store.userInformation);
 
-    const handlerSubmit = (e:Event) => {
+    const handlerSubmit = (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(loginRequest(emailValue, passwordValue));
     };
@@ -28,7 +28,7 @@ export const LoginPage = () => {
 
     return (
         <section className={style_page.registration}>
-            <form className={style_page.registration__form} onSubmit={(e)=>handlerSubmit(e)}>
+            <form className={style_page.registration__form} onSubmit={handlerSubmit}>
                 <h1 className="text text_type_main-medium">Вход</h1>
                 <label className={style_page.registration__input}>
                     <Input

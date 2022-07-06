@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "../../types/hooks";
 import { WS_CONNECTION_CLOSE, WS_CONNECTION_START } from "../../services/actions/ws-action-types";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { TIngredientsReadOnlyArray, TOrderFeedData } from "../../types/types";
+import { TOrderFeedData } from "../../types/types";
 
 export const OrderFeedPage = () => {
     const dispatch = useDispatch();

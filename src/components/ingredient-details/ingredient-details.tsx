@@ -1,13 +1,13 @@
 import styles from "./ingredient-details.module.css";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { useSelector } from "../../types/hooks";
 
-export function IngredientDetails() {
+export const IngredientDetails = () => {
     const id = useParams().id;
-    const {ingredients} = useSelector(store=>store.listIngredients);
-    const ingredient = ingredients.find(el=>el._id===id);
-    const {calories, carbohydrates, fat, image_large, name, proteins} = ingredient;
+    const { ingredients } = useSelector(store => store.listIngredients);
+    const ingredient = ingredients.find(el => el._id === id);
 
+    const { calories, carbohydrates, fat, image_large, name, proteins } = ingredient;
     return (
         <>
             <img className={styles.picture} src={image_large} alt={name} />

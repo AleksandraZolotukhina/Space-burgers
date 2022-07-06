@@ -1,16 +1,18 @@
+import { WSInitailState } from "../../types/initial-state";
 import {
     WS_CONNECTION_SUCCESS,
     WS_CONNECTION_ERROR,
     WS_CONNECTION_CLOSED,
-    WS_GET_ORDERS
+    WS_GET_ORDERS,
+    WsActions
 } from "../actions/ws-action-types";
 
-const initialState = {
+const initialState: WSInitailState = {
     wsConnected: false,
     orders: [],
 }
 
-export const wsReducer = (state = initialState, action) => {
+export const wsReducer = (state = initialState, action: WsActions): WSInitailState => {
     switch (action.type) {
         case WS_CONNECTION_SUCCESS:
             return { ...state, wsConnected: true }
