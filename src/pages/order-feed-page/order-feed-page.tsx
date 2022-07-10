@@ -22,7 +22,7 @@ export const OrderFeedPage = () => {
         }
     }, [])
 
-    if (!wsConnected) return <div>"Загрузка"</div>
+    if (!wsConnected) return <div>Загрузка</div>
 
     if (success) return (
         <section className="mt-10">

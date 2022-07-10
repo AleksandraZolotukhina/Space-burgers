@@ -22,6 +22,8 @@
   },
   "include": [
     "src",
-    "src/css-modules"
+    "src/css-modules",
+    "src/custom",
+    "src/window",
   ]
 }

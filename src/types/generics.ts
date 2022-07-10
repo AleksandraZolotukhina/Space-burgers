@@ -11,3 +11,7 @@ export type TError<Ttype> = {
     readonly error: string;
 }
 export type TArrayObjects<TObject> = ReadonlyArray<{ [fw in keyof Readonly<TObject>]: TObject[fw] }>
+
+export type TtypeSuccess<TtypeSuccess> = Ttype<TtypeSuccess> & {
+    readonly success: boolean;
+}

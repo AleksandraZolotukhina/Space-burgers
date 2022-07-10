@@ -6,8 +6,6 @@ import { OrderDetails } from "../order-details/order-details";
 import { sendNewOrder } from "../../services/actions/burger-cost";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "../../types/hooks";
-import { TArrayObjects } from "../../types/generics";
-import { TIngredient } from "../../types/types";
 
 export const BurgerCost: FC<{ cost: number, hasBun: boolean }> = ({ cost, hasBun }) => {
     const navigate = useNavigate();

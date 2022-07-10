@@ -2,11 +2,11 @@ import styles from "./app-header.module.css";
 import { BurgerIcon, ListIcon, Logo, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, NavLink } from "react-router-dom";
 
-export function AppHeader() {
+export const AppHeader = () => {
     const activeStyle:{color:string} = {
         color: "#F2F2F3",
     }
-    // Проверить, что работает style с {}
+
     return (
         <header className={`text_type_main-default ${styles.header}`}>
             <nav className={`${styles.main_nav} pt-4 pb-4`}>

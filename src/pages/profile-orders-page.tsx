@@ -5,6 +5,7 @@ import styles from "./order-feed-page/order-feed-page.module.css"
 import { useSelector, useDispatch } from "../types/hooks"
 import { Link } from "react-router-dom"
 import { useLocation } from "react-router-dom"
+import { TOrderFeed } from "../types/types"
 
 export const ProfileOrdersPage = () => {
     const dispatch = useDispatch();
@@ -20,21 +21,21 @@ export const ProfileOrdersPage = () => {
         }
     }, [])
     
-    if (!wsConnected) return <p>"Загрузка..."</p>
+    if (!wsConnected) return <p>Загрузка...</p>
     if (success) return (
         <>
             {
                 ordersArray.length ? (
                     <ul className={`${styles.list_orders} ${styles.scrollbar}`} style={{ marginTop: '-56px', }}>
                         {
-                            ordersArray?.reverse().map(order => {
+                            ordersArray.map((order:TOrderFeed) => { 
                                 return (
                                     <Link to={order._id} key={order._id} className={styles.order_link} state={{ backgroundLocation: location }}>
                                         <OrderFeedItem {...order} listIngredients={ingredients} isStatus={true} />
                                     </Link>
                                 )
 
-                            })
+                            }).reverse()
                         }
                     </ul>
                 ) : (

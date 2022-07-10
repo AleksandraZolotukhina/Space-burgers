@@ -1,4 +1,5 @@
 import { TUserInitialState } from "../../types/initial-state";
+import { TAllUserInfromation, TUserInfromation } from "../../types/types";
 import {
     GET_USER_INFORMATION_REQUEST,
     GET_USER_INFORMATION_SUCCESS,
@@ -22,7 +23,7 @@ import {
     RESET_PASSWORD_SUCCESS,
     RESET_PASSWORD_ERROR,
     UPDATE_TOKEN_ERROR,
-    TUserInformationActionsThunk
+    TUserInformationActions
 } from "../actions/user-information";
 
 const initialState: Readonly<TUserInitialState> = {
@@ -59,10 +60,10 @@ const initialState: Readonly<TUserInitialState> = {
     errorMessageResetPassword: "",
     successResetPassword: false,
 
-    data: {}
+    data: {} as TUserInfromation | TAllUserInfromation
 }
 
-export const userInformationReducer = (state = initialState, action: TUserInformationActionsThunk): Readonly<TUserInitialState> => {
+export const userInformationReducer = (state = initialState, action: TUserInformationActions): Readonly<TUserInitialState> => {
     switch (action.type) {
 
         case GET_USER_INFORMATION_REQUEST: {
@@ -102,7 +103,7 @@ export const userInformationReducer = (state = initialState, action: TUserInform
             return { ...state, isLoadingLogOut: true, hasErrorLogOut: false, errorMessageLogOut: "" }
         }
         case LOGOUT_SUCCESS: {
-            return { ...state, isLoadingLogOut: false, logOutSuccess: action.success, data: {} }
+            return { ...state, isLoadingLogOut: false, logOutSuccess: action.success, data: {} as TUserInfromation }
         }
         case LOGOUT_ERROR: {
             return { ...state, isLoadingLogOut: false, hasErrorLogOut: true, errorMessageLogOut: action.error }

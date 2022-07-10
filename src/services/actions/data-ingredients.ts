@@ -21,32 +21,34 @@ type TGetListIngreeientsRequestAction = Ttype<typeof GET_LIST_INGREDIENTS_REQUES
 type TGetListIngreeientsSuccessAction = TSuccess<typeof GET_LIST_INGREDIENTS_SUCCESS, TArrayObjects<TIngredient>>
 type TGetListIngreeientsErrorAction = TError<typeof GET_LIST_INGREDIENTS_ERROR>
 
-//think
-type TAddIngredientAction = {
-    readonly type: typeof ADD_INGREDIENT,
+
+type TAddIngredientAction =  Ttype<typeof ADD_INGREDIENT> & {
     readonly item: TArrayObjects<TIngredient>
 }
-type TDeleteIngredientAction = {
-    readonly type: typeof DELETE_INGREDIENT,
+
+type TDeleteIngredientAction = Ttype<typeof DELETE_INGREDIENT> & {
     readonly index: number
 }
-type TUpdateOrderIngredientsAction = {
-    readonly type: typeof UPDATE_ORDER_INGREDIENTS,
+
+type TUpdateOrderIngredientsAction = Ttype<typeof UPDATE_ORDER_INGREDIENTS> & {
     readonly dragIndex: number,
     readonly hoverIndex: number
 }
-type TIncreaseIngredientAction = {
-    readonly type: typeof INCREASE_INGREDIENT,
-    readonly id: string
-}
-type TDecreaseIngredientAction = {
-    readonly type: typeof DECREASE_INGREDIENT,
-    readonly id: string
-}
-export type TDataIngredientsActionsThunk = TGetListIngreeientsRequestAction | TGetListIngreeientsSuccessAction | TGetListIngreeientsErrorAction;
 
-export type TDataIngredientsActions = TDataIngredientsActionsThunk | TAddIngredientAction | TDeleteIngredientAction |
-    TUpdateOrderIngredientsAction | TIncreaseIngredientAction | TDecreaseIngredientAction;
+type TIncreaseIngredientAction = Ttype<typeof INCREASE_INGREDIENT> & {
+    readonly item: TArrayObjects<TIngredient>,
+    readonly id: string
+}
+
+type TDecreaseIngredientAction = Ttype<typeof DECREASE_INGREDIENT> & {
+    readonly item: TArrayObjects<TIngredient>,
+    readonly id: string
+}
+
+export type TDataIngredientsActions = 
+    TGetListIngreeientsRequestAction | TGetListIngreeientsSuccessAction | TGetListIngreeientsErrorAction | 
+    TAddIngredientAction | TDeleteIngredientAction | TUpdateOrderIngredientsAction | 
+    TIncreaseIngredientAction | TDecreaseIngredientAction;
 
 export const getDataIngredients: AppThunk = () => {
     return function (dispatch: AppDispatch) {

@@ -4,9 +4,8 @@ import { modalRoot } from "../../utils/constants";
 import { ModalOverlay } from "../modal-overlay/modal-overlay";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ReactNode, useEffect } from "react";
-import { NavigateFunction } from "react-router-dom";
 
-export const Modal = ({ closeModal, title, children }:Readonly<{closeModal: ()=>boolean | NavigateFunction, title: string, children: ReactNode}>) => {
+export const Modal = ({ closeModal, title, children }:Readonly<{closeModal:()=>boolean | void, title?: string, children: ReactNode}>) => {
 
     useEffect(() => {
         const closePopup = (event:{ readonly key: string}) => {

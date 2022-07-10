@@ -1,7 +1,8 @@
 import { AppDispatch, AppThunk } from "../../types";
 import { url } from "../../utils/constants"
 import { checkResponce, getCookie, updateCookies, setCookie } from "../../utils/functions"
-import { Ttype, TSuccess, TError } from "../../types/generics";
+import { Ttype, TSuccess, TError, TtypeSuccess } from "../../types/generics";
+import { TAllUserInfromation, TUserInfromation } from "../../types/types";
 
 export const GET_USER_INFORMATION_REQUEST: "GET_USER_INFORMATION_REQUEST" = "GET_USER_INFORMATION_REQUEST";
 export const GET_USER_INFORMATION_SUCCESS: "GET_USER_INFORMATION_SUCCESS" = "GET_USER_INFORMATION_SUCCESS";
@@ -35,43 +36,38 @@ export const RESET_PASSWORD_SUCCESS: "RESET_PASSWORD_SUCCESS" = "RESET_PASSWORD_
 export const RESET_PASSWORD_ERROR: "RESET_PASSWORD_ERROR" = "RESET_PASSWORD_ERROR";
 
 type TGetUserInformationRequestAction = Ttype<typeof GET_USER_INFORMATION_REQUEST>
-type TGetUserInformationSuccessAction = TSuccess<typeof GET_USER_INFORMATION_SUCCESS, any> //think
+type TGetUserInformationSuccessAction = TSuccess<typeof GET_USER_INFORMATION_SUCCESS, TUserInfromation>
 type TGetUserInformationErrorAction = TError<typeof GET_USER_INFORMATION_ERROR>
 
 type TUpdateUserRequestAction = Ttype<typeof UPDATE_USER_REQUEST>
-type TUpdateUserSuccessAction = TSuccess<typeof UPDATE_USER_SUCCESS, any> //think
+type TUpdateUserSuccessAction = TSuccess<typeof UPDATE_USER_SUCCESS, TUserInfromation>
 type TUpdateUserErrorAction = TError<typeof UPDATE_USER_ERROR>
 
 type TSendReqisterRequestAction = Ttype<typeof SEND_REGISTER_REQUEST>
-type TSendReqisterSuccessAction = TSuccess<typeof SEND_REGISTER_SUCCESS, any> //think
+type TSendReqisterSuccessAction = TSuccess<typeof SEND_REGISTER_SUCCESS, TAllUserInfromation>
 type TSendReqisterErrorAction = TError<typeof SEND_REGISTER_ERROR>
 
 type TLogoutRequestAction = Ttype<typeof LOGOUT_REQUEST>
-type TLogoutSuccessAction = Ttype<typeof LOGOUT_SUCCESS> & {   //think
-    readonly success: boolean;
-}
+type TLogoutSuccessAction = TtypeSuccess<typeof LOGOUT_SUCCESS>
 type TLogoutErrorAction = TError<typeof LOGOUT_ERROR>
 
 type TLoginRequestAction = Ttype<typeof LOGIN_REQUEST>
-type TLoginSuccessAction = TSuccess<typeof LOGIN_SUCCESS, any>
+type TLoginSuccessAction = TSuccess<typeof LOGIN_SUCCESS, TAllUserInfromation>
 type TLoginErrorAction = TError<typeof LOGIN_ERROR>
 
 type TSendForgotPasswordRequestAction = Ttype<typeof SEND_FORGOT_PASSWORD_REQUEST>
-type TSendForgotPasswordSuccessAction = Ttype<typeof SEND_FORGOT_PASSWORD_SUCCESS> & {   //think
-    readonly success: boolean;
-}
+type TSendForgotPasswordSuccessAction = TtypeSuccess<typeof SEND_FORGOT_PASSWORD_SUCCESS>
 type TSendForgotPasswordErrorAction = TError<typeof SEND_FORGOT_PASSWORD_ERROR>
 
 type TResetPasswordRequestAction = Ttype<typeof RESET_PASSWORD_REQUEST>
-type TResetPasswordSuccessAction = Ttype<typeof RESET_PASSWORD_SUCCESS> & {   //think
-    readonly success: boolean;
-}
+type TResetPasswordSuccessAction = TtypeSuccess<typeof RESET_PASSWORD_SUCCESS>
 type TResetPasswordErrorAction = TError<typeof RESET_PASSWORD_ERROR>
 
 type TUpdateTokenRequestAction = Ttype<typeof UPDATE_TOKEN_REQUEST>
 type TUpdateTokenErrorAction = Ttype<typeof UPDATE_TOKEN_ERROR>
 
-export type TUserInformationActionsThunk = TGetUserInformationRequestAction | TGetUserInformationSuccessAction | TGetUserInformationErrorAction |
+export type TUserInformationActions = 
+    TGetUserInformationRequestAction | TGetUserInformationSuccessAction | TGetUserInformationErrorAction |
     TUpdateUserRequestAction | TUpdateUserSuccessAction | TUpdateUserErrorAction |
     TSendReqisterRequestAction | TSendReqisterSuccessAction | TSendReqisterErrorAction |
     TLogoutRequestAction | TLogoutSuccessAction | TLogoutErrorAction |
@@ -101,7 +97,7 @@ export const sendForgotPassword: AppThunk = (email: string) => {
 }
 
 export const updateToken: AppThunk = () => {
-    return function (dispatch: AppDispatch) {
+    return function (dispatch: AppDispatch | any) { 
         dispatch({ type: UPDATE_TOKEN_REQUEST })
         fetch(`${url}/auth/token`, {
             method: "POST",
@@ -124,7 +120,7 @@ export const updateToken: AppThunk = () => {
 }
 
 export const getUserInformationRequest: AppThunk = () => {
-    return function (dispatch: AppDispatch) {
+    return function (dispatch: AppDispatch | any) { 
         dispatch({ type: GET_USER_INFORMATION_REQUEST })
 
         fetch(`${url}/auth/user`, {

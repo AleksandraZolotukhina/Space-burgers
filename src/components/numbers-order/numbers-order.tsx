@@ -1,6 +1,8 @@
 import styles from "./numbers-order.module.css";
+import { TArrayObjects } from "../../types/generics";
+import { TOrderFeed } from "../../types/types";
 
-export const NumbersOrder = ({ total, totalToday, ordersArray } :{total:number, totalToday:number, ordersArray:any}) => { //test
+export const NumbersOrder = ({ total, totalToday, ordersArray }:{total:number, totalToday:number, ordersArray:TArrayObjects<TOrderFeed>}) => { 
     const done = ordersArray.filter(el => el.status === "done");
     const created = ordersArray.filter(el => el.status === "created");
     return (

@@ -39,8 +39,6 @@ export const socketMiddleware = (soketUrl: string): Middleware<{}, RootState> =>
                 socket.onclose = event => {
                     dispatch({ type: WS_CONNECTION_CLOSED, payload: event })
                 }
-
-
             }
             next(action)
         }

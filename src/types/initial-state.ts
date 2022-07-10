@@ -1,4 +1,4 @@
-import { TIngredient } from "./types"
+import { TAllUserInfromation, TIngredient, TOrderFeedData, TUserInfromation } from "./types"
 
 export type TInitialState = {
     isLoading: boolean,
@@ -49,10 +49,10 @@ export type TUserInitialState = {
     errorMessageResetPassword: string,
     successResetPassword: boolean,
 
-    data: any //think
+    data: TUserInfromation | TAllUserInfromation
 }
 
 export type WSInitailState = {
     readonly wsConnected: boolean,
-    readonly orders: any //think
+    readonly orders: TOrderFeedData
 }

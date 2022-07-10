@@ -1,16 +1,16 @@
 import styles from "./order-feed-item.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { orderStatus } from "../../utils/constants";
-import PropTypes from 'prop-types';
 import { getCost, getTextTime } from "../../utils/functions";
 import { FC } from "react";
-import { TOrderFeedItemProps, TIngredientsArray } from "../../types/types";
+import { TOrderFeedItemProps, TIngredientsArray, TOrderStatus } from "../../types/types";
 
 export const OrderFeedItem:FC<TOrderFeedItemProps> = ({ ingredients, status, name, number, updatedAt, listIngredients, isStatus=false }) => {
-    const arrayIngredients:TIngredientsArray = [];
+    const arrayIngredients:TIngredientsArray= [];
     ingredients.forEach(ingredient => {
         if(ingredient!==null){
-            arrayIngredients.push(listIngredients.find(el => el._id === ingredient))
+            const listIngredient  = listIngredients.find(el => el._id === ingredient)
+            arrayIngredients.push(listIngredient!)
         }
     })
 
@@ -23,7 +23,7 @@ export const OrderFeedItem:FC<TOrderFeedItemProps> = ({ ingredients, status, nam
                 </p>
             </div>
             <h2 className="text text_type_main-medium">{name}</h2>
-            {isStatus && <p className={`text text_type_main-default ${status === "done" && styles.done}`}>{orderStatus[status]}</p>}
+            {isStatus && <p className={`text text_type_main-default ${status === "done" && styles.done}`}>{orderStatus[status as  keyof TOrderStatus]}</p>}
             <div className={styles.item_image_cost}>
                 <ul className={styles.item_ingredients}>
                     {

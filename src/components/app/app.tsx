@@ -67,25 +67,19 @@ export function App() {
                     <Routes>
 
                         <Route path="ingredients/:id" element={
-                            <Modal closeModal={() => {
-                                navigate(-1);
-                            }}>
+                            <Modal closeModal={() => navigate(-1)}>
                                 <IngredientDetails />
                             </Modal>
                         } />
 
                         <Route path="feed/:id" element={
-                            <Modal closeModal={() => {
-                                navigate(-1);
-                            }}>
+                            <Modal closeModal={() => navigate(-1)}>
                                 <OrdersDetails />
                             </Modal>
                         } />
 
                         <Route path="profile/orders/:id" element={
-                            <Modal closeModal={() => {
-                                navigate(-1);
-                            }}>
+                            <Modal closeModal={() => navigate(-1)}>
                                 <OrdersDetails />
                             </Modal>
                         } />

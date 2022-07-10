@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "../../types/hooks";
 import { WS_CONNECTION_CLOSE, WS_CONNECTION_START } from "../../services/actions/ws-action-types";
 
-export const OrdersDetailsPage = ({ token = false }: {token:boolean}) => {
+export const OrdersDetailsPage = ({ token = false }:{token?:boolean}) => {
     const dispatch = useDispatch();
     const { wsConnected } = useSelector(store => store.ws);
     

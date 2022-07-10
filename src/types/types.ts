@@ -18,12 +18,13 @@ export type TIngredient = {
 export type TLocationState = {
     state: {
         background?: string;
+        path?:string
     }
 }
 
 export type TIngredientsArray = Array<{ [fw in keyof Readonly<TIngredient>]: TIngredient[fw] }>
 
-export type TOrderFeed = {
+export type TOrderFeed = { //+
     readonly ingredients: ReadonlyArray<string>,
     readonly _id: string,
     readonly status: string,
@@ -41,5 +42,24 @@ export type TOrderFeedData = {
 
 export type TOrderFeedItemProps = Omit<TOrderFeed, "_id" & "createdAt"> & { 
     readonly listIngredients: TArrayObjects<TIngredient>, 
-    readonly isStatus: boolean 
+    readonly isStatus?: boolean 
+}
+
+export type TOrderStatus = { 
+    readonly done: string, 
+    readonly created: string, 
+    readonly pending: string 
+}
+
+export type TUserInfromation = { 
+    readonly success: boolean, 
+    readonly user: {
+        readonly email: string,
+        readonly name: string 
+    } 
+}
+
+export type TAllUserInfromation = TUserInfromation & {
+    readonly accessToken: string,
+    readonly refreshToken: string
 }

@@ -1,4 +1,5 @@
 import { WSInitailState } from "../../types/initial-state";
+import { TOrderFeedData } from "../../types/types";
 import {
     WS_CONNECTION_SUCCESS,
     WS_CONNECTION_ERROR,
@@ -9,7 +10,7 @@ import {
 
 const initialState: WSInitailState = {
     wsConnected: false,
-    orders: [],
+    orders: {} as TOrderFeedData,
 }
 
 export const wsReducer = (state = initialState, action: WsActions): WSInitailState => {
@@ -19,7 +20,7 @@ export const wsReducer = (state = initialState, action: WsActions): WSInitailSta
         case WS_CONNECTION_ERROR:
             return { ...state, wsConnected: false }
         case WS_CONNECTION_CLOSED:
-            return { ...state, wsConnected: false, orders: [] }
+            return { ...state, wsConnected: false, orders: {} as TOrderFeedData }
         case WS_GET_ORDERS:
             return { ...state, orders: action.payload }
         default:

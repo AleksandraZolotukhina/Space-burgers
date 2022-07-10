@@ -49,7 +49,7 @@ export const ResetPasswordPage = () => {
                         onChange={(e) => handlerInputChange(e, setCodeValue, setErrorCode)}
                     />
                 </label>
-                <Button type="primary" size="primary" disabled={(errorCode || errorPassword) || 
+                <Button type="primary" size="medium" disabled={(errorCode || errorPassword) || 
                     (!codeValue || !passwordValue) ? true : false}>
                     {!isLoadingResetPassword ? "Сохранить" : "Сохранение..."}
                 </Button>

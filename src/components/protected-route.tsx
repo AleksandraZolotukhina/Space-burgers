@@ -6,7 +6,7 @@ export const ProtectedRoute = () => {
     const location = useLocation();
     
     if(!isLoaded && !data.success){
-        return <p>"Загрузка..."</p>
+        return <p>Загрузка...</p>
     }
     if(isLoaded && data.success){
         return <Outlet />
@@ -14,4 +14,5 @@ export const ProtectedRoute = () => {
     if(isLoaded && !data.success){
         return <Navigate to="/login" replace state={{ path: location.pathname }}  />
     }
+    return <></>
 }

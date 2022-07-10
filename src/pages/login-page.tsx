@@ -6,12 +6,13 @@ import { handlerInputChange } from '../utils/functions';
 import style_page from "./page.module.css";
 import "./page.css";
 import { useDispatch, useSelector } from '../types/hooks';
+import { TLocationState } from '../types/types';
 
 export const LoginPage = () => {
     const dispatch = useDispatch();
     const [emailValue, setEmailValue] = useState<string>("");
     const [passwordValue, setPasswordValue] = useState<string>("");
-    const { state } = useLocation();
+    const { state } = useLocation() as TLocationState;
     const navigate = useNavigate();
     const [errorEmail, setErrorEmail] = useState<string>("");
     const [errorPassword, setErrorPassword] = useState<string>("");
@@ -23,7 +24,7 @@ export const LoginPage = () => {
     };
     
     useEffect(()=>{
-        if (data.success) navigate(state?.path || "/")
+        if (data.success) navigate(state.path || "/")
     }, [data.success])
 
     return (
