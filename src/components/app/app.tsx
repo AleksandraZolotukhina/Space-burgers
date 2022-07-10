@@ -26,7 +26,7 @@ import { TLocationState } from "../../types/types";
 export function App() {
     const dispatch = useDispatch();
     const location = useLocation() as TLocationState;
-    const background = location.state?.background;
+    const background = location.state?.backgroundLocation;
     const navigate = useNavigate();
     const { ingredients } = useSelector(store => store.listIngredients);
 

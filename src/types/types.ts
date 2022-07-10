@@ -17,7 +17,7 @@ export type TIngredient = {
 }
 export type TLocationState = {
     state: {
-        background?: string;
+        backgroundLocation?: {};
         path?:string
     }
 }
