@@ -8,7 +8,7 @@ import { ReactNode, useEffect } from "react";
 export const Modal = ({ closeModal, title, children }:Readonly<{closeModal:()=>boolean | void, title?: string, children: ReactNode}>) => {
 
     useEffect(() => {
-        const closePopup = (event:{ readonly key: string}) => {
+        const closePopup = (event:KeyboardEvent) => {
             if(event.key === "Escape"){
                 closeModal();
             }
