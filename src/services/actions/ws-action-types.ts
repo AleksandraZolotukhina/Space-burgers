@@ -1,3 +1,4 @@
+import { TWSOrdersActions } from './../../types/types';
 import { Ttype } from "../../types/generics";
 import { TOrderFeedData } from "../../types/types";
 
@@ -8,6 +9,14 @@ export const WS_CONNECTION_CLOSED = "WS_CONNECTION_CLOSED";
 export const WS_GET_ORDERS = "WS_GET_ORDERS";
 export const WS_CONNECTION_CLOSE = "WS_CONNECTION_CLOSE";
 
+export const wsOrdersActions: TWSOrdersActions = {
+    start: WS_CONNECTION_START,
+    success: WS_CONNECTION_SUCCESS,
+    error: WS_CONNECTION_ERROR,
+    getInfromation: WS_GET_ORDERS,
+    close: WS_CONNECTION_CLOSE,
+    closed: WS_CONNECTION_CLOSED
+}
 type WSConnectionStartAction = Ttype<typeof WS_CONNECTION_START>
 type WSConnectionSuccessAction = Ttype<typeof WS_CONNECTION_SUCCESS>  & { 
     readonly payload: {
