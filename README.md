@@ -1,46 +1,34 @@
-# Space-Burgers
+# :flying_saucer: :hamburger: Space-Burgers
+Проект создан для изучения React и TypeScript
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Макет проекта](https://www.figma.com/file/ocw9a6hNGeAejl4F3G9fp8/React-_-%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%BD%D1%8B%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B8-(3-%D0%BC%D0%B5%D1%81%D1%8F%D1%86%D0%B0)_external_link?node-id=849%3A1002)
 
-## Available Scripts
+[Демо](https://aleksandrazolotukhina.github.io/Space-burgers/)
 
-In the project directory, you can run:
+### Описание проекта 
+Space-Burgers - веб-приложение для заказа космических бургеров.
 
-### `npm start`
+### Функционал
+Заказ бургеров на главной странице, создание и управление личными кабинетами, просмотр истории заказов
+### Используемые технологии 
+- React
+- Redux
+- DND
+- TypeScript
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Запуск проекта
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. Склонируйте репозиторий к себе на компьютер
+```
+git clone https://github.com/AleksandraZolotukhina/Space-burgers.git
+```
 
-### `npm test`
+2. Установите зависимости проекта
+```
+npm i
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/)
+3. Запустите проект
+```
+npm start
+```
