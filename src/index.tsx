@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { store } from "./services/store";
 
 ReactDOM.render(
-    <BrowserRouter>
+    <BrowserRouter basename="/Space-burgers">
         <Provider store={store}>
             <App />
         </Provider>
