@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Space-burgers/static/css/main.b99a4c23.css",
-    "main.js": "/Space-burgers/static/js/main.121205c3.js",
+    "main.css": "/Space-burgers/static/css/main.1cc50966.css",
+    "main.js": "/Space-burgers/static/js/main.539e4b53.js",
     "static/media/JetBrainsMono-Bold.ttf": "/Space-burgers/static/media/JetBrainsMono-Bold.a490f58c0f460cdc1a8d.ttf",
     "static/media/JetBrainsMono-Regular.ttf": "/Space-burgers/static/media/JetBrainsMono-Regular.73fb7b7f0e68b372adfe.ttf",
     "static/media/JetBrainsMono-Bold.woff2": "/Space-burgers/static/media/JetBrainsMono-Bold.c232d532ea5a5189a278.woff2",
@@ -13,11 +13,11 @@
     "static/media/iceland.woff2": "/Space-burgers/static/media/iceland.4ae67a017a5ff82bbbb7.woff2",
     "static/media/graphics.svg": "/Space-burgers/static/media/graphics.0204cd30ec32b9238cf65b1b302dfdc7.svg",
     "index.html": "/Space-burgers/index.html",
-    "main.b99a4c23.css.map": "/Space-burgers/static/css/main.b99a4c23.css.map",
-    "main.121205c3.js.map": "/Space-burgers/static/js/main.121205c3.js.map"
+    "main.1cc50966.css.map": "/Space-burgers/static/css/main.1cc50966.css.map",
+    "main.539e4b53.js.map": "/Space-burgers/static/js/main.539e4b53.js.map"
   },
   "entrypoints": [
-    "static/css/main.b99a4c23.css",
-    "static/js/main.121205c3.js"
+    "static/css/main.1cc50966.css",
+    "static/js/main.539e4b53.js"
   ]
 }
